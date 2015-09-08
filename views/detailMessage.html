@@ -1,0 +1,537 @@
+<% include includes/head.html %>
+	<div class="room-banner" id="roomShow">
+		
+			<ul>
+				<% house.scollUrl.forEach(function( img ){ %>
+
+					<% if( img != '' ){ %>
+						<li><a href="#"><img src="<%=img %>" alt="banner-1" title=""/></a></li>
+					<% } %>
+					
+				<% }) %>
+			</ul>
+		<a class="btn-pre"><i class="icon-pre"></i></a>
+		<a class="btn-next"><i class="icon-next"></i></a>
+	</div>
+
+	<section class="main" style="margin-top:0">
+		<div id="main">
+			<div class="container detail-messaege">
+				<div class="table">
+					<div class="table-cell house-des">
+						<div class="house-name">
+							<p><%=house.title %></p>
+
+							<% house.keywords.forEach(function(keyword){ %>
+
+								<span><%=keyword %></span>
+
+							<% }) %>
+						</div>
+
+						<div class="house-detail">
+							<ul>
+								<li>
+									<i></i>
+									<p><strong><%=house.price %></strong>元/月</p>
+
+									<% house.require.forEach(function(val){
+									%>
+
+										<span><%=val %></span>
+									<% }) %>
+									
+								</li>
+								<li>
+									<div class="table">
+										<i></i>
+										<% house.des.forEach(function(val){
+										%>
+											<p class="table-cell">	<%= val %></p>
+										<% }) %>
+									</div>
+								</li>
+								<li><i></i><p><%=house.address %></p></li>
+								<!-- <li><p>快速公交929</p></li> -->
+							</ul>
+						</div>
+					</div>
+					<div class="table-cell house-config">
+						<table border="1" cellpadding="0" cellspacing="0" bordercolor="#dedede">
+							<thead>
+								<tr>
+									<th colspan="7"><i class="icon-room"></i>房间配置</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<tr>
+									<td>网络</td>
+									<td colspan="2">电器</td>
+									<td colspan="2">家具</td>
+									<td>软饰</td>
+									<td>其它</td>
+								</tr>
+								<tr>
+
+									<td rowspan="3">
+										
+											<% if( !house.houseconfig || house.houseconfig.internet == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.internet %>
+											<% } %>
+										
+									</td>
+									<td>
+										
+											<% if( !house.houseconfig || house.houseconfig.electri[0] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.electri[0] %>
+											<% } %>
+										
+									</td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.electri[1] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.electri[1] %>
+											<% } %>
+									</td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.furniture[0] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.furniture[0] %>
+											<% } %>
+									</td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.furniture[1] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.furniture[1] %>
+											<% } %>
+									</td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.other[0] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.other[0] %>
+											<% } %>
+									</td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.other[1] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.other[1] %>
+											<% } %>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										
+											<% if( !house.houseconfig || house.houseconfig.electri[2] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.electri[2] %>
+											<% } %>
+										
+									</td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.electri[3] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.electri[3] %>
+											<% } %>
+								</td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.furniture[2] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.furniture[2] %>
+											<% } %>
+									</td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.furniture[3] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.furniture[3] %>
+											<% } %>
+									</td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.other[4] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.other[4] %>
+											<% } %>
+									</td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.other[3] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.other[3] %>
+											<% } %>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										
+											<% if( !house.houseconfig || house.houseconfig.electri[4] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.electri[4] %>
+											<% } %>
+										
+									</td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.electri[5] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.electri[5] %>
+											<% } %>
+									</span></td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.furniture[4] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.furniture[4] %>
+											<% } %>
+									</td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.furniture[5] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.furniture[5] %>
+											<% } %>
+									</td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.other[4] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.other[4] %>
+											<% } %>
+									</td>
+									<td>
+										<% if( !house.houseconfig || house.houseconfig.other[5] == '' ){ %>
+												
+											<% }else{%>
+												<%=house.houseconfig.other[5] %>
+											<% } %>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="appointmen">
+					<input type="hidden" value="<%=house._id  %>" name="_id" class="apt-id"/>
+					
+						<% if( sign ){ %>
+							<a href="javascript:void(0)" class="btn-apt" id="btn-apt">	
+								立即预约
+							</a>
+						<% }else{ %>
+						<a href="javascript:void(0)" class="alreadyapt">	
+								你已经预约
+						</a>
+						<% } %>
+					</a>
+				</div>
+				<div>
+				</div>
+				<div class="mapShow">
+					<ul class="map-title">
+						<li class="active"><a href="javascript::void(0)">街景</a></li>
+						<li><a href="javascript::void(0)">地图</a></li>
+					</ul>
+					<div class="map-content">
+						<div class="map" id="e1" data-map="<%=house.address %>" data-address="<%=house.address %>">
+						</div>
+						<div class="map" id="e2" data-map="<%=house.address %>" data-address="<%=house.address %>">
+						</div>
+						<div class="btn-group">
+							<h4>
+								可选择查看周边
+							</h4>
+							<div class="Bmap-choose">
+								<label><input type="checkbox" value="周边楼盘"  id="btnBuilding"/>周边楼盘</label>
+								<label><input type="checkbox" value="公交站点"  id="btnBus"/>公交站点</label>
+								<label><input type="checkbox" value="餐饮"  id="btnHotel"/>餐饮</label>
+								<label><input type="checkbox" value="银行"  id="btnBank"/>银行</label>
+								<label><input type="checkbox" value="超市"  id="btnSuperMarket"/>超市</label>
+								<label><input type="checkbox" value="商场"  id="btnShop"/>商场</label>
+								<label><input type="checkbox" value="学校"  id="btnSchool"/>学校</label>
+								<label><input type="checkbox" value="医院"  id="btnHospital"/>医院</label>
+								<label><input type="checkbox" value="家居卖场"  id="btnFurniture"/>家居卖场</label>
+								<label><input type="checkbox" value="装饰公司"  id="btnDecoration"/>装饰公司</label>
+								<label><input type="checkbox" value="加油站"  id="btnGasstation"/>加油站</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="apt-process">
+			<div class="container">
+				<ul >
+					<li>
+						<span class="apt-icon"></span>
+						<div class="apt-des">
+							<span>在线选房</span>
+							<p>全方位3D高清图片</p>
+						</div>
+					</li>
+					<li>
+						<span class="apt-icon"></span>
+						<div class="apt-des">
+							<span>预约看房</span>
+							<p>贴心管家陪同看房</p>
+						</div>
+					</li>
+					<li>
+						<span class="apt-icon"></span>
+						<div class="apt-des">
+							<span>确定入驻</span>
+							<p>挑选配置</p>
+						<div>
+					</li>
+					<li>
+						<span class="apt-icon"></span>
+						<div class="apt-des">
+							<span>签署合同</span>
+							<p>签署合同后即可入住</p>
+						</div>
+					</li>
+					<li>
+						<span class="apt-icon"></span>
+						<div class="apt-des">
+							<span>入驻租客</span>
+							<p>恭喜您加入租客大家庭</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+
+	<footer class="footer">
+		<div id="footer">
+			<div class="wrap">
+				<div class="copyRight">
+					<p>© 2015  租租侠版权所有</p>
+				</div>
+				<div class="wrap-r">
+					<a href="#">用户协议</a>
+					<a href="#">投诉建议</a>
+					<a href="#">联系我们</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+<div class="shawdow" id="shawdow">
+		<div class="regFace">
+			<form action="" id="registerForm">
+				<legend>
+					注册
+					<a class="close"></a>
+				</legend>
+				<div class="form-group norInput">
+					<input type="text" name="username" placeholder="邮箱/手机" autocomplete="off"  id="loginU"/>
+					<input type="password" name="password" placeholder="密码" autocomplete="off"/>
+				</div>
+				<div class="form-group spcInput">
+					<input type="text" name="qr" placeholder="请输入验证码" autocomplete="off"/>
+					<input type="hidden" autocomplete="off" name="registerBy"/>
+					<input type="hidden" name="sendqr" autocomplete="off"/>
+					<button type="button" class="btn-send" id="send-code" >发送验证码</button>
+				</div>
+				<div class="form-group">
+					<label><input type="checkbox" />我同意并遵守上述的 《<a href="#">租租侠服务协议</a>》</label>
+				</div>
+
+				<div class="form-group submit">
+					<input type="button" value="完成并登录" id="register"/>
+				</div>
+				<div class="form-group">
+					<p class="errorL" id="regerror"></p>
+				</div>
+			</form>
+		</div>
+		<div class="loginFace">
+			<form action="loginAction" method="post" id="loginForm">
+				<legend>
+					登录
+					<a class="close"></a>
+				</legend>
+				<div class="form-group norInput">
+					<input type="text" name="username" placeholder="账号" autocomplete="off"  />
+					<input type="password" name="pass" placeholder="密码"/>
+				</div>
+				<div class="form-group remember">
+					<label><input type="checkbox" name="1" value="0"/>记住账号</label>
+
+					<a class="btn-getPass" href="#">忘记密码</a>
+				</div>
+				<div class="form-group submit">
+					<input type="button" value="登录" id="btn-lg"/>
+				</div>
+				<div class="form-group">
+					<p class="error" id="error">密码不能为空</p>
+				</div>
+				<div class="form-group other-login">
+					<label>第三方登录</label>
+					<a class="wx-login"  href="<%=webLogin %>" id="wx-login"></a>
+					<a class="qq-login" href="#"></a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9f5d468870788eaa79a8865781872668"></script>
+<script src="http://map.qq.com/api/js?v=2.exp&key=d84d6d83e0e51e481e50454ccbe8986b"></script>
+<script type="text/javascript">
+
+	
+	function loadScript(url){ 
+
+		var script = document.createElement("script") 
+		script.type = "text/javascript"; 
+		if (script.readyState){ //IE 
+			script.onreadystatechange = function(){ 
+				if (script.readyState == "loaded" || 
+				script.readyState == "complete"){ 
+					script.onreadystatechange = null; 
+					//callback(); 
+				} 
+			}; 
+		} else { //Others: Firefox, Safari, Chrome, and Opera 
+			script.onload = function(){ 
+				//callback(); 
+			}; 
+		} 
+		script.src = url; 
+		document.body.appendChild(script); 
+
+	}
+	window.onload = function(){
+
+		// loadScript('http://api.map.baidu.com/api?v=2.0&ak=9f5d468870788eaa79a8865781872668');
+		// loadScript('http://map.qq.com/api/js?v=2.exp&key=d84d6d83e0e51e481e50454ccbe8986b');
+
+		console.log( BMap );
+		var BmapInit = {
+			searchType:['btnBuilding','btnBus','btnHotel','btnBank','btnSuperMarket','btnShop','btnSchool','btnHospital','btnFurniture','btnDecoration','btnGasstation'],
+			init:function(el){
+
+				// 百度地图API功能
+				var map = new BMap.Map(el);
+				this.local = new BMap.LocalSearch(map, {
+					renderOptions:{map: map}
+				});
+				var point = new BMap.Point(116.331398,39.897445);
+				map.centerAndZoom(point,12);
+				var marker;
+				var city = document.getElementById(el).getAttribute('data-map');
+				var address = document.getElementById(el).getAttribute('data-address');
+
+				// 创建地址解析器实例
+				var myGeo = new BMap.Geocoder();
+				// 将地址解析结果显示在地图上,并调整地图视野
+				myGeo.getPoint(city, function(point){
+					if (point) {
+						// marker = new BMap.Marker(point);// 创建标注
+						// map.centerAndZoom(point, 16);
+						// map.addOverlay(marker);// 将标注添加到地图中
+						
+						// var opts = {
+						//   width : 200,     // 信息窗口宽度
+						//   height: 100,     // 信息窗口高度
+						//   title : city , // 信息窗口标题
+						//   enableMessage:true,//设置允许信息窗发送短息
+						//   message:"亲耐滴，晚上一起吃个饭吧？戳下面的链接看下地址喔~"
+						// }
+						// var infoWindow = new BMap.InfoWindow("地址:"+address, opts);  // 创建信息窗口对象 
+						// marker.addEventListener("click", function(){          
+						// 	map.openInfoWindow(infoWindow,point); //开启信息窗口
+						// });
+						map.centerAndZoom(point, 16);
+						map.addOverlay(new BMap.Marker(point));
+
+					}else{
+						alert("您选择地址没有解析到结果!");
+					}
+				},'中国');
+
+				this.mapSearch();
+			},
+			mapSearch:function(){
+
+				var local = this.local;
+				var searchType = this.searchType;
+				var This = this;
+				searchType.forEach(function(elem,index){
+
+					This.addEvent( document.getElementById(elem),'click', function(event){
+
+							var _val = this.getAttribute('value');
+							if( this.checked ){
+								console.log(_val);
+								This.local.search(_val);
+							}else{
+								This.local.search();
+							}
+							
+					});
+				});
+			},
+			addEvent:function(obj,type,fn){
+
+				if(obj.attacheEvent){
+					obj.attacheEvent( 'on'+type,fn );
+				}else{
+					obj.addEventListener( type,fn,false );
+				}
+			},
+			clickEvent:function(){
+
+				console.log( this );
+			}
+		};
+		var tengMap = {
+			init:function(el){
+				this.address = document.getElementById('e2').getAttribute('data-map');
+			    this.pano_service = new qq.maps.PanoramaService();
+			    this.geocoder();
+			},
+			geocoder:function(){
+
+				var pano_service = this.pano_service;
+				var address = this.address;
+
+				var geocoder = new qq.maps.Geocoder({
+			        complete : function(result){
+		                var radius;
+			    		pano_service.getPano(result.detail.location,radius, function (result){
+			                new qq.maps.Panorama(document.getElementById('e2'), {
+						        pano: result.svid,
+						        disableMove: false,
+						        pov:{
+						            heading:20,
+						            pitch:15
+						        },
+						        zoom:1
+						    });
+			            });
+			        }
+			    });
+			    geocoder.getLocation(address);
+			}
+		};
+		BmapInit.init('e1');
+		tengMap.init('e2');
+	}
+</script>
+<% include includes/foot.html %>

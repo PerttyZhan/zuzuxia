@@ -1,0 +1,150 @@
+
+<% include includes/head.html %>
+	<div id="banner" >
+		<div class="bg">
+			<img src="<%=user.bgimg %>" width="1897" alt="" title=""/>
+			<form method="post" name="form" encType="multipart/form-data" title="改变背景" action="uploadbgImg">
+				<input type="hidden" name="username" value="<%=user.username %>"/>
+				<input type="hidden" name="url" value="/personCenterMe"/>
+				<input type="file" name="bgimg" accept="image/*" title="改变背景" id="changeBg"/>
+			</form>
+		</div>
+		<div class="jumbotron-des">
+			<h3><%=personinfo.name %></h3>
+			<p><%=personinfo.sign %></p>
+		</div>
+	</div>
+	<section class="main" id="main">
+		<div>
+			<div class="center-choose">
+				<a class="me active" href="/personCenterMe">
+					<i></i>
+					<p>我</p>
+				</a>
+				<a class="message" href="/personCenterMessage">
+					<i></i>
+					<p>消息</p>
+				</a>
+				<a class="appointment" href="/personCenter">
+					<i></i>
+					<p>预约</p>
+					
+				</a>
+				<a class="collection" >
+					<i></i>
+					<p>收藏</p>
+					
+				</a>
+			</div>
+			<div class="message-edit">
+				<div class="form" id="personInfoFrom">
+					<form>
+						<input type="hidden" name="_id" value="<%=personinfo._id  %>" id="_id"/>
+						<legend>
+							个人资料
+						</legend>
+						<fieldset>
+							<div class="form-group">
+
+								<label for="name">
+									姓名
+								</label>
+
+								<input type="text" name="name" value="<%=personinfo.name  %>" placeholder="请输入姓名"/>
+							</div>
+							<div class="form-group">
+								<label>性别</label>
+								<label>
+									<input type="radio" name="sex" value="男"
+									<% if( personinfo.sex == '男' ) {%> checked <%}%>
+									/>
+									男
+								</label>
+								<label>
+									<input type="radio" name="sex" value="女"
+									<% if( personinfo.sex == '女' ) {%> checked <%}%>
+									/>
+									女
+								</label>
+							</div>
+							<div class="form-group">
+								<label for="sign">
+									签名
+								</label>
+								<input type="text" name="sign" value="<%=personinfo.sign  %>" placeholder="请输入签名"/>
+							</div>
+							<div class="form-group">
+								<label for="school">
+									学校
+								</label>
+								<input type="text" name="school" value="<%=personinfo.school  %>" placeholder="请选择学校" id="schoolText" />
+								<div class="choose-school" >
+									<div class="gj" id="gj">
+
+									</div>
+									<div class="sf" id="sf">
+									</div>
+									<div class="list" id="list">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="marjor">
+									专业
+								</label>
+								<input type="text" name="marjor" value="<%=personinfo.marjor  %>"placeholder="请输入专业"/>
+							</div>
+							<div class="form-group">
+								<label for="interset">
+									兴趣
+								</label>
+								<input type="text" name="interset" value="<%=personinfo.interset  %>" placeholder="请输入兴趣" id="intersetText"/>
+
+								<div class="choose-interset">
+									<div class="interset-type">
+										<a href="#">运动</a>
+										<a href="#">游戏</a>
+										<a href="#">游泳</a>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="company">
+									公司
+								</label>
+								<input type="text" name="company" value="<%=personinfo.company  %>" placeholder="请输入公司"/>
+							</div>
+							<div class="form-group">
+								<label for="job">
+									职位
+								</label>
+								<input type="text" name="job" value="<%=personinfo.job  %>" placeholder="请输入职位"/>
+							</div>
+							<div class="form-group">
+								<p class="error" id="error">名字不能为空</p>
+							</div>
+						</fieldset>
+					</from>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<footer class="footer">
+		<div id="footer">
+			<div class="wrap">
+				<div class="copyRight">
+					<p>© 2015  租租侠版权所有</p>
+				</div>
+				<div class="wrap-r">
+					<a href="#">用户协议</a>
+					<a href="#">投诉建议</a>
+					<a href="#">联系我们</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+<script src="/js/allunivlist.js"></script>
+<% include includes/foot.html %>
