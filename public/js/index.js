@@ -333,7 +333,9 @@ $(document).ready(function(){
 			$banner_search.css('top',parseInt($main.css('margin-top'))-$banner_search.height() + 'px').show();
 		}
 	},20);;
-		
+	
+
+	$('body').css( 'min-height',$(window).height()+'px' );
 	var banner = new bannerRun( $banner,function(){},$('.btn-pre'),$('.btn-next'));
 	var roomBanner = new bannerRun( $roomBanner,function(){},$('.btn-pre'),$('.btn-next'));
 	$.each( $('.scoll-pic'),function(index,elem){

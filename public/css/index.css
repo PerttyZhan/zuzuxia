@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 body {
+  position: relative;
   font-family: "Hiragino Sans GB", "Microsoft Yahei", "微软雅黑", arial;
   font-size: 14px;
   backgroun-color: #ffffff;
@@ -645,6 +646,7 @@ a {
   z-index: 12;
   background-color: #696969;
   width: 100%;
+  bottom: 0;
 }
 #footer {
   width: 100%;
