@@ -378,6 +378,47 @@ module.exports = function(app){
 			    mail.transport.close(); 
 			});
 		});
+
+	app.route('/resetPass')
+		.post(function(req,res){
+			var username = req.body.username;
+			 var pass = req.body.password;
+
+			 console.log( pass );
+			 var md5 = crypto.createHash('md5'),
+					pass = md5.update( pass ).digest('hex');
+			adminModel.valiUsernameAlive(username,function(err,count){
+
+				if(count){
+
+					adminModel.resetPassword(username,pass,function(err,admin){
+
+						if(err){return console.log(err);}
+
+						adminModel.findPersonByUsername(username,function(err,user){
+
+							delete req.session.user;
+							console.log( user[0] );
+							req.session.user = user[0];
+							return res.send({
+								msg:'yes',
+								val:''
+							});
+
+						});
+						
+					});
+				}else{
+					return res.send({
+						msg:'no',
+						val:'账号不存在'
+					});
+				}
+			});
+			
+
+
+		});
 	app.route('/register')
 		.post(function(req,res){
 

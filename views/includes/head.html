@@ -9,6 +9,7 @@
 	<meta name="description" content="租租侠"/>
 	<!-- <link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon"> -->
 	<link href="/css/index.css" rel="stylesheet" type="text/css"/>
+	<link href="/css/animate2.css" rel="stylesheet" type="text/css">
 	<title><%= title %></title>
 </head>
 
@@ -43,11 +44,13 @@
 					<li><a href="#" id="loginOut">退出</a></li>
 				</ul>
 			</div>
+			<a href="" class="qr">
 			<% } else{ %>
 				<a href="javascript:void(0)" class="login" id="login">登陆</a>
 				<a href="javascript:void(0)" class="reg" id="reg">注册</a>
+				<a href="" class="qr" style="border:none">
 			<% } %>
-			<a href="" class="qr">
+			
 				<i class="icon-qr"></i>
 				<div class="qr-show">
 					<i class="icon-arrow-top"></i>

@@ -20,7 +20,7 @@
 						<li>
 							<dl>
 								<dt class="chooseSite">
-									<input type="text" name="site" value="" placeholder="公寓位置" readonly/>
+									<input type="text" name="site" value="" placeholder="公寓位置" readonly />
 									<i class="icon-arrow-botom"></i>
 								</dt>
 								<dd class="detailsite">
@@ -30,26 +30,26 @@
 							</dl>
 						</li>
 						<li>
-							<input type="text" name="starttime" placeholder="起始时间"  onClick="WdatePicker()" readonly />
+							<input type="text" name="starttime" placeholder="起始时间"  onClick="WdatePicker()" readonly id="starttime"/>
 							<i class="icon-arrow-botom"></i>
 						</li>
 
 						<li>
 							<dl>
 								<dt class="choosetime">
-									<input type="text" name="site" value="" placeholder="入住周期" readonly/>
+									<input type="text" name="site" value="" placeholder="入住周期" readonly id="duringtime"/>
 									
 									<i class="icon-arrow-botom"></i>
 								</dt>
 								<dd class="detailtime">
-									<a href="#">1周</a><a href="#">2周</a><a href="#">3周</a><a href="#">4周</a>
-									<a href="#">5周</a><a href="#">6周</a><a href="#">7周</a><a href="#">8周</a>
-									<a href="#">9周</a><a href="#">10周</a><a href="#">11周</a><a href="#">12周</a>
+									<a href="#">3月</a><a href="#">6月</a><a href="#">9月</a><a href="#">12月</a>
+									<a href="#">15月</a><a href="#">18月</a><a href="#">21月</a><a href="#">24月</a>
+									<a href="#">27月</a><a href="#">30月</a><a href="#">33月</a><a href="#">36月</a>
 								</dd>
 							</dl>
 						</li>
 						<li>
-							<input type="text" name="endtime" placeholder="结束时间"/>
+							<input type="text" name="endtime" placeholder="结束时间" id="endtime" readonly/>
 							
 						</li>
 						<li>
@@ -79,29 +79,7 @@
 			<div class="show">
 				<% houses.forEach(function(house){ %>
 				<div class="thumbnail">
-					<a href="detailMessage/<%=house._id %>">
-						<img src="<%=house.coverUrl %>" width=""/>
-						<div class="mask">
-							<div class="ma table">
-								<div class="table-cell">
-									<h3 ><%=house.title %></h3>
-									<p ><%=house.summary %></p>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<% }) %>
-			</div>
-		</div>
-		<div >
-			<div class="title">
-				<span>杭州</span>
-			</div>
-			<div class="show">
-				<% houses.forEach(function(house){ %>
-				<div class="thumbnail">
-					<a href="detailMessage/<%=house._id %>">
+					<a href="detailMessage/<%=house._id %>" class="thumbnail-body">
 						<img src="<%=house.coverUrl %>" width=""/>
 						<div class="mask">
 							<div class="ma table">
@@ -156,7 +134,8 @@
 				</div>
 
 				<div class="form-group submit">
-					<input type="button" value="完成并登录" id="register"/>
+					<button type="button" id="register">完成并登录</button>
+					<!-- <input type="button" value="完成并登录" id="register"/> -->
 				</div>
 				<div class="form-group">
 					<p class="errorL" id="regerror"></p>
@@ -176,10 +155,11 @@
 				<div class="form-group remember">
 					<label><input type="checkbox" name="1" value="0"/>记住账号</label>
 
-					<a class="btn-getPass" href="#">忘记密码</a>
+					<a class="btn-getPass" href="javascript:void(0)" id="forgetPass">忘记密码</a>
 				</div>
 				<div class="form-group submit">
-					<input type="button" value="登录" id="btn-lg"/>
+					<button type="button" id="btn-lg" >登录</button>
+					<!-- <input type="button" value="登录" id="btn-lg" disabled/> -->
 				</div>
 				<div class="form-group">
 					<p class="error" id="error">密码不能为空</p>
@@ -188,6 +168,31 @@
 					<label>第三方登录</label>
 					<a class="wx-login"  href="<%=webLogin %>" id="wx-login"></a>
 					<a class="qq-login" href="#"></a>
+				</div>
+			</form>
+		</div>
+		<div class="getPassFace">
+			<form action="" id="resetForm">
+				<legend>
+					找回密码
+					<a class="close"></a>
+				</legend>
+				<div class="form-group norInput">
+					<input type="text" name="username" placeholder="邮箱/手机" autocomplete="off"/>
+					<input type="password" name="onepass" placeholder="密码" autocomplete="off"/>
+					<input type="password" name="agapass" placeholder="确定密码" autocomplete="off"/>
+				</div>
+				<div class="form-group spcInput">
+					<input type="text" name="qr" placeholder="请输入验证码" autocomplete="off"/>
+					<input type="hidden" name="sendqr" autocomplete="off"/>
+					<button type="button" class="btn-send" id="reset-code" >发送验证码</button>
+				</div>
+				<div class="form-group submit">
+					<button type="button" id="resetPass">修改并登录</button>
+					<!-- <input type="button" value="完成并登录" id="register"/> -->
+				</div>
+				<div class="form-group">
+					<p class="errorL" id="reseterror"></p>
 				</div>
 			</form>
 		</div>

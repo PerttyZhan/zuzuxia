@@ -104,5 +104,11 @@ adminSchema.statics = {
 		return this
 				.find({openid:openid})
 				.exec(cb);
+	},
+	resetPassword:function(username,pass,cb){
+
+		return this
+				.update( {username:username},{$set:{password:pass}} )
+				.exec(cb);
 	}
 }

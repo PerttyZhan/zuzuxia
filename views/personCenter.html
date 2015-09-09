@@ -40,7 +40,7 @@
 
 				<% appoints.forEach(function(appoint){ %>
 				<div class="thumbnail">
-					<a href="detailMessage/<%=appoint.houseID._id %>">
+					<a href="detailMessage/<%=appoint.houseID._id %>" class="thumbnail-body">
 						<img src="<%=appoint.houseID.coverUrl %>" width=""/>
 						<div class="mask">
 							<div class="ma table">
@@ -49,8 +49,20 @@
 									<p ><%=appoint.houseID.summary %></p>
 								</div>
 							</div>
+							
 						</div>
+						<input type="hidden" name="_id" value="<%=appoint.houseID._id %>"/>
 					</a>
+					<div class="mask-icon">
+						<span class="btn-share" title="分享">
+							<div class="share-icon">
+								<p class="wx-login" ></p>
+								<p class="qq-login" ></p>
+							</div>
+						</span>
+						<span class="btn-coll" title="收藏"></span>
+						<span class="btn-dele" title="删除" id="apt-dele"></span>
+					</div>
 				</div>
 				<% }) %>
 				

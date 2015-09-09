@@ -365,6 +365,26 @@ $(document).ready(function(){
 
 	} );
 
+	$('#endtime').on('click',function(){
+
+		var times = $('#starttime').val().split('-');
+		var year = parseInt(times[0]),month = parseInt(times[1]),day = times[2];
+		var dtime = parseInt( $('#duringtime').val() );
+
+		month = month + dtime;
+
+		console.log( month );
+		if( month > 12 ){
+			year+= parseInt( month/12 );
+			month = ( month%12 );
+		}
+		console.log( month );
+		if( month < 10 ){
+			month = '0'+month;
+		}
+		$(this).val( year + '-' + month + '-' + day );
+	});
+
 	$('#e2').show();
 	$('#e1').hide();
 	$('.map-title').find('li').hover(function(){
@@ -387,20 +407,26 @@ $(document).ready(function(){
 
 			event.preventDefault();
 
-			$('#shawdow').show().find('.loginFace').addClass('active').siblings().removeClass('active');
+			$('#shawdow').show().find('.loginFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
 	});
 	$('#reg').on('click',function(event){
 
 			event.preventDefault();
 
-			$("#shawdow").show().find('.regFace').addClass('active').siblings().removeClass('active');
+			$("#shawdow").show().find('.regFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
 	});
 
+	$('#forgetPass').on('click',function(event){
+			event.preventDefault();
+
+			$('#shawdow').find('.getPassFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
+	});
 	$(".close").on('click',function(event){
 
 		event.preventDefault();
 
-		$("#shawdow").hide().find('input');
+		$("#shawdow").hide().find('input').not('input[type="button"]').val('');
+		$("#shawdow").find('.error,.errorL').hide();
 
 	});
 
@@ -439,21 +465,22 @@ $(document).ready(function(){
 		});
 	});
 
-	$('#dropRole').hover(function(event){
-
-
-		event.stopPropagation();
+	$('#dropRole').hover(function(e){
+		e.stopPropagation();
 		$(this).find('.dropMenu').fadeIn().show();
+	},function(e){
+		
+		$(this).find('.dropMenu').hide();
 	});
 
-	$('#dropMenu').hover(function(event){
+	$('#dropMenu').hover(function(e){
 
-		event.stopPropagation();
+		
 
 		$(this).show();
-	},function(event){
+	},function(e){
 
-		event.stopPropagation();
+		e.stopPropagation();
 		$(this).hide();
 	});
 
@@ -636,14 +663,14 @@ $(document).ready(function(){
 		};
 
 		if( register.username == '' || register.password == ''){
-			return $regerror.text('用户名/密码不能空').show();
+			return $error.text('用户名/密码不能空').show();
 		}
 
 		if( $register.find('input[name="qr"]').val() == '' || ( $register.find('input[name="qr"]').val() != $register.find('input[name="sendqr"]').val() ) ){
-			return $regerror.text('验证码不正确').show();
+			return $error.text('验证码不正确').show();
 		}
 		if( !$register.find('input[type="checkbox"]').prop('checked')){
-			return $regerror.text('请看协议,看后没意见请打钩').show();
+			return $error.text('请看协议,看后没意见请打钩').show();
 		}
 
 		$.ajax({
@@ -664,27 +691,118 @@ $(document).ready(function(){
 			}
 		});
 	});
+	//忘记密码
+	$('#resetPass').on('click',function(){
+		var $resetPass = $('#resetForm');
+		var $error = $('#reseterror');
+		var wcode = $resetPass.find('input[name="qr"]').val();
+		var scode = $resetPass.find('input[name="sendqr"]').val();
 
-	//删除预约
 
-	$('.btn-dele').on('click',function(){
+		var user = {
+			username:$resetPass.find('input[name="username"]').val(),
+			onepass:$resetPass.find('input[name="onepass"]').val(),
+			agapass:$resetPass.find('input[name="agapass"]').val()
+		};
 
-		var _val = $(this).parents('.caption-btn').find('input').val();
+		if( user.username == ''){
+			return $error.text('邮箱/手机号不能空').show();
+		}
+		if( user.onepass == ''){
+			return $error.text('密码不能空').show();
+		}
+		if( user.agapass == ''){
+			return $error.text('确定密码不能空').show();
+		}
+		if( wcode == '' ){
+			return $error.text('短信验证码不能空').show();
+		}
+
+		if( user.onepass.length <10 || user.onepass.length >20 ){
+			return $error.text('密码长度规定在10到20').show();
+		}
 		
+		if( user.onepass != user.agapass ){
+			return $error.text('两次密码不一样').show();
+		}
+
+		console.log( wcode + '|' + scode );
+		if( wcode != scode ){
+			return $error.text('短信验证码不正确').show();
+		}
+
 		$.ajax({
-			url:'/removeAppointHouse',
+			url:'/resetPass',
 			type:'post',
-			data:'_id='+_val,
+			data:'username='+user.username+'&password='+user.onepass,
 			success:function(msg){
-				
-				location.reload();
+				if( msg.msg == 'yes' ){
+
+					location.reload();
+				}else{
+					console.log(msg);
+					return $error.text(msg.val).show();
+				}
 			},
-			error:function(){
+			error:function(err){
+				console.log( err );
+			}
+		});
+	});
+
+	//忘记密码时的发送验证码
+	$('#reset-code').on('click',function(event){
+
+		event.preventDefault();
+
+		var $loginu = $('#registerForm').find('input[name="username"]');
+		var _val = $loginu.val();
+		var $error = $('#reseterror');
+		var $this = $(this);
+		var second = 30;
+
+		if( valiType( _val ) == '邮箱' ){
+
+			$error.hide();
+
+		}else if( valiType( _val ) == '电话' ){
+
+			$error.hide();
+
+		}else{
+			return $error.text('请输入合法的邮箱或者手机号').show();
+		}
+
+		$this.html('<strong>'+second+'</strong>s后重新发送').attr('disabled','disabled');
+
+		$this.timer = setInterval(function(){
+			second--;
+			$this.html('<strong>'+second+'</strong>s后重新发送').attr('disabled','disabled');
+
+			if( second == 0 ){
+
+				clearInterval( $this.timer  );
+				$this.timer = null ;
+
+				$this.removeAttr('disabled').html('发送验证码');
+			}
+		},1000);
+		$.ajax({
+			url:'/sendMessage',
+			type:'post',
+			data:'src='+_val,
+			success:function(msg){
+				console.log(msg.val);
+				$this.prev().val( msg.val );
+
+			},
+			error:function(err){
 
 			}
-		})
 
+		});
 	});
+
 	//thumilb高度初始化
 
  	var timer = setInterval(function(){
@@ -707,6 +825,54 @@ $(document).ready(function(){
 			
 		});
 
+	//个人中心-预约-hover
+
+	$('.thumbnail').hover(function(e){
+
+		e.stopPropagation();
+
+		$(this).find('.mask-icon').animate({
+			opacity:1,
+			top:0
+		},200);
+
+	},function(e){
+		e.stopPropagation();
+
+		$(this).find('.mask-icon').animate({
+			opacity:0,
+			top:'-40px'
+		},200);
+	});
+	//个人中心-预约-share
+	// $('.btn-share').on('click',function(){
+
+	// 	$(this).find('.share-icon').animate({
+
+	// 		opacity: 1,
+	//  		left:'-70px'
+
+	// 	},500);
+	// })
+	
+	//个人中心-预约-删除预约
+	$('#apt-dele').on('click',function(){
+
+		var _val = $(this).parents('.thumbnail').find('input[name="_id"]').val();
+		
+		$.ajax({
+			url:'/removeAppointHouse',
+			type:'post',
+			data:'_id='+_val,
+			success:function(msg){
+				
+				location.reload();
+			},
+			error:function(){
+
+			}
+		})
+	});
 	/*$('#wx-login').on('click',function(event){
 		event.preventDefault();
 

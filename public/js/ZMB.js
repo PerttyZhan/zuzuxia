@@ -343,7 +343,25 @@ $(document).ready(function(){
 				});
 			}
 		});
+		//所有公寓-hover
 
+		$('.thumbnail').hover(function(e){
+
+			e.stopPropagation();
+
+			$(this).find('.mask-icon').animate({
+				opacity:1,
+				top:0
+			},200);
+
+		},function(e){
+			e.stopPropagation();
+
+			$(this).find('.mask-icon').animate({
+				opacity:0,
+				top:'-40px'
+			},200);
+		});
 		//房屋的删除，发布，下架
 
 		$('#under,#dele,#release').on('click',function(event){

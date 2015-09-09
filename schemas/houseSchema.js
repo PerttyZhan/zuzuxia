@@ -40,7 +40,7 @@ var houserSchema = new mongoose.Schema({
 	},
 	coverUrl:{
 		type:String,
-		default:'',
+		default:'/image/1438176413433.jpg',
 	},
 	scollUrl:{
 		type:[String],
@@ -53,6 +53,10 @@ var houserSchema = new mongoose.Schema({
 	status:{
 		type:String,
 		default:1
+	},
+	aptNum:{
+		type:String,
+		default:'0'
 	}
 });
 

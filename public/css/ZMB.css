@@ -175,6 +175,15 @@ a {
 #main .house {
   position: relative;
 }
+#main .item1 {
+  margin-top: 40px;
+}
+#main .item1 h2 {
+  text-align: center;
+  color: #999;
+  font-size: 32px;
+  padding: 10px 0;
+}
 #main .house-update {
   top: 0;
   left: 0;
@@ -287,7 +296,7 @@ a {
 }
 #main .show-all {
   width: 100%;
-  padding: 56px 0 0 56px;
+  padding: 0 0 0 37px;
   overflow: hidden;
 }
 #main .show-all .thumbnail {
@@ -297,6 +306,33 @@ a {
   overflow: hidden;
   position: relative;
   padding-right: 3.333%;
+  -webkit-animation: slide .8s ease 0s both;
+  animation: slide .8s ease 0s both;
+}
+#main .mask-icon {
+  padding-top: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+  cursor: default;
+  position: relative;
+  top: -28px;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0;
+}
+#main .mask-icon p {
+  float: right;
+  font-size: 12px;
+  color: #aaa;
+}
+#main .mask-icon .apt-num {
+  float: left;
+  font-size: 12px;
+  color: #aaa;
+}
+#main .mask-icon .apt-num strong {
+  color: #669900;
 }
 #main .list-title {
   width: 100%;
