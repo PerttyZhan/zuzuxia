@@ -755,7 +755,7 @@ $(document).ready(function(){
 
 		event.preventDefault();
 
-		var $loginu = $('#registerForm').find('input[name="username"]');
+		var $loginu = $('#resetForm').find('input[name="username"]');
 		var _val = $loginu.val();
 		var $error = $('#reseterror');
 		var $this = $(this);

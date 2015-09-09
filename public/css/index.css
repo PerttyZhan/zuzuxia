@@ -641,9 +641,10 @@ a {
   background-color: #e1dfdf;
 }
 .footer {
-  position: relative;
+  position: absolute;
   z-index: 12;
   background-color: #696969;
+  width: 100%;
 }
 #footer {
   width: 100%;
@@ -1182,6 +1183,8 @@ a {
   margin-bottom: 52px;
   font-size: 50px;
   color: #fff;
+  overflow: hidden;
+  word-wrap: normal;
 }
 .jumbotron-des p {
   font-size: 33px;
