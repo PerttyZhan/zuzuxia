@@ -314,7 +314,8 @@ $(document).ready(function(){
 
 	var $header = $('#header');
 	var $banner = $('#banner');
-	var $main = $('#main')
+	var $main = $('#main');
+	var $footer = $('#footer')
 	var $roomBanner = $('#roomShow');
 	var $banner_search = $('#banner-search');
 	var $error = $('#error');
@@ -330,12 +331,16 @@ $(document).ready(function(){
 			clearInterval( bannerTimer );
 			bannerTimer = null;
 			$main.css( 'margin-top',$banner.height()-$header.height()+'px' );
+
+			if( $banner.length > 0 && $('body').height() < $(window).height() ){
+
+				var _height = $(window).height() - $banner.height() - $footer.height();
+				$main.css( 'min-height',_height+'px' );
+			}
 			$banner_search.css('top',parseInt($main.css('margin-top'))-$banner_search.height() + 'px').show();
 		}
-	},20);;
+	},20);
 	
-
-	$('body').css( 'min-height',$(window).height()+'px' );
 	var banner = new bannerRun( $banner,function(){},$('.btn-pre'),$('.btn-next'));
 	var roomBanner = new bannerRun( $roomBanner,function(){},$('.btn-pre'),$('.btn-next'));
 	$.each( $('.scoll-pic'),function(index,elem){
