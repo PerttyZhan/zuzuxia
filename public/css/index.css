@@ -899,7 +899,7 @@ a {
 }
 .apt-process li {
   float: left;
-  display: block;
+  display: table;
   width: 20%;
 }
 .apt-process li:nth-of-type(1) .apt-icon {
@@ -920,7 +920,7 @@ a {
 .apt-icon {
   display: table-cell;
   vertical-align: middle;
-  width: 28%;
+  width: 30%;
   height: auto;
   max-width: 91px;
   background-size: 100% auto !important;
@@ -928,21 +928,20 @@ a {
 .apt-des {
   display: table-cell;
   padding-left: 5px;
+  vertical-align: middle;
 }
 .apt-des span {
   font-size: 27px;
   color: #fff;
   width: 100%;
-  display: inline-block;
-  vertical-align: middle;
+  display: block;
 }
 .apt-des p {
+  display: block;
   width: 100%;
   font-size: 17px;
   color: #fff;
-  padding: 0 0;
-  display: inline-block;
-  vertical-align: middle;
+  padding: 5px 0;
 }
 #shawdow {
   position: fixed;
