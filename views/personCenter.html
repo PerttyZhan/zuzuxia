@@ -56,8 +56,8 @@
 					<div class="mask-icon">
 						<span class="btn-share" title="分享">
 							<div class="share-icon">
-								<p class="wx-login" ></p>
-								<p class="qq-login" ></p>
+								<p class="wx-login" id=""></p>
+								<p class="qq-login" id="qq-share" data-share='{"title":"<%=appoint.houseID.title %>","summary":"<%=appoint.houseID.summary %>","pics":["<%=appoint.houseID.coverUrl %>"]}' title="QQ分享"></p>
 							</div>
 						</span>
 						<span class="btn-coll" title="收藏"></span>
@@ -70,7 +70,6 @@
 			</div>
 		</div>
 	</section>
-
 
 	<footer class="footer">
 		<div id="footer">
@@ -86,4 +85,5 @@
 			</div>
 		</div>
 	</footer>
+<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
 <% include includes/foot.html %>
