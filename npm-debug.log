@@ -1,0 +1,77 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'grun-css' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 warn package.json zuzuxia@0.0.1 No repository field.
+6 warn package.json zuzuxia@0.0.1 No README data
+7 warn package.json crypto@0.0.3 crypto is also the name of a node core module.
+8 warn package.json multipart@0.1.5 No repository field.
+9 warn package.json multipart@0.1.5 No README data
+10 verbose readDependencies using package.json deps
+11 verbose cache add [ 'grun-css', null ]
+12 verbose cache add name=undefined spec="grun-css" args=["grun-css",null]
+13 verbose parsed url { protocol: null,
+13 verbose parsed url   slashes: null,
+13 verbose parsed url   auth: null,
+13 verbose parsed url   host: null,
+13 verbose parsed url   port: null,
+13 verbose parsed url   hostname: null,
+13 verbose parsed url   hash: null,
+13 verbose parsed url   search: null,
+13 verbose parsed url   query: null,
+13 verbose parsed url   pathname: 'grun-css',
+13 verbose parsed url   path: 'grun-css',
+13 verbose parsed url   href: 'grun-css' }
+14 silly lockFile 941ff137-grun-css grun-css
+15 verbose lock grun-css C:\Users\Administrator\AppData\Roaming\npm-cache\941ff137-grun-css.lock
+16 silly lockFile 941ff137-grun-css grun-css
+17 silly lockFile 941ff137-grun-css grun-css
+18 verbose addNamed [ 'grun-css', '' ]
+19 verbose addNamed [ null, '*' ]
+20 silly lockFile 362c89ff-grun-css grun-css@
+21 verbose lock grun-css@ C:\Users\Administrator\AppData\Roaming\npm-cache\362c89ff-grun-css.lock
+22 silly addNameRange { name: 'grun-css', range: '*', hasData: false }
+23 verbose request where is /grun-css
+24 verbose request registry https://registry.npmjs.org/
+25 verbose request id b4b585ea80f0115d
+26 verbose url raw /grun-css
+27 verbose url resolving [ 'https://registry.npmjs.org/', './grun-css' ]
+28 verbose url resolved https://registry.npmjs.org/grun-css
+29 verbose request where is https://registry.npmjs.org/grun-css
+30 info trying registry request attempt 1 at 16:27:41
+31 http GET https://registry.npmjs.org/grun-css
+32 http 404 https://registry.npmjs.org/grun-css
+33 silly registry.get cb [ 404,
+33 silly registry.get   { 'content-type': 'application/json',
+33 silly registry.get     'cache-control': 'max-age=0',
+33 silly registry.get     'content-length': '2',
+33 silly registry.get     'accept-ranges': 'bytes',
+33 silly registry.get     date: 'Thu, 10 Sep 2015 08:26:41 GMT',
+33 silly registry.get     via: '1.1 varnish',
+33 silly registry.get     age: '0',
+33 silly registry.get     connection: 'keep-alive',
+33 silly registry.get     'x-served-by': 'cache-itm7421-ITM',
+33 silly registry.get     'x-cache': 'MISS',
+33 silly registry.get     'x-cache-hits': '0',
+33 silly registry.get     'x-timer': 'S1441873600.270477,VS0,VE734' } ]
+34 silly lockFile 362c89ff-grun-css grun-css@
+35 silly lockFile 362c89ff-grun-css grun-css@
+36 error 404 Not Found
+36 error 404
+36 error 404 'grun-css' is not in the npm registry.
+36 error 404 You should bug the author to publish it
+36 error 404 It was specified as a dependency of 'zuzuxia'
+36 error 404
+36 error 404 Note that you can also install from a
+36 error 404 tarball, folder, or http url, or git url.
+37 error System Windows_NT 6.1.7601
+38 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "grun-css"
+39 error cwd E:\node-learn\zuzuxia
+40 error node -v v0.10.33
+41 error npm -v 1.4.28
+42 error code E404
+43 verbose exit [ 1, true ]

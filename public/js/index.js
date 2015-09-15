@@ -359,6 +359,107 @@ var qqshare = {
 	}
 };
 
+var imageShow = {
+	init:function($img){
+
+		var $oAi = $img;
+
+		var arr = [];
+		for( var i=0,max=$oAi.length;i<max;i++){
+
+			var config = this.getSubClient( $oAi.eq(i) );
+
+			arr.push({
+				obj:$oAi.eq(i),
+				json:config,
+				img:$oAi.eq(i).find('img:eq(0)')
+			});
+		}
+		this.arr = arr;
+
+		
+		this.initImage();
+		this.initEvent();
+
+	},
+	initImage:function(){
+
+	},
+	initEvent:function(){
+
+		var This = this;
+		$(window).scroll( $.proxy(function(){
+
+			var _arr = this.arr,_src,s_arr=[];
+
+			if( _arr.length == 0 ){
+				$ (window).unbind('scroll');
+				return ;
+			}
+			var win_json = this.getClient(),obj_json={};
+
+			for( var i=0,max=_arr.length;i<max;i++){
+
+				obj_json = this.getSubClient( _arr[i].obj );
+				
+				if( this.intens( win_json,obj_json ) ){
+
+					_src = _arr[i].img.data('src');
+					_arr[i].img.attr('src',_src);
+					_arr[i].obj.css({
+						'-webkit-animation': 'slide .8s ease 0s both',
+  						'animation': 'slide .8s ease 0s both'
+					}).fadeIn(800);
+				}else{
+					s_arr.push( _arr[i] )
+				}
+
+			}
+			 
+			this.arr = s_arr;
+		},This) );
+	},
+	getClient:function(){
+		//返回浏览器的可视区域位置
+
+		var l,t,w,h;
+
+		l = $(window).scrollLeft();
+		t = $(window).scrollTop();
+		w = $(window).width();
+		h = $(window).height();
+
+		return {left:l,top:t,width:w,height:h};
+	},
+	getSubClient:function($p){
+		// 返回待加载资源位置
+
+		var l=0,t=0,w,h;
+
+		l = $p.offset().left;
+		t = $p.offset().top;
+		w = $p.width();
+		h = $p.height();
+
+		return {left:l,top:t,width:w,height:h}
+	},
+	intens:function(rec1,rec2){
+		// 判断两个矩形是否相交,返回一个布尔值 
+
+		var lc1,lc2,tc1,tc2,w1,h1;
+
+		lc1 = rec1.left + rec1.width/2;
+		lc2 = rec2.left + rec2.width/2;
+		tc1 = rec1.top + rec1.height/2;
+		tc2 = rec2.top + rec2.height/2;
+		w1 = ( rec1.width + rec2.width )/2;
+		h1 = ( rec1.height + rec2.height )/2;
+
+		return Math.abs(lc1 - lc2) < w1 && Math.abs(tc1 - tc2) < h1;
+
+	}
+};
+
 $(document).ready(function(){
 
 	var $header = $('#header');
@@ -368,6 +469,7 @@ $(document).ready(function(){
 	var $roomBanner = $('#roomShow');
 	var $banner_search = $('#banner-search');
 	var $error = $('#error');
+	var $thumbnail = $('.thumbnail');
 
 	$banner.css('opacity',1).find('ul').height( $banner.find('a').height() ).find('li:eq(0)').addClass('active');
 	$roomBanner.css('opacity',1).find('ul').height( $roomBanner.find('a').height() ).find('li:eq(0)').addClass('active');
@@ -399,12 +501,14 @@ $(document).ready(function(){
 
 	searchChange.init($banner_search,'search-fiexd');
 
+	imageShow.init( $thumbnail );
+
 	$.each( $('.chooseSite,.choosetime'),function(index,elem){
 
-		$(elem).on('click',function(event){
-			event.preventDefault();
-			event.stopPropagation();
+		$(elem).on('click',function(e){
 
+			e.preventDefault();
+			e.stopPropagation();
 			$(this).next().hasClass('active')?$(this).next().removeClass('active'):$(this).next().addClass('active');
 		});
 	});
@@ -423,18 +527,18 @@ $(document).ready(function(){
 
 	$('#endtime').on('click',function(){
 
+		if( $('#starttime').val()=='' || $('#duringtime').val() == '' ){return;}
 		var times = $('#starttime').val().split('-');
 		var year = parseInt(times[0]),month = parseInt(times[1]),day = times[2];
 		var dtime = parseInt( $('#duringtime').val() );
 
 		month = month + dtime;
 
-		console.log( month );
 		if( month > 12 ){
 			year+= parseInt( month/12 );
 			month = ( month%12 );
 		}
-		console.log( month );
+
 		if( month < 10 ){
 			month = '0'+month;
 		}
@@ -624,15 +728,6 @@ $(document).ready(function(){
 		var _id = $('.apt-id').val();
 		var $this = $(this);
 		var _url = '',_text = '';
-		// if( $this.text().indexOf('立即预约') != -1 ){
-
-		// 	_url = '/appointHouse';
-		// 	_text = '撤除预约';
-
-		// }else{
-		// 	_url = '/removeAppointHouse';
-		// 	_text = '立即预约';
-		// }
 
 		
 		$.ajax({
@@ -785,7 +880,6 @@ $(document).ready(function(){
 			return $error.text('两次密码不一样').show();
 		}
 
-		console.log( wcode + '|' + scode );
 		if( wcode != scode ){
 			return $error.text('短信验证码不正确').show();
 		}
@@ -851,7 +945,6 @@ $(document).ready(function(){
 			type:'post',
 			data:'src='+_val,
 			success:function(msg){
-				console.log(msg.val);
 				$this.prev().val( msg.val );
 
 			},

@@ -5,7 +5,7 @@
 	<div class="banner" id="banner">
 		
 			<ul>
-				<li class="active"><a href="#"><img src="/image/banner-1.png" alt="banner-1" title="" width="1900"/></a></li>
+				<li class="active"><a href="#"><img src="/image/banner-1.jpg" alt="banner-1" title="" width="1900"/></a></li>
 				<li><a href="#"><img src="/image/banner-2.jpg" alt="banner-1" title="" width="1900"/></a></li>
 				<li><a href="#"><img src="/image/banner-3.jpg" alt="banner-1" title="" width="1900"/></a></li>
 			</ul>
@@ -72,6 +72,28 @@
 	</div>
 
 	<section class="main" id="main">
+		<div>
+			<div class="title">
+				<span>杭州</span>
+			</div>
+			<div class="show">
+				<% houses.forEach(function(house){ %>
+				<div class="thumbnail">
+					<a href="detailMessage/<%=house._id %>" class="thumbnail-body">
+						<img data-src="<%=house.coverUrl %>" width=""/>
+						<div class="mask">
+							<div class="ma table">
+								<div class="table-cell">
+									<h3 ><%=house.title %></h3>
+									<p ><%=house.summary %></p>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+				<% }) %>
+			</div>
+		</div>
 		<div >
 			<div class="title">
 				<span>杭州</span>
@@ -80,7 +102,7 @@
 				<% houses.forEach(function(house){ %>
 				<div class="thumbnail">
 					<a href="detailMessage/<%=house._id %>" class="thumbnail-body">
-						<img src="<%=house.coverUrl %>" width=""/>
+						<img data-src="<%=house.coverUrl %>" width="" />
 						<div class="mask">
 							<div class="ma table">
 								<div class="table-cell">
