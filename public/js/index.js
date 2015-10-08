@@ -471,15 +471,15 @@ $(document).ready(function(){
 	var $error = $('#error');
 	var $thumbnail = $('.thumbnail');
 
-	console.log(  'asdasdadadas'+$banner.find('a').height() );
 
 	$banner.css('opacity',1).find('ul').height( $banner.find('a').height() ).find('li:eq(0)').addClass('active');
 	$roomBanner.css('opacity',1).find('ul').height( $roomBanner.find('a').height() ).find('li:eq(0)').addClass('active');
 
 
-	var bannerTimer = setInterval(function(){
+	var bannerTimer = $banner.length >=0?setInterval(function(){
 
-		if( $banner.length <= 0 || $banner.height() ){
+		console.log( $banner.height() );
+		if( $banner.height() ){
 
 			clearInterval( bannerTimer );
 			bannerTimer = null;
@@ -492,7 +492,7 @@ $(document).ready(function(){
 			}
 			$banner_search.css('top',parseInt($main.css('margin-top'))-$banner_search.height() + 'px').show();
 		}
-	},20);
+	},20):null;
 	
 	var banner = new bannerRun( $banner,function(){},$('.btn-pre'),$('.btn-next'));
 	var roomBanner = new bannerRun( $roomBanner,function(){},$('.btn-pre'),$('.btn-next'));
