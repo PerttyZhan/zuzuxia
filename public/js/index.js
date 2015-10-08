@@ -471,6 +471,8 @@ $(document).ready(function(){
 	var $error = $('#error');
 	var $thumbnail = $('.thumbnail');
 
+	console.log(  'asdasdadadas'+$banner.find('a').height() );
+
 	$banner.css('opacity',1).find('ul').height( $banner.find('a').height() ).find('li:eq(0)').addClass('active');
 	$roomBanner.css('opacity',1).find('ul').height( $roomBanner.find('a').height() ).find('li:eq(0)').addClass('active');
 
