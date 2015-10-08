@@ -1184,6 +1184,9 @@ a {
   color: #fff;
   overflow: hidden;
   word-wrap: normal;
+  transform:translateY(-50%);
+  -webkit-transform:translateY(-50%);
+  -moz-transform:translateY(-50%);
 }
 .jumbotron-des p {
   font-size: 33px;
