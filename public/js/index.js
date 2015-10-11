@@ -472,6 +472,110 @@ $(document).ready(function(){
 
 	var url = window.location.href.split('\/');
 
+	$(document).on('click',function(e){
+
+			var $aptFail = $('#apt-fail'),
+				$aptSub = $('#apt-sub')
+				$choosesite = $('.chooseSite'),
+				$choosetime = $('.choosetime'),
+				$starttime = $('#starttime'),
+				$duringtime = $('#duringtime'),
+				$endtime = $('#endtime'),
+				$login = $('.login'),
+				$reg = $('.reg'),
+				$shawdow = $('#shawdow'),
+				$loginFace = $shawdow.find('.loginFace'),
+				$regFace = $shawdow.find('.regFace'),
+				$forgetPass = $('#forgetPass')
+				$close = $('.close');
+
+
+			if( $aptSub[0]  == e.target || $aptFail[0]  == e.target || $.contains( $aptFail[0],e.target ) ){
+
+			}else{
+				$aptFail.hide();
+			}
+
+			if( $choosesite[0]  == e.target || $.contains( $choosesite[0],e.target ) ){
+
+				$choosesite.next().hasClass('active')?$choosesite.next().removeClass('active'):$choosesite.next().addClass('active');
+			}
+			if( $choosetime[0]  == e.target || $.contains( $choosetime[0],e.target ) ){
+
+				$choosetime.next().hasClass('active')?$choosetime.next().removeClass('active'):$choosetime.next().addClass('active');
+			}
+			if( $endtime[0]  == e.target || $.contains( $endtime[0],e.target ) ){
+
+				if( $starttime.val()=='' || $duringtime.val() == '' ){return;}
+
+				var times = $starttime.val().split('-');
+				var year = parseInt(times[0]),month = parseInt(times[1]),day = times[2];
+				var dtime = parseInt( $duringtime.val() );
+
+				month = month + dtime;
+
+				if( month > 12 ){
+					year+= parseInt( month/12 );
+					month = ( month%12 );
+				}
+
+				if( month < 10 ){
+					month = '0'+month;
+				}
+				$endtime.val( year + '-' + month + '-' + day );
+			}
+			if( $aptSub[0]  == e.target ){
+
+				e.preventDefault();
+
+				if( document.getElementById('dropMenu') == null ){
+
+					return $aptFail.show().addClass('fadeInDown animated-login');
+				}
+
+				var $form = $(e.target).parents('form'),$input = $form.find('input[type="text"]');
+
+				for( var i=0,max=$input.length;i<max;i++ ){
+					$input.eq(i).parent().css('border','none');
+					if( $input.eq(i).val() == '' ){
+						$input.eq(i).parent().css('border','1px solid red');
+						return ;
+					}
+				}
+
+				$(e.target).parents('form').submit();
+			}
+
+			/* 登录前共有的登录，注册部分 */
+			//点击登录按钮的
+			if( $login[0]  == e.target ){
+				event.preventDefault();
+				$aptFail.removeClass('fadeInDown animated-login').hide();
+				$shawdow.show().find('.loginFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
+			}
+
+			//点击注册按钮
+			if( $reg[0]  == e.target ){
+				event.preventDefault();
+				$aptFail.removeClass('fadeInDown animated-login').hide();
+				$shawdow.show().find('.regFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
+			}
+
+			//忘记密码
+			if( $forgetPass[0]  == e.target ){
+				event.preventDefault();
+				$shawdow.find('.getPassFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
+			}
+			//点击叉叉
+			if( $(e.target).attr('class') == 'close' ){
+				event.preventDefault();
+				$shawdow.hide().find('input').not('input[type="button"]').val('');
+				$shawdow.find('.error,.errorL').hide();
+			}
+
+				
+		});
+	
 	/* 属于首页部分 */
 	if( $banner.length > 0 ){
 
@@ -499,16 +603,6 @@ $(document).ready(function(){
 
 		imageShow.init( $thumbnail );
 
-		$.each( $('.chooseSite,.choosetime'),function(index,elem){
-
-			$(elem).on('click',function(e){
-
-				e.preventDefault();
-				e.stopPropagation();
-				$(this).next().hasClass('active')?$(this).next().removeClass('active'):$(this).next().addClass('active');
-			});
-		});
-
 		$.each( $('.detailsite,.detailtime').find('a'),function(index,elem){
 
 			$(elem).on('click',function(event){
@@ -519,51 +613,7 @@ $(document).ready(function(){
 				$(this).parents('dd').removeClass('active').prev().find('input').val(_val);
 			});
 
-		} );
-
-		$('#endtime').on('click',function(){
-
-			if( $('#starttime').val()=='' || $('#duringtime').val() == '' ){return;}
-			var times = $('#starttime').val().split('-');
-			var year = parseInt(times[0]),month = parseInt(times[1]),day = times[2];
-			var dtime = parseInt( $('#duringtime').val() );
-
-			month = month + dtime;
-
-			if( month > 12 ){
-				year+= parseInt( month/12 );
-				month = ( month%12 );
-			}
-
-			if( month < 10 ){
-				month = '0'+month;
-			}
-			$(this).val( year + '-' + month + '-' + day );
 		});
-
-
-		$('#apt-sub').on('click',function(ev){
-
-			ev.preventDefault();
-
-			// var site,start,end;
-			if( document.getElementById('dropMenu') == null ){
-
-				return $('#apt-fail').show().addClass('fadeInDown animated-login');
-			}
-
-			var $form = $(this).parents('form'),$input = $form.find('input[type="text"]');
-
-			for( var i=0,max=$input.length;i<max;i++ ){
-				$input.eq(i).parent().css('border','none');
-				if( $input.eq(i).val() == '' ){
-					$input.eq(i).parent().css('border','1px solid red');
-					return ;
-				}
-			}
-
-			$(this).parents('form').submit();
-		});	
 	}
 
 	/* 属于详情的部分 */
@@ -624,37 +674,7 @@ $(document).ready(function(){
 		});
 	}
 
-	/* 登录前共有的登录，注册部分 */
-
-		//点击登录按钮的
-		$('.login').on('click',function(event){
-
-				event.preventDefault();
-				$('#apt-fail').removeClass('fadeInDown animated-login').hide();
-				$('#shawdow').show().find('.loginFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
-		});
-			//点击注册按钮
-		$('.reg').on('click',function(event){
-
-				event.preventDefault();
-				$('#apt-fail').removeClass('fadeInDown animated-login').hide();
-				$("#shawdow").show().find('.regFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
-		});
-			//忘记密码
-		$('#forgetPass').on('click',function(event){
-				event.preventDefault();
-
-				$('#shawdow').find('.getPassFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
-		});
-			//点击叉叉
-		$(".close").on('click',function(event){
-
-			event.preventDefault();
-
-			$("#shawdow").hide().find('input').not('input[type="button"]').val('');
-			$("#shawdow").find('.error,.errorL').hide();
-
-		});
+		
 			//登录里面的登录
 		$('#btn-lg').on('click',function(){
 

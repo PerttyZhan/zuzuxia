@@ -502,6 +502,11 @@ a {
   width: 100%;
   padding: 0 69px 0 69px;
   overflow: hidden;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  justify-content:space-between;
 }
 .show input{
   width:50px;
@@ -541,11 +546,9 @@ a {
   position: relative;
 }
 .thumbnail {
-  width: 33%;
-  float: left;
+  width: 31%;
   margin-bottom: 42px;
   position: relative;
-  padding-right: 3.333%;
 }
 .thumbnail .thumbnail-body {
   text-decoration: none;

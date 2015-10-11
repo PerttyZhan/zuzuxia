@@ -177,12 +177,18 @@ a {
 }
 #main .item1 {
   margin-top: 40px;
+    display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 #main .item1 h2 {
   text-align: center;
   color: #999;
   font-size: 32px;
   padding: 10px 0;
+  width: 100%;
 }
 #main .house-update {
   top: 0;
@@ -194,13 +200,7 @@ a {
   padding: 30px;
   border: 1px solid #ebebeb;
 }
-#main .thumbnail {
-  width: 33%;
-  float: left;
-  margin-bottom: 30px;
-  position: relative;
-  padding-right: 3.333%;
-}
+
 #main .thumbnail a {
   text-decoration: none;
   transition: color 1s;
@@ -298,6 +298,7 @@ a {
   width: 100%;
   padding: 0 37px 0 37px;
   overflow: hidden;
+  
 }
 #main .show-all table{
   width:100%;
@@ -365,12 +366,11 @@ a {
   background-color: #fff;
 }
 #main .show-all .thumbnail {
-  width: 33.333%;
+  width: 31%;
   float: left;
   margin-bottom: 30px;
   overflow: hidden;
   position: relative;
-  padding-right: 3.333%;
   -webkit-animation: slide .8s ease 0s both;
   animation: slide .8s ease 0s both;
 }
