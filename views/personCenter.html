@@ -73,7 +73,7 @@
 
 									<span><strong><%=count %></strong>/<%=all %></span> 
 
-									<% if( count != all ){ %>
+									<% if( count != all && count != 0  ){ %>
 										<a class="next " href="personCenter?count=<%= (count+1) %>">下一页</a>
 									<% } %>
 									 <input type="hidden" name="allnum" value="<%=all %>" /> 
