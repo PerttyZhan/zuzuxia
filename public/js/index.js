@@ -585,9 +585,6 @@ $(document).ready(function(){
 
 		var bannerTimer = $banner.length >=0?setInterval(function(){
 			if( $banner.height() ){
-
-				clearInterval( bannerTimer );
-				bannerTimer = null;
 				$main.css( 'margin-top',$banner.height()-$header.height()+'px' );
 
 				if( $banner.length > 0 && $('body').height() < $(window).height() ){
@@ -596,6 +593,8 @@ $(document).ready(function(){
 					$main.css( 'min-height',_height+'px' );
 				}
 				$banner_search.css('top',parseInt($main.css('margin-top'))-$banner_search.height() + 'px').show();
+				clearInterval( bannerTimer );
+				bannerTimer = null;
 			}
 		},20):null;
 		var banner = new bannerRun( $banner,function(){},$('.btn-pre'),$('.btn-next'));
