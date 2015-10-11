@@ -62,21 +62,22 @@
 								<tr>
 									<td colspan="7">
 									<% if( count != 1 ){ %>
-										<a href="#" class="pre disabled" >上一页</a> 
+										<a href="aptManager?count=<%= (count-1) %>" class="pre" >上一页</a> 
 									<% } %>
 									
 									<span><strong><%=count %></strong>/<%=all %></span> 
 									
 									<% if( count != all ){ %>
-										<a class="next " href="#">下一页</a>
+										<a class="next " href="aptManager?count=<%= (count+1) %>">下一页</a>
 									<% } %>
-										<a class="trun" href="#">
+										<a class="trun" href="javascript:void(0)" id="open-turn">
 											跳转
 											<span class="page-choose">
 												<p>
+													<input type="hidden" name="all" value="<%=all %>"/>
 													跳转至 <input type="text" name="page" /> 页
 												</p>
-												<button type="button">确定</button>
+												<button type="button" id="turn-page">确定</button>
 											</span>
 										</a>
 										

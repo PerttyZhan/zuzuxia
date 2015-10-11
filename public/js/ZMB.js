@@ -424,4 +424,39 @@ $(document).ready(function(){
 
 		});
 
+		// 预约管理 -- 跳转
+		$('#open-turn').on('click',function(e){
+
+			e.preventDefault();
+
+			var $page = $(this).find('.page-choose');
+
+			console.log( $page.hasClass('fadeInUp') );
+			if( $page.hasClass('fadeInUp') ){
+				$page.removeClass('fadeInUp animated-login').hide();
+			}else{
+				$page.addClass('fadeInUp animated-login').show();
+			}
+
+		});
+		$('#open-turn .page-choose').on('click',function(e){
+			e.stopPropagation();
+			return false;
+		});
+		$('#turn-page').on('click',function(e){
+
+			e.preventDefault();
+
+			var parent = $(this).parent(),
+				page = parent.find('input[name="page"]').val(),
+				all = parent.find('input[name="all"]').val();
+
+			if( page > all ){
+				alert('超过总数,最多只有'+all);
+			}else{
+				window.location.href = 'aptManager?count='+page;
+			}
+
+		});
+
 });

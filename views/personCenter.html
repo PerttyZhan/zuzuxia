@@ -68,17 +68,17 @@
 							<tr>
 								<td colspan="7">
 									<% if( count != 1 ){ %>
-										<a href="#" class="pre disabled" >上一页</a> 
+										<a href="personCenter?count=<%= (count-1) %>" class="pre" >上一页</a> 
 									<% } %>
-									
+
 									<span><strong><%=count %></strong>/<%=all %></span> 
 
 									<% if( count != all ){ %>
-										<a class="next " href="/">下一页</a>
+										<a class="next " href="personCenter?count=<%= (count+1) %>">下一页</a>
 									<% } %>
-									 
-									<input type="text" name="apt"/> 
-									<a class="trun" href="javascript:void(0)" class="trun-page" >
+									 <input type="hidden" name="allnum" value="<%=all %>" /> 
+									<input type="text" name="pagenum" value="" /> 
+									<a class="trun" href="javascript:void(0)" class="trun-page" id="trun-page">
 										跳转
 									</a>
 									

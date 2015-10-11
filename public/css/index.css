@@ -347,6 +347,16 @@ a {
   position: relative;
   width: 195px;
 }
+.banner-form li table{
+  table-layout: fixed;
+  width:100%;
+  border-top: 1px solid #d8d8d8;
+  border-left: 1px solid #d8d8d8;
+}
+.banner-form li td {
+  border-right: 1px solid #d8d8d8;
+  border-bottom: 1px solid #d8d8d8;
+}
 .banner-form li:nth-of-type(1) dd {
   display: none;
 }
@@ -362,18 +372,20 @@ a {
 .banner-form li:nth-of-type(3) dd {
   overflow: hidden;
   display: none;
-  padding: 0 8px 0 8px;
 }
 .banner-form li:nth-of-type(3) a {
   float: left;
   display: inline-block;
   line-height: 27px;
-  color: #669900;
+  color: #333;
   margin: 8px 9px;
   width: 40px;
   text-align: center;
-  border: 1px solid #669900;
   border-radius: 4px;
+}
+.banner-form li:nth-of-type(3) td:hover{
+ background-color: #CCC;
+ color:#fff;
 }
 .banner-form li:last-child {
   border-right: none;

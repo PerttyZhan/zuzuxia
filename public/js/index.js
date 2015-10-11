@@ -516,7 +516,7 @@ $(document).ready(function(){
 				event.preventDefault();
 				event.stopPropagation();
 
-				$(this).parent().removeClass('active').prev().find('input').val(_val);
+				$(this).parents('dd').removeClass('active').prev().find('input').val(_val);
 			});
 
 		} );
@@ -558,14 +558,10 @@ $(document).ready(function(){
 				$input.eq(i).parent().css('border','none');
 				if( $input.eq(i).val() == '' ){
 					$input.eq(i).parent().css('border','1px solid red');
-					break ;
+					return ;
 				}
 			}
-			console.log('can submit');
 
-			// site = $('input[name="site"]').val();
-			// start = $('#starttime').val();
-			// end = $('endtime').val();
 			$(this).parents('form').submit();
 		});	
 	}
@@ -985,7 +981,7 @@ $(document).ready(function(){
 			});
 		});
 
-	}else if( url[url.length -1] === 'personCenter' ){
+	}else if( window.location.href.indexOf('personCenter') != -1 ){
 
 		console.log( 'load personCenter js' );
 		//个人中心-预约-hover
@@ -1026,6 +1022,21 @@ $(document).ready(function(){
 
 				}
 			})
+		});
+
+		//个人中心 -- 预约 -- 跳转
+		$('#trun-page').on('click',function(e){
+
+			e.preventDefault();
+			console.log('asdasdad');
+			var page = $(this).prev().val(),all = $(this).prev().prev().val();
+
+			if( page > all ){
+				alert('超过总数,最多只有'+all);
+			}else{
+				window.location.href = 'personCenter?count='+page;
+			}
+
 		});
 
 		//预约中心-- qqshare

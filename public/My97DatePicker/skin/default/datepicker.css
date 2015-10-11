@@ -4,7 +4,7 @@
 .WdateDiv {
 	width:260px;
 	background-color:#ffffff;
-	border:#666 1px solid;
+	border:#d8d8d8 1px solid;
 	/*padding:10px;*/
 	box-shadow:1px 1px 2px #ddd;
 	font-family:arial,"Microsoft Yahei";
@@ -54,8 +54,9 @@
 	/*overflow: hidden;*/
 	position: relative;
 	z-index: 999;
-	background:url(date.png) no-repeat 50% 0;
+	background:url(date.png) no-repeat 0 4px;
 	margin-bottom:2px;
+	 background-size: 100% ;
 }
 .WdateDiv .NavImgl{ margin-right:26px; float:left; height:52px;}
 .WdateDiv .NavImgr{float:right; height:52px;}
@@ -63,13 +64,12 @@
 	text-align:center;
 	border:0px;
 	height:25px;
-	line-height:25px;
+	line-height:31px;
 	margin:10px 0 0;
 	width:50px;
-	color:#034c50;
+	color:#000;
 	background-color:transparent;
 	cursor:pointer;
-	color:#fff;
 	margin-right:15px;
 	font-size:16px;
 	font-family:arial;
@@ -165,7 +165,7 @@
 	height: 35px;
 	padding: 0!important;
 	line-height: 35px;
-	border-radius:100px;
+	border-radius:0;
 }
 
 .WdateDiv .Wday{

@@ -208,7 +208,9 @@ module.exports = function(app){
 		});
 	app.route('/personCenter')
 		.get(function(req,res){
-			var user = {},deferred = Q.defer(),count = req.params.count || 1;
+
+			var args = URL.parse(req.url,true).query;
+			var user = {},deferred = Q.defer(),count =  args['count'] == undefined ? 1 : args['count'];
 
 			console.log( count );
 			if( getUser(req) ){
@@ -604,7 +606,8 @@ module.exports = function(app){
 	app.route('/aptManager')
 		.get(function(req,res){
 
-			var count = req.params.count || 1;
+			var args = URL.parse(req.url,true).query,
+				count =  args['count'] == undefined ? 1 : args['count'];
 
 			personAppoint.findAll(function(err,apponits){
 
@@ -614,32 +617,13 @@ module.exports = function(app){
 					title:'后台登录--预约管理',
 					appoints:apponits.slice( (count - 1)*20,count*20 ),
 					count:count,
-					all:Math.ceil( apponits.length/5 )
+					all:Math.ceil( apponits.length/20 )
 				})
 			});
 
 			
 		});
 
-	app.route('/aptManager')
-		.get(function(req,res){
-
-			var count = req.params.count || 1;
-
-			personAppoint.findAll(function(err,apponits){
-
-				if( err ){return console.log(err)}
-
-				return res.render('aptManager',{
-					title:'后台登录--预约管理',
-					appoints:apponits.slice( (count - 1)*20,count*20 ),
-					count:count,
-					all:Math.ceil( apponits.length/5 )
-				})
-			});
-
-			
-		});
 	//后台--上传图片
 	app.route('/uploadImage')
 		.post(function(req,res){
