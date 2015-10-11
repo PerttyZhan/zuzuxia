@@ -4,9 +4,9 @@
 	<div class="banner" id="banner">
 		
 			<ul>
-				<li class="active"><a href="#"><img src="/image/banner-1.jpg" alt="banner-1" title="" width="1900"/></a></li>
-				<li><a href="#"><img src="/image/banner-2.jpg" alt="banner-1" title="" width="1900"/></a></li>
-				<li><a href="#"><img src="/image/banner-3.jpg" alt="banner-1" title="" width="1900"/></a></li>
+				<li class="active"><a href="javascript:void(0)"><img src="/image/banner-1.jpg" alt="banner-1" title="" width="1900"/></a></li>
+				<li><a href="javascript:void(0)"><img src="/image/banner-2.jpg" alt="banner-1" title="" width="1900"/></a></li>
+				<li><a href="javascript:void(0)"><img src="/image/banner-3.jpg" alt="banner-1" title="" width="1900"/></a></li>
 			</ul>
 		<a class="btn-pre"><i class="icon-pre"></i></a>
 		<a class="btn-next"><i class="icon-next"></i></a>
@@ -14,7 +14,7 @@
 	<div class="banner-search" id="banner-search">
 		<div class="container">
 			<div class="wrap">
-				<form class="banner-form">
+				<form action="siteapt" class="banner-form" novalidate method="post">
 					<ul>
 						<li>
 							<dl>
@@ -36,7 +36,7 @@
 						<li>
 							<dl>
 								<dt class="choosetime">
-									<input type="text" name="site" value="" placeholder="入住周期" readonly id="duringtime"/>
+									<input type="text" name="week" value="" placeholder="入住周期" readonly id="duringtime"/>
 									
 									<i class="icon-arrow-botom"></i>
 								</dt>
@@ -52,7 +52,7 @@
 							
 						</li>
 						<li>
-							<button type="submit" class="submit">立即预约</buton>
+							<button type="button" class="submit" id="apt-sub">立即预约</buton>
 						</li>
 					</ul>
 				</form>
@@ -78,8 +78,14 @@
 			<div class="show">
 				<% houses.forEach(function(house){ %>
 				<div class="thumbnail">
+
 					<a href="detailMessage/<%=house._id %>" class="thumbnail-body">
-						<img data-src="<%=house.coverUrl %>" width=""/>
+						<% if( house.coverUrl == '' ){ %>
+							<img data-src="image/default-curimg.png" width=""/>
+						<% }else{ %>
+							<img data-src="<%=house.coverUrl %>" width=""/>
+						<% } %>
+						
 						<div class="mask">
 							<div class="ma table">
 								<div class="table-cell">
@@ -101,7 +107,11 @@
 				<% houses.forEach(function(house){ %>
 				<div class="thumbnail">
 					<a href="detailMessage/<%=house._id %>" class="thumbnail-body">
-						<img data-src="<%=house.coverUrl %>" width="" />
+						<% if( house.coverUrl == '' ){ %>
+							<img data-src="image/default-curimg.png" width=""/>
+						<% }else{ %>
+							<img data-src="<%=house.coverUrl %>" width=""/>
+						<% } %>
 						<div class="mask">
 							<div class="ma table">
 								<div class="table-cell">
@@ -125,9 +135,9 @@
 					<p>© 2015  租租侠版权所有</p>
 				</div>
 				<div class="wrap-r">
-					<a href="#">用户协议</a>
-					<a href="#">投诉建议</a>
-					<a href="#">联系我们</a>
+					<a href="javascript:void(0)">用户协议</a>
+					<a href="javascript:void(0)">投诉建议</a>
+					<a href="javascript:void(0)">联系我们</a>
 				</div>
 			</div>
 		</div>
@@ -217,6 +227,12 @@
 				</div>
 			</form>
 		</div>
+	</div>
+	<div class="apt-fail" id="apt-fail">
+		<img src="/image/apt-faild.gif" alt=""/>
+		<p>马上去登录吧~~</p>
+		<a class="login" href="javascript:void(0)">立即登录</a>
+		<a class="reg" href="javascript:void(0)">马上注册</a>
 	</div>
 <script src="/My97DatePicker/WdatePicker.js"></script>
 

@@ -296,8 +296,73 @@ a {
 }
 #main .show-all {
   width: 100%;
-  padding: 0 0 0 37px;
+  padding: 0 37px 0 37px;
   overflow: hidden;
+}
+#main .show-all table{
+  width:100%;
+  font-size: 13px;
+  color:#666;
+  margin-top:40px;
+   border-left:1px solid #ebebeb;
+  border-top:1px solid #ebebeb;
+}
+#main .show-all table tfoot td{
+  padding-top:90px;
+}
+#main .show-all td,#main .show-all th{
+  padding:10px 0;
+  border-right:1px solid #ebebeb;
+  border-bottom:1px solid #ebebeb;
+  text-align: center;
+}
+#main .show-all a{
+  color:#666;
+}
+#main .disabled{
+    cursor: no-drop;
+}
+#main .pre{
+  margin-right: 44px
+}
+#main .next{
+
+  margin-left: 44px;
+  margin-right: 24px;
+}
+#main .trun{
+  position: relative;
+}
+#main .page-choose{
+  position: absolute;
+   left: -80px;
+   text-align: center;
+    top: -67px;
+  width:190px;
+  border:1px solid #e0e0e0;
+  padding:10px 0;
+  border-radius: 5px;
+  box-shadow: 5px 10px 13px 0px rgba(0,0,0,.3);
+  display: none;
+}
+#main .page-choose input{
+  width:66px;
+  border-radius:15px;
+  border:1px solid #e0e0e0;
+  outline: none;
+  line-height: 22px;
+    padding-left: 25px;
+}
+#main .page-choose p{
+  display: inline-block;
+  vertical-align: middle;
+}
+#main .page-choose button{
+  border:none;
+  color:#666;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #fff;
 }
 #main .show-all .thumbnail {
   width: 33.333%;
@@ -708,7 +773,7 @@ a {
   float: left;
 }
 #login .form-group input {
-  -webkit-box-shadow: 0 0 0 1000px white inset;
+/*  -webkit-box-shadow: 0 0 0 1000px white inset;*/
   width: 270px;
   height: 42px;
   line-height: 42px;

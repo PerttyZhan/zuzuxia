@@ -39,34 +39,54 @@
 				</a>
 			</div>
 			<ul class="show">
+					
+				<table  border="0" cellpadding="0" cellspacing="0" bordercolor="#dedede">
+						<thead>
+							<tr>
+								<th>预约号</th><th>公寓编号</th><th>客户姓名</th><th>联系方式</th><th>入住时间</th><th>提交时间</th><th>预约类型</th>
+							</tr>
+						</thead>
+						<tbody>
+						<% appoints.forEach(function(appoint){ %>
+							<tr>
+								<td><%=appoint._id %></td>
+								<td>
+									<% if( appoint.area != '' ){ %>
 
-				<% appoints.forEach(function(appoint){ %>
-				<div class="thumbnail">
-					<a href="detailMessage/<%=appoint.houseID._id %>" class="thumbnail-body">
-						<img data-src="<%=appoint.houseID.coverUrl %>" width=""/>
-						<div class="mask">
-							<div class="ma table">
-								<div class="table-cell">
-									<h3 ><%=appoint.houseID.title %></h3>
-									<p ><%=appoint.houseID.summary %></p>
-								</div>
-							</div>
-							
-						</div>
-						<input type="hidden" name="_id" value="<%=appoint.houseID._id %>"/>
-					</a>
-					<div class="mask-icon">
-						<span class="btn-share" title="分享">
-							<div class="share-icon">
-								<p class="wx-login" id=""></p>
-								<p class="qq-login" id="qq-share" data-share='{"title":"<%=appoint.houseID.title %>","summary":"<%=appoint.houseID.summary %>","pics":["<%=appoint.houseID.coverUrl %>"]}' title="QQ分享"></p>
-							</div>
-						</span>
-						<span class="btn-coll" title="收藏"></span>
-						<span class="btn-dele" title="删除" id="apt-dele"></span>
-					</div>
-				</div>
-				<% }) %>
+										<%=appoint.area %>
+									<% } %>
+								</td>
+								<td><%=appoint.user %></td>
+								<td><%=appoint.telephone %></td>
+								<td><%=appoint.startTime %> -- <%=appoint.endTime %></td>
+								<td><%=appoint.createTime %></td>
+								<td><%=appoint.state %></td>
+							</tr>
+							<% }) %>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="7">
+									<% if( count != 1 ){ %>
+										<a href="#" class="pre disabled" >上一页</a> 
+									<% } %>
+									
+									<span><strong><%=count %></strong>/<%=all %></span> 
+
+									<% if( count != all ){ %>
+										<a class="next " href="/">下一页</a>
+									<% } %>
+									 
+									<input type="text" name="apt"/> 
+									<a class="trun" href="javascript:void(0)" class="trun-page" >
+										跳转
+									</a>
+									
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				
 				
 
 			</div>

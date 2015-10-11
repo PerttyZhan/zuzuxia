@@ -21,6 +21,10 @@ var personInfo = new mongoose.Schema({
 		type:String,
 		default:''
 	},
+	telephone:{
+		type:String,
+		default:'123456789'
+	},
 	marjor:{
 		type:String,
 		default:''

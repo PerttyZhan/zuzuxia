@@ -2,6 +2,10 @@
 var mongoose = require('mongoose');
 
 var houserSchema = new mongoose.Schema({
+	bh:{
+		type:String,
+		default:''
+	},
 	title:{
 		type:String,
 		default:''

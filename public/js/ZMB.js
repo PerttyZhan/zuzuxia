@@ -151,7 +151,6 @@ $(document).ready(function(){
 
 	//初始高度
 	$('#main .content').css('height',$(window).height()-$('#header').height()+'px');
-
 	$.each( $('.scoll-pic'),function(index,elem){
 
 		new bannerRun($(elem) ,function(){},null,null,$('.sroll-num'));

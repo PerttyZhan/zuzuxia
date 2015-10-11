@@ -3,6 +3,22 @@
 var mongoose = require('mongoose');
 var personAppoint = new mongoose.Schema({
 	user:String,
+	telephone:{
+		type:String,
+		default:''
+	},
+	area:{
+		type:String,
+		default:''
+	},
+	startTime:{
+		type:String,
+		default:''
+	},
+	endTime:{
+		type:String,
+		default:''
+	},
 	createTime:{
 		type:String,
 		default:''
@@ -10,6 +26,10 @@ var personAppoint = new mongoose.Schema({
 	houseID:{
 		type:mongoose.Schema.ObjectId,
 		ref:'houseMessage'
+	},
+	state:{
+		type:String,
+		default:'入住申请'
 	}
 });
 
@@ -30,7 +50,6 @@ personAppoint.pre('save',function(next){
 personAppoint.statics = {
 
 	findIsAlive:function(username,_id,cb){
-
 		return this
 				.count({user:username,houseID:_id})
 				.exec(cb);
@@ -40,9 +59,17 @@ personAppoint.statics = {
 				.remove({user:username,houseID:_id})
 				.exec(cb);
 	},
-	findAppointByUsername:function(username,cb){
+	findAppointByUsername:function(username,count,cb){
 		return this
 				.find({user:username})
+				.populate('houseID')
+				// .skip( (count -1)*5 )
+				// .limit(5)
+				.exec(cb);
+	},
+	findAll:function(cb){
+		return this
+				.find({})
 				.populate('houseID')
 				.exec(cb);
 	}

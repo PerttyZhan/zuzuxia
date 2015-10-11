@@ -29,7 +29,7 @@ module.exports = function(app){
 			if( getUser(req) ){
 				user = req.session.user
 			}
-			
+			console.log( user );
 			var url = client.getAuthorizeURLForWebsite('http://young.so/wechat/login');
 
 			houseMessage.findHouseByArea('杭州',function(err,house){
@@ -136,6 +136,32 @@ module.exports = function(app){
 				return res.send({err:'no login',yes:''}); 
 			}
 		});
+	app.route('/siteapt')
+		.post(function(req,res){
+
+			if( req.session.user ){
+
+				user = req.session.user;
+				var appoint = new personAppoint({
+					user:user.username,
+					telephone:user.nameID.telephone,
+					area:req.body.site,
+					startTime:req.body.starttime,
+					endTime:req.body.endtime,
+				});
+				
+				appoint.save(function(err,appoint){
+
+					return res.redirect('/personCenter');
+
+				});
+			}else{
+				res.send({err:'no login',yes:''}); 
+			}
+
+			
+
+		});
 
 	app.route('/uploadbgImg')
 		.post(function(req,res){
@@ -182,11 +208,13 @@ module.exports = function(app){
 		});
 	app.route('/personCenter')
 		.get(function(req,res){
-			var user = {},deferred = Q.defer();
+			var user = {},deferred = Q.defer(),count = req.params.count || 1;
+
+			console.log( count );
 			if( getUser(req) ){
 				user = req.session.user ;
 				Q.all([
-					personAppoint.findAppointByUsername(user.username,function(err,appoint){
+					personAppoint.findAppointByUsername(user.username,count,function(err,appoint){
 
 						if( err ){
 							return console.log( err );
@@ -206,7 +234,9 @@ module.exports = function(app){
 					return res.render('personCenter',{ 
 						title:'租租侠---大学生租房平台',
 						user:user,
-						appoints:arguments['0'],
+						appoints:arguments['0'].slice( (count - 1)*5,count*5 ),
+						count:count,
+						all:Math.ceil( arguments['0'].length/5 ),
 						personinfo:Array.prototype.slice.call(arguments)[1][0].nameID
 					});
 				});
@@ -569,6 +599,47 @@ module.exports = function(app){
 				});
 			}
 		});		
+
+	//后台 -- 预约管理
+	app.route('/aptManager')
+		.get(function(req,res){
+
+			var count = req.params.count || 1;
+
+			personAppoint.findAll(function(err,apponits){
+
+				if( err ){return console.log(err)}
+
+				return res.render('aptManager',{
+					title:'后台登录--预约管理',
+					appoints:apponits.slice( (count - 1)*20,count*20 ),
+					count:count,
+					all:Math.ceil( apponits.length/5 )
+				})
+			});
+
+			
+		});
+
+	app.route('/aptManager')
+		.get(function(req,res){
+
+			var count = req.params.count || 1;
+
+			personAppoint.findAll(function(err,apponits){
+
+				if( err ){return console.log(err)}
+
+				return res.render('aptManager',{
+					title:'后台登录--预约管理',
+					appoints:apponits.slice( (count - 1)*20,count*20 ),
+					count:count,
+					all:Math.ceil( apponits.length/5 )
+				})
+			});
+
+			
+		});
 	//后台--上传图片
 	app.route('/uploadImage')
 		.post(function(req,res){

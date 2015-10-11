@@ -242,8 +242,8 @@
 				</div>
 				<div class="mapShow">
 					<ul class="map-title">
-						<li class="active"><a href="javascript::void(0)">街景</a></li>
-						<li><a href="javascript::void(0)">地图</a></li>
+						<li ><a href="javascript::void(0)">街景</a></li>
+						<li class="active"><a href="javascript::void(0)">地图</a></li>
 					</ul>
 					<div class="map-content">
 						<div class="map" id="e1" data-map="<%=house.address %>" data-address="<%=house.address %>">
@@ -323,9 +323,9 @@
 					<p>© 2015  租租侠版权所有</p>
 				</div>
 				<div class="wrap-r">
-					<a href="#">用户协议</a>
-					<a href="#">投诉建议</a>
-					<a href="#">联系我们</a>
+					<a href="javascript:void(0)">用户协议</a>
+					<a href="javascript:void(0)">投诉建议</a>
+					<a href="javascript:void(0)">联系我们</a>
 				</div>
 			</div>
 		</div>
@@ -415,40 +415,18 @@
 				</div>
 			</form>
 		</div>
+		
 	</div>
-
+<div class="apt-fail">
+	<img src="" alt=""/>
+	<p>马上去登录吧~~</p>
+	<a class="" href="#">立即登录</a>
+	<a></a>
+</div>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9f5d468870788eaa79a8865781872668"></script>
 <script src="http://map.qq.com/api/js?v=2.exp&key=d84d6d83e0e51e481e50454ccbe8986b"></script>
 <script type="text/javascript">
 
-	
-	function loadScript(url){ 
-
-		var script = document.createElement("script") 
-		script.type = "text/javascript"; 
-		if (script.readyState){ //IE 
-			script.onreadystatechange = function(){ 
-				if (script.readyState == "loaded" || 
-				script.readyState == "complete"){ 
-					script.onreadystatechange = null; 
-					//callback(); 
-				} 
-			}; 
-		} else { //Others: Firefox, Safari, Chrome, and Opera 
-			script.onload = function(){ 
-				//callback(); 
-			}; 
-		} 
-		script.src = url; 
-		document.body.appendChild(script); 
-
-	}
-	window.onload = function(){
-
-		// loadScript('http://api.map.baidu.com/api?v=2.0&ak=9f5d468870788eaa79a8865781872668');
-		// loadScript('http://map.qq.com/api/js?v=2.exp&key=d84d6d83e0e51e481e50454ccbe8986b');
-
-		console.log( BMap );
 		var BmapInit = {
 			searchType:['btnBuilding','btnBus','btnHotel','btnBank','btnSuperMarket','btnShop','btnSchool','btnHospital','btnFurniture','btnDecoration','btnGasstation'],
 			init:function(el){
@@ -460,33 +438,16 @@
 				});
 				var point = new BMap.Point(116.331398,39.897445);
 				map.centerAndZoom(point,12);
-				var marker;
 				var city = document.getElementById(el).getAttribute('data-map');
 				var address = document.getElementById(el).getAttribute('data-address');
-
 				// 创建地址解析器实例
 				var myGeo = new BMap.Geocoder();
 				// 将地址解析结果显示在地图上,并调整地图视野
 				myGeo.getPoint(city, function(point){
+					console.log(point);
 					if (point) {
-						// marker = new BMap.Marker(point);// 创建标注
-						// map.centerAndZoom(point, 16);
-						// map.addOverlay(marker);// 将标注添加到地图中
-						
-						// var opts = {
-						//   width : 200,     // 信息窗口宽度
-						//   height: 100,     // 信息窗口高度
-						//   title : city , // 信息窗口标题
-						//   enableMessage:true,//设置允许信息窗发送短息
-						//   message:"亲耐滴，晚上一起吃个饭吧？戳下面的链接看下地址喔~"
-						// }
-						// var infoWindow = new BMap.InfoWindow("地址:"+address, opts);  // 创建信息窗口对象 
-						// marker.addEventListener("click", function(){          
-						// 	map.openInfoWindow(infoWindow,point); //开启信息窗口
-						// });
 						map.centerAndZoom(point, 16);
 						map.addOverlay(new BMap.Marker(point));
-
 					}else{
 						alert("您选择地址没有解析到结果!");
 					}
@@ -559,6 +520,5 @@
 		};
 		BmapInit.init('e1');
 		tengMap.init('e2');
-	}
 </script>
 <% include includes/foot.html %>

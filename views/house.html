@@ -16,6 +16,7 @@
 					<a  href="#" class="manager">管理</a>
 					<ul class="dropMenu">
 						<li><a href="#">素材管理</a></li>
+						<li><a href="/aptManager">预约管理</a></li>
 					</ul>
 				</div>
 			</div>
@@ -39,9 +40,8 @@
 							<div class="thumbnail">
 								<a href="house/<%=house._id %>">
 									<% if( house.coverUrl == '' ){ %>
-									<img src="/image/1438176413433.jpg" width=""/>
+										<img src="image/default-curimg.png" width=""/>
 									<% }else{ %>
-										
 										<img src="<%=house.coverUrl %>" width=""/>
 									<% } %>
 									<div class="mask">
