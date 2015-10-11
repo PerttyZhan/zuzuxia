@@ -233,12 +233,14 @@ module.exports = function(app){
 					})
 					]).spread(function(){
 
+					var appoint = arguments['0'];
+
 					return res.render('personCenter',{ 
 						title:'租租侠---大学生租房平台',
 						user:user,
-						appoints:arguments['0'].slice( (count - 1)*5,count*5 ),
+						appoints:appoint.slice( (count - 1)*5,count*5 ),
 						count:count,
-						all:Math.ceil( arguments['0'].length/5 ),
+						all:Math.ceil( appoint.length/5 ) == 0?1:appoint.length,
 						personinfo:Array.prototype.slice.call(arguments)[1][0].nameID
 					});
 				});
