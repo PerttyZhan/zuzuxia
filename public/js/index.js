@@ -465,12 +465,16 @@ var imageShow = {
 
 var clickList = {
 	'open-login-modal':function(){
+
+		var $shawdow = this.$shawdow;
 		$shawdow.show().find('.loginFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
 	},
 	'open-reg-modal':function(){
+		var $shawdow = this.$shawdow;
 		$shawdow.show().find('.regFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
 	},
 	'open-getPass-modal':function(){
+		var $shawdow = this.$shawdow;
 		$shawdow.find('.getPassFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
 	},
 	'close-modal':function(){
@@ -478,6 +482,8 @@ var clickList = {
 		$shawdow.find('.error,.errorL').hide();
 	},
 	'login':function(){
+
+		var $error = this.$error;
 		var user = {
 			username : $loginForm.find('input[name="username"]').val(),
 			password : $loginForm.find('input[name="pass"]').val()
@@ -508,12 +514,12 @@ var clickList = {
 			}
 		});
 	},
-	'reg-sendMessage':function(){
+	'reg-sendMessage':function(This){
 
 		var $loginu = $('#loginU');
 		var _val = $loginu.val();
 		var $error = $('#regerror');
-		$this = $(e.target);
+		var $this = This;
 		var second = 30;
 
 		if( valiType( _val ) == '邮箱' ){
@@ -653,11 +659,11 @@ var clickList = {
 			}
 		});
 	},
-	'forget-sendMessage':function(){
+	'forget-sendMessage':function(This){
 		var $loginu = $('#resetForm').find('input[name="username"]');
 		var _val = $loginu.val();
 		var $error = $('#reseterror');
-		$this = $(e.target);
+		$this = This;
 		var second = 30;
 
 		if( valiType( _val ) == '邮箱' ){
@@ -701,7 +707,6 @@ var clickList = {
 		});
 	},
 	'lgoinOut':function(){
-		event.preventDefault();
 		$.ajax({
 			url:'/loginOut',
 			type:'get',
@@ -714,14 +719,14 @@ var clickList = {
 			}
 		});
 	},
-	'house-collect':function(){
+	'house-collect':function(This){
 
 		if( document.getElementById('dropMenu') == null ){
 
 			return alert('请先登录');
 		}
 		var _id = $('.apt-id').val();
-		$this = $(e.target);
+		$this = This;
 		var _url = '',_text = '';
 
 			
@@ -741,13 +746,13 @@ var clickList = {
 			}
 		});
 	},
-	'house-appoint':function(){
+	'house-appoint':function(This){
 		if( document.getElementById('dropMenu') == null ){
 
 			return alert('请先登录');
 		}
 		var _id = $('.apt-id').val();
-		$this = $(e.target);
+		var $this = This;
 		var _url = '',_text = '';
 
 			
@@ -767,9 +772,9 @@ var clickList = {
 			}
 		});
 	},
-	'check-message':function(){
+	'check-message':function(This){
 
-		var $elem = $(e.target);
+		var $elem = This;
 		var _id = $elem.prev().val();
 
 		$.ajax({
@@ -781,8 +786,8 @@ var clickList = {
 			}
 		});
 	},
-	'dele-collect':function(){
-		var _val = $(e.target).parents('.thumbnail').find('input[name="_id"]').val();
+	'dele-collect':function(This){
+		var _val =This.parents('.thumbnail').find('input[name="_id"]').val();
 		$.ajax({
 			url:'/removeAppointHouse',
 			type:'post',
@@ -796,8 +801,8 @@ var clickList = {
 			}
 		})
 	},
-	'turn-page':function(){
-		$this = $(e.target);
+	'turn-page':function(This){
+		$this = This;
 		var page = $this.prev().val(),all = $this.prev().prev().val();
 
 		if( page > all ){
@@ -806,13 +811,15 @@ var clickList = {
 			window.location.href = 'personCenter?count='+page;
 		}
 	},
-	'open-site-modal':function(){
-		$choosesite.next().hasClass('active')?$choosesite.next().removeClass('active'):$choosesite.next().addClass('active');
+	'open-site-modal':function(This){
+		This.next().hasClass('active')?This.next().removeClass('active'):This.next().addClass('active');
 	},
-	'open-time-modal':function(){
-		$choosetime.next().hasClass('active')?$choosetime.next().removeClass('active'):$choosetime.next().addClass('active');
+	'open-time-modal':function(This){
+		This.next().hasClass('active')?This.next().removeClass('active'):This.next().addClass('active');
 	},
 	'calc-endtime':function(){
+
+		var $starttime = this.$starttime,$duringtime = this.$duringtime;
 
 		if( $starttime.val()=='' || $duringtime.val() == '' ){return;}
 
@@ -832,13 +839,16 @@ var clickList = {
 		}
 		$endtime.val( year + '-' + month + '-' + day );
 	},
-	'index-apt':function(){
+	'index-apt':function(This){
+
+		var $aptFail = this.$aptFail;
+
 		if( document.getElementById('dropMenu') == null ){
 
 			return $aptFail.show().addClass('fadeInDown animated-login');
 		}
 
-		var $form = $(e.target).parents('form'),$input = $form.find('input[type="text"]');
+		var $form = This.parents('form'),$input = $form.find('input[type="text"]');
 
 		for( var i=0,max=$input.length;i<max;i++ ){
 			$input.eq(i).parent().css('border','none');
@@ -848,7 +858,10 @@ var clickList = {
 			}
 		}
 
-		$(e.target).parents('form').submit();
+		This.parents('form').submit();
+	},
+	valiType:function( val ){
+		
 	}
 
 };
@@ -865,514 +878,37 @@ $(document).ready(function(){
 
 	var url = window.location.href.split('\/');
 
+	$.extend(clickList,{
+		$aptFail : $('#apt-fail'),
+		$starttime : $('#starttime'),
+		$duringtime : $('#duringtime'),
+		$error : $('#error'),
+		$shawdow : $('#shawdow')
+	});
 	//对于click 事件做的。用事件代理的方式
 	$(document).on('click',function(e){
 
 			e.preventDefault();
-			var $aptFail,
-				$aptSub,
-				$choosesite,
-				$choosetime,
-				$starttime,
-				$duringtime,
-				$endtime,
+			var $shawdow = $('#shawdow'),
+				$aptFail = $('#apt-fail'),
+				 $aptSub = $('#apt-sub'),
+			 	$this = $(e.target);
 
-				$login = $('.login'),
-				$reg = $('.reg'),
-				$shawdow = $('#shawdow'),
-				$loginFace = $shawdow.find('.loginFace'),
-				$regFace = $shawdow.find('.regFace'),
-				$forgetPass = $('#forgetPass'),
-				$close = $('.close'),
-				$btnLogin = $('#btn-lg'),
-				$loginForm = $('#loginForm'),
-				$sendCode = $('#send-code'),
-				$register = $('#register'),
-				$resetPass = $('#resetPass'),
-				$resetCode = $('#reset-code'),
-				$loginOut = $('#loginOut'),
-				$error = $('#error'),
-
-				$aptCollect,$aptbtn,
-				$check,
-				$aptDele,$turnPage ,$this;
-
-			
-			if( $.isFunction(actionName) ) action();
-
-			if( $(e.target).attr('class') =='login' || $(e.target).attr('class') =='reg' || $.contains( $shawdow[0],e.target )){
+			if( $this.attr('class') =='login' || $this.attr('class') =='reg' || $.contains( $shawdow[0],e.target )){
 			}else{
 				$shawdow.hide().find('input').not('input[type="button"]').val('');
 				$shawdow.find('.error,.errorL').hide();
 			}
 
-			var actionName = $(e.target).data('action'),action = clickList[actionName];
-			
-			/* 登录前共有的登录，注册部分 */
-			//点击登录按钮的
-			if( $(e.target).attr('class')  == 'login' ){
-				// e.preventDefault();
-				// $shawdow.show().find('.loginFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
-			}
-			//点击注册按钮
-			else if( $(e.target).attr('class')  == 'reg' ){
-				// event.preventDefault();
-				// $shawdow.show().find('.regFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
-			}
-			//忘记密码
-			else if( $forgetPass[0]  == e.target ){
-				// event.preventDefault();
-				// $shawdow.find('.getPassFace').addClass('active fadeInUp animated-login').siblings().removeClass('active');
-			}
-			//点击叉叉
-			else if( $(e.target).attr('class') == 'close' ){
-				// $shawdow.hide().find('input').not('input[type="button"]').val('');
-				// $shawdow.find('.error,.errorL').hide();
-			}
-			//登录里的登录按钮
-			else if( $btnLogin[0]  == e.target ){
+			if( $aptSub[0]  == e.target || $aptFail[0]  == e.target || $.contains( $aptFail[0],e.target ) ){
 
-				// var user = {
-				// 	username : $loginForm.find('input[name="username"]').val(),
-				// 	password : $loginForm.find('input[name="pass"]').val()
-				// };
-
-				// if( user.username == '' ){
-
-				// 	return $error.text('账号不能为空').show();
-				// };
-				// if( user.password == '' ){
-				// 	return $error.text('密码不能为空').show();
-				// };
-
-				// $.ajax({
-				// 	type:'post',
-				// 	url:'/loginAction',
-				// 	data:'username='+user.username+'&password='+user.password,
-				// 	success:function(msg){
-				// 		if( msg.err == '' ){
-				// 			location.reload();
-				// 		}else{
-				// 			$error.text(msg.err).show();
-				// 		}
-				// 	},
-				// 	error:function(err){
-						
-
-				// 	}
-				// });
-			}
-			//注册里面的发送短信
-			else if( $sendCode[0]  == e.target ){
-
-				// var $loginu = $('#loginU');
-				// var _val = $loginu.val();
-				// var $error = $('#regerror');
-				// $this = $(e.target);
-				// var second = 30;
-
-				// if( valiType( _val ) == '邮箱' ){
-
-				// 	$('#registerForm').find('input[name="registerBy"]').val('邮箱');
-				// 	$error.hide();
-
-				// }else if( valiType( _val ) == '电话' ){
-
-				// 	$('#registerForm').find('input[name="registerBy"]').val('电话');
-				// 	$error.hide();
-
-				// }else{
-				// 	return $error.text('请输入合法的邮箱或者手机号').show();
-				// }
-
-				// $this.html('<strong>'+second+'</strong>s后重新发送').attr('disabled','disabled');
-
-				// $this.timer = setInterval(function(){
-				// 	second--;
-				// 	$this.html('<strong>'+second+'</strong>s后重新发送').attr('disabled','disabled');
-
-				// 	if( second == 0 ){
-
-				// 		clearInterval( $this.timer  );
-				// 		$this.timer = null ;
-
-				// 		$this.removeAttr('disabled').html('发送验证码');
-				// 	}
-				// },1000);
-				// $.ajax({
-				// 	url:'/sendMessage',
-				// 	type:'post',
-				// 	data:'src='+_val,
-				// 	success:function(msg){
-
-				// 		$this.prev().val( msg.val );
-
-				// 	},
-				// 	error:function(err){
-
-				// 	}
-
-				// });
-			}
-			//注册验证
-			else if( $register[0]  == e.target ){
-				// event.preventDefault();
-
-				// var $register = $('#registerForm');
-				// var $error = $('#regerror');
-				// var register = {
-				// 	username:$register.find('input[name="username"]').val(),
-				// 	password:$register.find('input[name="password"]').val(),
-				// 	registerBy:$register.find('input[name="registerBy"]').val()
-				// };
-
-				// if( register.username == '' || register.password == ''){
-				// 	return $error.text('用户名/密码不能空').show();
-				// }
-
-				// if( $register.find('input[name="qr"]').val() == '' || ( $register.find('input[name="qr"]').val() != $register.find('input[name="sendqr"]').val() ) ){
-				// 	return $error.text('验证码不正确').show();
-				// }
-				// if( !$register.find('input[type="checkbox"]').prop('checked')){
-				// 	return $error.text('请看协议,看后没意见请打钩').show();
-				// }
-
-				// $.ajax({
-				// 	url:'/register',
-				// 	type:'post',
-				// 	data:'username='+register.username+'&password='+register.password+'&registerBy='+register.registerBy,
-				// 	success:function(msg){
-				// 		if( msg.msg == 'yes' ){
-
-				// 			location.reload();
-				// 		}else{
-				// 			console.log(msg);
-				// 			return $error.text(msg.val).show();
-				// 		}
-				// 	},
-				// 	error:function(err){
-				// 		console.log( err );
-				// 	}
-				// });
-			}
-			//忘记密码里面的提交
-			else if( $resetPass[0]  == e.target ){
-			
-				// var $resetPass = $('#resetForm');
-				// var $error = $('#reseterror');
-				// var wcode = $resetPass.find('input[name="qr"]').val();
-				// var scode = $resetPass.find('input[name="sendqr"]').val();
-
-
-				// var user = {
-				// 	username:$resetPass.find('input[name="username"]').val(),
-				// 	onepass:$resetPass.find('input[name="onepass"]').val(),
-				// 	agapass:$resetPass.find('input[name="agapass"]').val()
-				// };
-
-				// if( user.username == ''){
-				// 	return $error.text('邮箱/手机号不能空').show();
-				// }
-				// if( user.onepass == ''){
-				// 	return $error.text('密码不能空').show();
-				// }
-				// if( user.agapass == ''){
-				// 	return $error.text('确定密码不能空').show();
-				// }
-				// if( wcode == '' ){
-				// 	return $error.text('短信验证码不能空').show();
-				// }
-
-				// if( user.onepass.length <10 || user.onepass.length >20 ){
-				// 	return $error.text('密码长度规定在10到20').show();
-				// }
-				
-				// if( user.onepass != user.agapass ){
-				// 	return $error.text('两次密码不一样').show();
-				// }
-
-				// if( wcode != scode ){
-				// 	return $error.text('短信验证码不正确').show();
-				// }
-
-				// $.ajax({
-				// 	url:'/resetPass',
-				// 	type:'post',
-				// 	data:'username='+user.username+'&password='+user.onepass,
-				// 	success:function(msg){
-				// 		if( msg.msg == 'yes' ){
-
-				// 			location.reload();
-				// 		}else{
-				// 			console.log(msg);
-				// 			return $error.text(msg.val).show();
-				// 		}
-				// 	},
-				// 	error:function(err){
-				// 		console.log( err );
-				// 	}
-				// });
-			}
-
-			//忘记密码时的发送验证码
-			else if( $resetCode[0]  == e.target ){
-
-				// var $loginu = $('#resetForm').find('input[name="username"]');
-				// var _val = $loginu.val();
-				// var $error = $('#reseterror');
-				// $this = $(e.target);
-				// var second = 30;
-
-				// if( valiType( _val ) == '邮箱' ){
-
-				// 	$error.hide();
-
-				// }else if( valiType( _val ) == '电话' ){
-
-				// 	$error.hide();
-
-				// }else{
-				// 	return $error.text('请输入合法的邮箱或者手机号').show();
-				// }
-
-				// $this.html('<strong>'+second+'</strong>s后重新发送').attr('disabled','disabled');
-
-				// $this.timer = setInterval(function(){
-				// 	second--;
-				// 	$this.html('<strong>'+second+'</strong>s后重新发送').attr('disabled','disabled');
-
-				// 	if( second == 0 ){
-
-				// 		clearInterval( $this.timer  );
-				// 		$this.timer = null ;
-
-				// 		$this.removeAttr('disabled').html('发送验证码');
-				// 	}
-				// },1000);
-				// $.ajax({
-				// 	url:'/sendMessage',
-				// 	type:'post',
-				// 	data:'src='+_val,
-				// 	success:function(msg){
-				// 		$this.prev().val( msg.val );
-
-				// 	},
-				// 	error:function(err){
-
-				// 	}
-
-				// });
-			}
-			//登出
-			else if( $loginOut[0]  == e.target ){
-
-				// event.preventDefault();
-				// $.ajax({
-				// 	url:'/loginOut',
-				// 	type:'get',
-				// 	success:function(msg){
-
-				// 		location.reload();
-				// 	},
-				// 	error:function(err){
-				// 		console.log(err);
-				// 	}
-				// });
-			}
-
-
-			if( url.indexOf('detailMessage') != -1 ){
-
-				console.log('load detail.js click');
-
-				$aptCollect = $('#apt-collect'),$aptbtn = $('#btn-apt');
-
-				if( $aptCollect[0] == e.target ){
-
-					// if( document.getElementById('dropMenu') == null ){
-
-					// 	return alert('请先登录');
-					// }
-					// var _id = $('.apt-id').val();
-					// $this = $(e.target);
-					// var _url = '',_text = '';
-
-						
-					// $.ajax({
-					// url:'/collectHouse',
-					// type:'post',
-					// data:'_id='+_id,
-					// success:function(msg){
-
-					// 		if( msg.err !='' ){
-					// 			console.log( msg.err );
-					// 		}else{
-					// 			console.log( msg.yes );
-
-					// 			location.reload();
-					// 		}
-					// 	}
-					// });
-				}else if( $aptbtn[0] == e.target ){
-
-					// event.preventDefault();
-					// event.preventDefault();
-
-					// if( document.getElementById('dropMenu') == null ){
-
-					// 	return alert('请先登录');
-					// }
-					// var _id = $('.apt-id').val();
-					// $this = $(e.target);
-					// var _url = '',_text = '';
-
-						
-					// $.ajax({
-					// url:'/appointHouse',
-					// type:'post',
-					// data:'_id='+_id,
-					// success:function(msg){
-
-					// 		if( msg.err !='' ){
-					// 			console.log( msg.err );
-					// 		}else{
-					// 			console.log( msg.yes );
-
-					// 			location.reload();
-					// 		}
-					// 	}
-					// });
-				}	
-			}
-			else if( url[url.length -1] === 'personCenterMe' ){
-
-				console.log('load personCenterMe click');
-			}
-			else if(  url[url.length -1] === 'personCenterMessage' ){
-
-				console.log('load personCenterMessage click');
-				$check = $('.check');
-
-				if( $(e.target).attr('class') == 'check'){
-
-					// var $elem = $(e.target);
-					// var _id = $elem.prev().val();
-
-					// $.ajax({
-					// 	type:'post',
-					// 	url:'/reviseMessageStatus',
-					// 	data:'_id='+_id,
-					// 	success:function(){
-					// 		$elem.remove();
-					// 	}
-					// });
-				}
-			}
-			else if( window.location.href.indexOf('personCenter') != -1 ){
-
-				console.log('load personCenter click');
-				//个人中心-预约-删除预约
-				$aptDele = $('#apt-dele'),$turnPage = $('#trun-page'),$this;
-				if( $aptDele[0] == e.target ){
-
-					// var _val = $(e.target).parents('.thumbnail').find('input[name="_id"]').val();
-					// $.ajax({
-					// 	url:'/removeAppointHouse',
-					// 	type:'post',
-					// 	data:'_id='+_val,
-					// 	success:function(msg){
-							
-					// 		location.reload();
-					// 	},
-					// 	error:function(){
-
-					// 	}
-					// })
-				}
-				//个人中心 -- 预约 -- 跳转
-				if( $turnPage[0] == e.target ){
-
-					// e.preventDefault();
-					// $this = $(e.target);
-					// var page = $this.prev().val(),all = $this.prev().prev().val();
-
-					// if( page > all ){
-					// 	alert('超过总数,最多只有'+all);
-					// }else{
-					// 	window.location.href = 'personCenter?count='+page;
-					// }
-
-				}
-			}else if( url[url.length -1] === 'collectHouse' ){
-
-				console.log( 'load collec house click' );
 			}else{
-				console.log('load index click');
+				$aptFail.hide();
+			}
 
-				$aptSub = $('#apt-sub'),
-				$aptFail = $('#apt-fail'),
-				$choosesite = $('.chooseSite'),
-				$choosetime = $('.choosetime'),
-				$starttime = $('#starttime'),
-				$duringtime = $('#duringtime'),
-				$endtime = $('#endtime');
+			var actionName = $(e.target).data('action'),action = clickList[actionName]
 
-				if( $aptSub[0]  == e.target || $aptFail[0]  == e.target || $.contains( $aptFail[0],e.target ) ){
-
-				}else{
-					$aptFail.hide();
-				}
-
-				if( $choosesite[0]  == e.target || $.contains( $choosesite[0],e.target ) ){
-
-					// $choosesite.next().hasClass('active')?$choosesite.next().removeClass('active'):$choosesite.next().addClass('active');
-				}
-				if( $choosetime[0]  == e.target || $.contains( $choosetime[0],e.target ) ){
-
-					// $choosetime.next().hasClass('active')?$choosetime.next().removeClass('active'):$choosetime.next().addClass('active');
-				}
-				if( $endtime[0]  == e.target || $.contains( $endtime[0],e.target ) ){
-
-					// if( $starttime.val()=='' || $duringtime.val() == '' ){return;}
-
-					// var times = $starttime.val().split('-');
-					// var year = parseInt(times[0]),month = parseInt(times[1]),day = times[2];
-					// var dtime = parseInt( $duringtime.val() );
-
-					// month = month + dtime;
-
-					// if( month > 12 ){
-					// 	year+= parseInt( month/12 );
-					// 	month = ( month%12 );
-					// }
-
-					// if( month < 10 ){
-					// 	month = '0'+month;
-					// }
-					// $endtime.val( year + '-' + month + '-' + day );
-				}
-				if( $aptSub[0]  == e.target ){
-
-					// e.preventDefault();
-
-					// if( document.getElementById('dropMenu') == null ){
-
-					// 	return $aptFail.show().addClass('fadeInDown animated-login');
-					// }
-
-					// var $form = $(e.target).parents('form'),$input = $form.find('input[type="text"]');
-
-					// for( var i=0,max=$input.length;i<max;i++ ){
-					// 	$input.eq(i).parent().css('border','none');
-					// 	if( $input.eq(i).val() == '' ){
-					// 		$input.eq(i).parent().css('border','1px solid red');
-					// 		return ;
-					// 	}
-					// }
-
-					// $(e.target).parents('form').submit();
-				}
-			}			
+			if( $.isFunction(action) ) action.call(clickList,$this);		
 	});
 	
 
