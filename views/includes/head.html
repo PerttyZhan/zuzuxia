@@ -8,7 +8,8 @@
 	<meta name="keywords" content="大学生,创业,租房" />
 	<meta name="description" content="租租侠"/>
 	<!-- <link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon"> -->
-	<link href="/dist/css/index.css?201510111920" rel="stylesheet" type="text/css"/>
+	<link href="/css/index.css?201510111920" rel="stylesheet" type="text/css"/>
+	<link href="/css/normalize.css?201510111920" rel="stylesheet" type="text/css"/>
 	<title><%= title %></title>
 </head>
 
@@ -40,13 +41,13 @@
 					<li><a href="/personCenterMessage">消息</a></li>
 					<li><a href="/personCenter">预约</a></li>
 					<li><a href="#">收藏</a></li>
-					<li><a href="#" id="loginOut">退出</a></li>
+					<li><a href="#" id="loginOut" data-login="lgoinOut">退出</a></li>
 				</ul>
 			</div>
 			<a href="" class="qr">
 			<% } else{ %>
-				<a href="javascript:void(0)" class="login" >登陆</a>
-				<a href="javascript:void(0)" class="reg" >注册</a>
+				<a href="javascript:void(0)" class="login" data-action="open-login-modal">登陆</a>
+				<a href="javascript:void(0)" class="reg" data-action="open-reg-modal">注册</a>
 				<a href="" class="qr" style="border:none">
 			<% } %>
 			

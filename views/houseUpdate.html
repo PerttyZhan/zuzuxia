@@ -37,6 +37,7 @@
 	<div class="index-show">
 		<div class="update-choose">
 			<div class="update-list">
+				<input type="text" name="bh" class="bh" placeholder="请输入公寓编号" id="bh"/>
 				<span class="list-title">标题</span>
 				<div class="list-form">
 					<div class="list-text">
@@ -79,14 +80,20 @@
 				<ul class="pic-show">
 					<div class="cover-img">
 						<a href="javascript:void(0)" data-name="coverUrl">
-							<img src="<%=house.coverUrl %>" alt="封面" title=""/>
+							<img src="<%=house.coverUrl %>" title=""/>
+							<p class="size">
+								尺寸 456 : 341
+							</p>
 							<input type="hidden" name="coverUrl" value="<%=house.coverUrl %>"/>
 						</a>
 					</div>
 					<div class="scroll-img">
 						<% house.scollUrl.forEach(function(img){ %>
-							<a href="javascript:void(0)" data-name="scollUrl"><img src="<%=img %>" alt="公寓详情" title="" data-name="scollUrl"/>
+							<a href="javascript:void(0)" data-name="scollUrl"><img src="<%=img %>" title="" data-name="scollUrl"/>
 								<input type="hidden" name="scollUrl" value="<%=img %>"/>
+								<p class="size">
+									尺寸 1898 : 700
+								</p>
 							</a>
 						<% }) %>
 					</div>
@@ -127,8 +134,8 @@
 		</div>
 		<div class="mapShow">
 					<ul class="map-title">
-						<li class="active"><a href="javascript::void(0)">街景</a></li>
-						<li><a href="javascript::void(0)">地图</a></li>
+						<li ><a href="javascript::void(0)">街景</a></li>
+						<li class="active"><a href="javascript::void(0)">地图</a></li>
 					</ul>
 					<div class="map-content">
 						<div class="map" id="e1" data-map="<%=house.address %>" data-address="<%=house.address %>">

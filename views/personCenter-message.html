@@ -32,7 +32,7 @@
 					<p>预约</p>
 					
 				</a>
-				<a class="collection" >
+				<a class="collection" href="/collectHouse">
 					<i></i>
 					<p>收藏</p>
 					
@@ -125,7 +125,7 @@
 									<p><%=message.content  %></p>
 									<input type="hidden" name="_id" value="<%=message._id %>"/>
 									<% if( !message.isCheck ) {%>
-									<button class="check" >确定查看</button>
+									<button class="check" data-action="check-message">确定查看</button>
 									<% } %>
 									
 								</div>

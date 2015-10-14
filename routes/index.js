@@ -8,6 +8,7 @@ var personAppoint = require('../models/personAppointModel');
 var mailSend = require('../models/sendEmail');
 var houseconfig = require('../models/houseConfig');
 var managerAdmin = require('../models/managerAdmin');
+var personCollect = require('../models/collectModel');
 
 var Promise = require('promise');
 var URL = require('url');
@@ -47,51 +48,43 @@ module.exports = function(app){
 		});
 	app.route('/detailMessage/:_id')
 		.get(function(req,res){
-			var user = {},json = {},_house,sign;
-			var _req = req;
+			var user = getUser(req)?req.session.user:{},sign = true,deferred = Q.defer();
 			 var url = client.getAuthorizeURLForWebsite('http://young.so/wechat/login');
-
+			 console.log( user.username == undefined);
 			if( req.params._id ){
-				houseMessage.findHouseById(req.params._id,function(err,house){
-					deferred = Q.defer();
-					if( err ){
-						return console.log( err );
-					}
 
-					_house = house[0];
-					sign = true;
-					
-					if( getUser(_req) ){
+				Q.all([
+					houseMessage.findHouseById(req.params._id,function(err,house){
 
-						user = req.session.user;
-						personAppoint.findIsAlive(user.username,_house._id,function(err,count){
-							if( count ){
-								sign = false;
-							}else{
-								sign = true;
-							}
-							return res.render('detailMessage',{ 
-								title:'租租侠---大学生租房平台',
-								user:user,
-								house:_house,
-								sign:sign,
-								webLogin:url
-							});
-							
-						});
+						if( err ){
+							return console.log( err );
+						}	
+						
+						deferred.resolve(house[0]);
+						return deferred.promise;
+					}),
+					personCollect.findIsAlive(user.username,req.params._id ,function(err,count){
+			    		
+			    		console.log('count = '+count);
+						if( count ){
+							sign = false;
+						}else{
+							sign = true;
+						}
+						deferred.resolve();
+						return deferred.promise;
+					})
+					]).spread(function(){
 
-					}else{
-
+						console.log( arguments[0][0] );
 						return res.render('detailMessage',{ 
 							title:'租租侠---大学生租房平台',
 							user:user,
-							house:_house,
+							house:arguments[0][0],
 							sign:sign,
 							webLogin:url
 						});
-
-					}	
-				});
+					});
 			}
 			else{
 				return res.redirect('/');
@@ -117,6 +110,30 @@ module.exports = function(app){
 			}
 			
 		});
+
+
+	app.route('/collectHouse')
+		.post(function(req,res){
+
+			var _id = req.body._id,user = {};
+
+			if( req.session.user ){
+
+				user = req.session.user;
+				var collect = new personCollect({
+					user:user.username,
+					houseID:_id
+				});
+				
+				collect.save(function(err,appoint){
+					return res.send({err:'',yes:'ok'});
+				});
+			}else{
+				res.send({err:'no login',yes:''}); 
+			}
+		});
+
+
 	app.route('/removeAppointHouse')
 		.post(function(req,res){
 
@@ -211,8 +228,6 @@ module.exports = function(app){
 
 			var args = URL.parse(req.url,true).query;
 			var user = {},deferred = Q.defer(),count =  args['count'] == undefined ? 1 : args['count'];
-
-			console.log( count );
 			if( getUser(req) ){
 				user = req.session.user ;
 				Q.all([
@@ -341,7 +356,44 @@ module.exports = function(app){
 				res.send();
 			});
 		});
-		
+	app.route('/collectHouse')
+		.get(function(req,res){
+
+			var user,deferred = Q.defer();
+			if( getUser(req) ){
+
+				user = req.session.user ;
+
+				Q.all([
+					personCollect.findCollectByUserName(user.username,function(err,collects){
+
+						if( err ){return console.log(err);}
+
+						deferred.resolve(collects);
+						return deferred.promise;
+					
+					}),
+					adminModel.findPersonByUsername(user.username ,function(err,personInfos){
+			    
+						personInfo = personInfos[0].nameID;
+						deferred.resolve(personInfo);
+						return deferred.promise;
+					})
+					]).spread(function(){
+
+					return res.render('collectHouse',{ 
+						title:'租租侠---大学生租房平台',
+						user:user,
+						collects:arguments['0'],
+						personinfo:Array.prototype.slice.call(arguments)[1][0].nameID
+					});
+				});
+
+			}else{
+				return res.redirect('/');
+			}
+		})
+
 	app.route('/loginAction')
 		.post(function(req,res){
 
@@ -777,8 +829,8 @@ module.exports = function(app){
 	app.route('/loginManager')
 		.post(function(req,res){
 
-			var username = req.body.username;
-			var password = req.body.password;
+			var username = req.body.username || 'no';
+			var password = req.body.password || 'no';
 
 			var md5 = crypto.createHash('md5');
 			password = md5.update( password ).digest('hex');

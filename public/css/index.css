@@ -19,6 +19,14 @@ textarea:-webkit-autofill,
 select:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset;
 }
+.clearfix{
+  zoom:1;
+}
+.clearfix:before,.clearfix:after{
+  content:"";
+  display: table;
+}
+.clearfix:after{clear:both;} 
 li {
   list-style: none;
 }
@@ -481,7 +489,7 @@ a {
 }
 #main {
   width: 100%;
-  padding-bottom: 59px;
+  padding-bottom: 32px;
   background-color: #edefed;
   position: relative;
   z-index: 10;
@@ -498,6 +506,10 @@ a {
   line-height: 137px;
   color: #999;
 }
+.show-table{
+  width:100%;
+  padding: 0 69px 0 69px;
+}
 .show {
   width: 100%;
   padding: 0 69px 0 69px;
@@ -506,12 +518,14 @@ a {
   display: flex;
   flex-direction:row;
   flex-wrap:wrap;
-  justify-content:space-between;
 }
-.show input{
+.middle-div{
+   margin: 0 3.5%;
+}
+.show-table input{
   width:50px;
 }
-.show table{
+.show-table table{
   width:100%;
   font-size: 13px;
   color:#666;
@@ -519,30 +533,30 @@ a {
    border-left:1px solid #ebebeb;
   border-top:1px solid #ebebeb;
 }
-.show table tfoot td{
+.show-table table tfoot td{
   padding-top:45px;
 }
-.show td,.show th{
+.show-table td,.show-table th{
   padding:10px 0;
   border-right:1px solid #ebebeb;
   border-bottom:1px solid #ebebeb;
   text-align: center;
 }
-.show a{
+.show-table a{
   color:#666;
 }
 .disabled{
     cursor: no-drop;
 }
-.show .pre{
+.show-table .pre{
   margin-right: 44px
 }
-.show .next{
+.show-table .next{
 
   margin-left: 44px;
   margin-right: 24px;
 }
-.show .trun{
+.show-table .trun{
   position: relative;
 }
 .thumbnail {
@@ -843,19 +857,27 @@ a {
   overflow: hidden;
   width: 100%;
 }
-.btn-apt {
+  
+.btn-apt,.collect{
   font-size: 20px;
   color: #ff9933;
   padding: 12px 65px;
   float: right;
-  border: 1px solid #ff9933;
+  border: 1px solid #f93;
+}
+.btn-apt:hover,.collect:hover{
+  background-color:#f93;
+  color:#fff;
+}
+.collect{
+  margin-right: 15px;
 }
 .alreadyapt {
   font-size: 20px;
   color: #fff;
   padding: 12px 65px;
   float: right;
-  background-color: #f60;
+  background-color: #f93;
   cursor: no-drop;
 }
 .mapShow {
@@ -864,8 +886,6 @@ a {
 .map-title {
   display: block;
   width: 100%;
-  overflow: hidden;
-  border-bottom: 1px solid #ccc;
 }
 .map-title li {
   float: left;
@@ -875,7 +895,7 @@ a {
 }
 .map-title a {
   font-size: 16px;
-  padding: 10px 30px;
+  padding: 3px 30px;
   color: #333;
   position: relative;
 }
@@ -885,7 +905,7 @@ a {
   bottom: 0px;
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 1px;
 }
 #e1,
 #e2 {
@@ -930,7 +950,7 @@ a {
 .apt-process {
   width: 100%;
   background-color: #ff9933;
-  padding: 36px 0;
+  padding: 100px 0;
   position: relative;
   z-index: 10;
 }
@@ -961,6 +981,62 @@ a {
 .apt-process li:nth-of-type(5) .apt-icon {
   background: url('../image/houser-process-icon.png') no-repeat 0 92%;
 }
+.section-fz{
+    width:100%;
+    background-color:#f7f7f7;
+    padding-bottom:60px;
+  }
+
+.section-fz h1{
+  font-size: 33px;
+  color:#666;
+  padding:36px 0;
+  text-align: center;
+}
+.fz-content{
+  width: 1183px;
+  margin:0 auto;
+}
+.fz-content p{
+  color:#666;
+  font-size: 18px;
+  text-align: center;
+  width:100%;
+  line-height: 36px;
+}
+.fz-intro{
+  margin:0 auto;
+  text-align: center;
+  margin-top:36px;
+}
+.fz-intro img{
+  display: inline-block;
+  vertical-align: top;
+  -webkit-filter: blur(10px); /* Chrome, Opera */
+       -moz-filter: blur(10px);
+        -ms-filter: blur(10px);    
+            filter: blur(10px);  
+}
+.intro-message{
+  display: inline-block;
+    margin-left: 75px;
+}
+.intro-message span{
+  display: block;
+  font-size: 18px;
+  margin-bottom:28px;
+  text-align: left;
+}
+.tele{
+    background: url('../image/fz-icon.png') no-repeat 0 -43px;
+  padding-left: 57px;
+  height: 74px;
+  line-height: 74px;
+}
+.intro-wx{
+  height: 142px;
+  background: url('../image/fz-icon.png') no-repeat 0 -205px;
+}
 .apt-icon {
   display: table-cell;
   vertical-align: middle;
@@ -979,13 +1055,14 @@ a {
   color: #fff;
   width: 100%;
   display: block;
+  height: 41px;
 }
 .apt-des p {
   display: block;
   width: 100%;
   font-size: 17px;
   color: #fff;
-  padding: 5px 0;
+  line-height: 36px;
 }
 .apt-fail{
   position: fixed;
@@ -1296,6 +1373,9 @@ a {
   font-size: 25px;
   color: #999;
 }
+.center-choose .active p{
+  color:#000;
+}
 .center-choose i {
   display: block;
   width: 100%;
@@ -1498,6 +1578,7 @@ a {
   .apt-process p {
     font-size: 15px;
   }
+
   #footer .wrap {
     max-width: 1200px;
   }

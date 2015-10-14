@@ -226,22 +226,28 @@
 				</div>
 				<div class="appointmen">
 					<input type="hidden" value="<%=house._id  %>" name="_id" class="apt-id"/>
-					
-						<% if( sign ){ %>
-							<a href="javascript:void(0)" class="btn-apt" id="btn-apt">	
+
+					<a href="javascript:void(0)" class="btn-apt" id="btn-apt" data-action="house-appoint">	
 								立即预约
+						</a>
+						<% if( sign ){ %>
+							<a href="javascript:void(0)" class="collect" id="apt-collect" data-action="house-collect">	
+								收藏
 							</a>
 						<% }else{ %>
-						<a href="javascript:void(0)" class="alreadyapt">	
-								你已经预约
-						</a>
+							<a href="javascript:void(0)" class="collect alreadyapt">	
+								收藏
+							</a>
 						<% } %>
+						
+
+						
 					</a>
 				</div>
 				<div>
 				</div>
 				<div class="mapShow">
-					<ul class="map-title">
+					<ul class="map-title clearfix">
 						<li ><a href="javascript::void(0)">街景</a></li>
 						<li class="active"><a href="javascript::void(0)">地图</a></li>
 					</ul>
@@ -315,7 +321,27 @@
 		</div>
 	</section>
 
-
+	<section class="section-fz">
+		<div class="container">
+			<div class="fz-content">
+				<h1>公寓管家</h1>
+				<p>我相信生活是美好的，而干净的租房环境何尝不是一种对于美好的具体体现，舒适的租房生活也让我们感受到生活</br>
+					的美好，我是驻客管家郭栋，我来为您提供干净、舒适的租房房环境，为您打造高品质的美好生活租房新体验
+				</p>
+				<div class="fz-intro">
+					<img src="/image/fz-pic.png" alt="">
+					<div class="intro-message">
+						<span>科科</span>
+						<span>房间数量：200间</span>
+						<span>可入住房源：12间</span>
+						<span>负责区域:滨江区</span>
+						<span class="tele">****155****</span>
+						<span class="intro-wx"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	<footer class="footer">
 		<div id="footer">
 			<div class="wrap">

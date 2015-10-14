@@ -6,8 +6,10 @@
     <meta charset="utf-8" />
     <meta name="keywords" content="大学生,创业,租房" />
     <meta name="description" content="租租侠"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
     <link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
-    <link href="/dist/css/ZMB.css?201510111920" rel="stylesheet" type="text/css"/>
+    <link href="/css/ZMB.css?201510111920" rel="stylesheet" type="text/css"/>
+    <link href="/css/normalize.css" rel="stylesheet" type="text/css"/>
     <title><%= title %></title>
 </head>
 
@@ -16,25 +18,27 @@
 
 <div id="container">
 
-<div id="anitOut" class="anitOut"> 
-
-</div>
+<ul id="anitOut"> 
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
 
 <div class="login" id="login">
     <form action="/loginManager" method="post" id="managerForm">
         <legend>
             登录
         </legend>
-
-        <div class="form-group">
-            <input type="text" name="username" placeholder="用户名" autocomplete="off"/>
-        </div>
-        <div class="form-group">
-            <input type="password" name="password" placeholder="密码" autocomplete="off"/>
-        </div>
-        <div class="form-group submit">
-            <button type="button" class="btn-login" id="btn-login">登录</button>
-        </div>
+       <input type="text" name="username" password="password" placeholder="用户名">
+        <input type="password" name="password" placeholder="密码">
+        <button type="submit" id="login-button">登录</button>
     </form>
     <% if( err !='' ){ %>
         <div class="err" id="error" style="display:block">
@@ -48,23 +52,4 @@
     
 </div>
 </div>
-
-<!-- <button onclick="changeC();">换色</button> -->
-
-<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
-<script>
-
-    $('#anitOut').height( $(window).height() );
-
-    $('#login').css({
-        'margin-top':'-'+$('#login').height()/2+'px',
-        'margin-left':'-'+$('#login').width()/2+'px'
-    });
-</script>
-<script src="/dist/js/cav.js?201510111920"></script>
-
-<script src="/dist/js/getStart.js?201510111920"></script>
-<script src="/dist/js/ZMB.js?201510111920"></script>
-</body>
-</html>
-
+<% include manager-includes/foot.html %>
