@@ -70,6 +70,8 @@ personInfo.statics = {
 			set = { $set:{ job:arr.value[1] } };
 		}else if( key == 'school' ){
 			set = { $set:{ school:arr.value[1] } };
+		}else if( key == 'telephone' ){
+			set = { $set:{ telephone:arr.value[1] } };
 		}else{
 			set = {};
 		}

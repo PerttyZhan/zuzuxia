@@ -25,10 +25,9 @@ managerAdmin.pre('save',function(next){
 	var month = new Date().getUTCMonth();
 	month = month +1;
 	var day = new Date().getUTCDate();
-
 	this.createTime = year + '-' + month + '-' + day;
-
-	next()
+	console.log('save');
+	next();
 });
 
 

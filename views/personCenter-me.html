@@ -1,6 +1,6 @@
 
 <% include includes/head.html %>
-	<div id="banner" >
+	<div id="roomShow" >
 		<div class="bg">
 			<img src="<%=user.bgimg %>" width="1897" alt="" title=""/>
 			<form method="post" name="form" encType="multipart/form-data" title="改变背景" action="uploadbgImg">
@@ -32,7 +32,7 @@
 					<p>预约</p>
 					
 				</a>
-				<a class="collection" href="/collectHouse">
+				<a class="collection" href="/personCenterCollect">
 					<i></i>
 					<p>收藏</p>
 					
@@ -53,6 +53,14 @@
 								</label>
 
 								<input type="text" name="name" value="<%=personinfo.name  %>" placeholder="请输入姓名"/>
+							</div>
+							<div class="form-group">
+
+								<label for="name">
+									电话
+								</label>
+
+								<input type="text" name="telephone" value="<%=personinfo.telephone  %>" placeholder="请输入电话号码"/>
 							</div>
 							<div class="form-group">
 								<label>性别</label>
@@ -147,6 +155,7 @@
 			</div>
 		</div>
 	</footer>
-
-<script src="/dist/js/allunivlist.js?201510111920"></script>
 <% include includes/foot.html %>
+<script type="text/javascript">
+ 	kvm.module.invoke("/dist/js/lib/personCenterMe.js");
+</script>

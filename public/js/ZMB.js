@@ -3,11 +3,20 @@
 $(document).ready(function(){
 
 
-	$(document).on('click',function(){
-		
-	})
 	//初始高度
 	$('#main .content').css('height',$(window).height()-$('#header').height()+'px');
+
+
+	var clickList = {
+
+		''
+	};
+	$(document).on('click',function(e){
+
+		var $this = $(e.target);
+
+
+	});
 
 	$('.add-sign').on('click',function(event){
 
@@ -22,7 +31,6 @@ $(document).ready(function(){
 	$('#main').find('input.alive-input').on('click',function(){
 		var key = $(this).attr('name');
 		var val = $(this).val();
-
 		$(this).data('val',val);
 
 	});

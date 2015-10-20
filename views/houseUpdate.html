@@ -16,6 +16,7 @@
 					<a  href="#" class="manager">管理</a>
 					<ul class="dropMenu">
 						<li><a href="#">素材管理</a></li>
+						<li><a href="/aptManager">预约管理</a></li>
 					</ul>
 				</div>
 			</div>
@@ -37,12 +38,12 @@
 	<div class="index-show">
 		<div class="update-choose">
 			<div class="update-list">
-				<input type="text" name="bh" class="bh" placeholder="请输入公寓编号" id="bh"/>
+				<input type="text" name="bh" class="alive-input" placeholder="请输入公寓编号" id="bh" value="<%=house.bh %>" data-val="<%=house.bh %>"/>
 				<span class="list-title">标题</span>
 				<div class="list-form">
 					<div class="list-text">
 						
-						<input type="text" name="title" placeholder="" value="<%=house.title %>" class="alive-input"/>
+						<input type="text" name="title" placeholder="" value="<%=house.title %>" class="alive-input" data-val="<%=house.title %>"/>
 						<p><strong><%=house.title.length  %></strong>/50</p>
 					</div>
 					<div class="list-btn">
@@ -51,7 +52,7 @@
 							<span class="can-edit" data-name="keywords"><%=word %></span>
 						<% }) %>
 						
-						<a href="javascrip:void(0)" class="add-sign" data-name="keywords">点击添加标签</a>
+						<a href="javascrip:void(0)" class="add-sign" data-name="keywords" data-action="add-sign">点击添加标签</a>
 					</div>
 				</div>
 			</div>
@@ -59,7 +60,7 @@
 				<span class="list-title">摘要</span>
 				<div class="list-form">
 					<div class="list-text">
-						<input type="text" name="summary" value="<%=house.summary %>" class="alive-input"/>
+						<input type="text" name="summary" value="<%=house.summary %>" class="alive-input" data-val="<%=house.summary %>"/>
 						<p><strong><%=house.summary.length %></strong>/50</p>
 					</div>
 				</div>
@@ -75,11 +76,11 @@
 						<input type="hidden" name="changeNum" value="" id="changeNum"/>
 						<button type="button">上传<input type="file" name="imgUrl" accept="image/*" /></button>
 						<button type="button">从图片库选择</button>
-						<button type="button" class="dele">删除</button>
+						<button type="button" class="dele" data-action="dele-img">删除</button>
 				</div>
 				<ul class="pic-show">
 					<div class="cover-img">
-						<a href="javascript:void(0)" data-name="coverUrl">
+						<a href="javascript:void(0)" data-name="coverUrl" data-action="changeUrl-first">
 							<img src="<%=house.coverUrl %>" title=""/>
 							<p class="size">
 								尺寸 456 : 341
@@ -89,7 +90,7 @@
 					</div>
 					<div class="scroll-img">
 						<% house.scollUrl.forEach(function(img){ %>
-							<a href="javascript:void(0)" data-name="scollUrl"><img src="<%=img %>" title="" data-name="scollUrl"/>
+							<a href="javascript:void(0)" data-name="scollUrl" data-action="changeUrl-first"><img src="<%=img %>" title="" data-name="scollUrl"/>
 								<input type="hidden" name="scollUrl" value="<%=img %>"/>
 								<p class="size">
 									尺寸 1898 : 700
@@ -106,7 +107,7 @@
 		<div class="house-detail">
 			<ul>
 				<li>
-					<span><input type="text" value="<%=house.price %>" class="alive-input" name="price"/>元/月</span>
+					<span><input type="text" value="<%=house.price %>" data-val="<%=house.price %>" class="alive-input" name="price" />元/月</span>
 					<div class="keywords">
 						<% house.require.forEach(function(word){ %>
 
@@ -114,7 +115,7 @@
 
 						<% }) %>
 
-						<a href="#" class="add-sign" data-name="require">点击添加标签</a>
+						<a href="#" class="add-sign" data-name="require" data-action="add-sign">点击添加标签</a>
 					</div>
 				</li>
 				<li>
@@ -123,11 +124,11 @@
 						<span class="can-edit" data-name="des"><%=word %></span>
 
 					<% }) %>
-					<a href="#" class="add-sign" data-name="des">点击添加标签</a>
+					<a href="#" class="add-sign" data-name="des" data-action="add-sign">点击添加标签</a>
 				</li>
 				<li class="address">
 					<span>
-						<input type="text" name="address" value="<%=house.address %>" class="alive-input" id="address"/>
+						<input type="text" name="address" value="<%=house.address %>" class="alive-input" id="address" data-val="<%=house.address %>"/>
 					</span>
 				</li>
 			</ul>
@@ -333,13 +334,13 @@
 		<div class="btn">
 
 			<% if(house.status == '2'){ %>
-				<button id="under" type="btn">下架</button>
-				<button id="dele" type="btn">删除</button>
+				<button id="under" type="btn" data-action="update-house-status">下架</button>
+				<button id="dele" type="btn" data-action="update-house-status">删除</button>
 			<% }else if( house.status == '1' ){ %>
-				<button id="release" type="btn">发布</button>
-				<button id="dele" type="btn">删除</button>
+				<button id="release" type="btn" data-action="update-house-status">发布</button>
+				<button id="dele" type="btn" data-action="update-house-status">删除</button>
 			<% }else{ %>
-				<button id="release" type="btn">发布</button>
+				<button id="release" type="btn" data-action="update-house-status">发布</button>
 			<% } %>	
 			<!-- <button id="release" type="btn">发布</button> -->
 			
@@ -354,161 +355,10 @@
 		
 		</div>
 	</div>
-<iframe name='hidden_frame' id="hidden_frame" style='display:none'></iframe>
+	<iframe name="hidden_frame" id="hidden_frame" style="display:none"></iframe>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9f5d468870788eaa79a8865781872668"></script>
 <script src="http://map.qq.com/api/js?v=2.exp&key=d84d6d83e0e51e481e50454ccbe8986b"></script>
-<script type="text/javascript">
-var BmapInit = {
-		searchType:['btnBuilding','btnBus','btnHotel','btnBank','btnSuperMarket','btnShop','btnSchool','btnHospital','btnFurniture','btnDecoration','btnGasstation'],
-		init:function(el){
-
-			// 百度地图API功能
-			var map = new BMap.Map(el);
-			this.local = new BMap.LocalSearch(map, {
-				renderOptions:{map: map}
-			});
-			var point = new BMap.Point(116.331398,39.897445);
-			map.centerAndZoom(point,12);
-			var marker;
-			var city = document.getElementById(el).getAttribute('data-map');
-			var address = document.getElementById(el).getAttribute('data-address');
-			// 创建地址解析器实例
-			var myGeo = new BMap.Geocoder();
-
-			this.map = map;
-			this.myGeo = myGeo;
-
-			this.getPoint(city);
-			this.mapSearch();
-			this.changeEvent();
-		},
-		mapSearch:function(){
-
-			var local = this.local;
-			var searchType = this.searchType;
-			var This = this;
-			searchType.forEach(function(elem,index){
-
-				This.addEvent( document.getElementById(elem),'click', function(event){
-
-						var _val = this.getAttribute('value');
-						if( this.checked ){
-							console.log(_val);
-							This.local.search(_val);
-						}else{
-							This.local.search();
-						}
-						
-				});
-			});
-		},
-		addEvent:function(obj,type,fn){
-
-			if(obj.attacheEvent){
-				obj.attacheEvent( 'on'+type,fn );
-			}else{
-				obj.addEventListener( type,fn,false );
-			}
-		},
-		getPoint:function(city){
-
-			// 将地址解析结果显示在地图上,并调整地图视野
-			var myGeo = this.myGeo;
-			var map = this.map;
-			console.log( city );
-			myGeo.getPoint(city, function(point){
-				if (point) {
-					// marker = new BMap.Marker(point);// 创建标注
-					// map.centerAndZoom(point, 16);
-					// map.addOverlay(marker);// 将标注添加到地图中
-					
-					// var opts = {
-					//   width : 200,     // 信息窗口宽度
-					//   height: 100,     // 信息窗口高度
-					//   title : city , // 信息窗口标题
-					//   enableMessage:true,//设置允许信息窗发送短息
-					//   message:"亲耐滴，晚上一起吃个饭吧？戳下面的链接看下地址喔~"
-					// }
-					// var infoWindow = new BMap.InfoWindow("地址:"+address, opts);  // 创建信息窗口对象 
-					// marker.addEventListener("click", function(){          
-					// 	map.openInfoWindow(infoWindow,point); //开启信息窗口
-					// });
-					map.centerAndZoom(point, 16);
-					map.addOverlay(new BMap.Marker(point));
-
-				}else{
-					alert("您选择地址没有解析到结果!");
-				}
-			},'中国');
-		},
-		changeEvent:function(){
-
-			var address = document.getElementById('address');
-			var This = this;
-
-			this.addEvent(address,'change',function(){
-
-				var _val = this.value;
-				This.getPoint.call(This,_val);
-			});
-		}
-	};
-	
-	BmapInit.init('e1')
-
-	var tengMap = {
-		init:function(el){
-			this.address = document.getElementById('e2').getAttribute('data-map');
-		    this.pano_service = new qq.maps.PanoramaService();
-		    this.geocoder();
-		    this.addEvent();
-		},
-		geocoder:function(){
-
-			var pano_service = this.pano_service;
-			var address = this.address;
-
-			this.geocoder = new qq.maps.Geocoder({
-		        complete : function(result){
-	                var radius;
-		    		pano_service.getPano(result.detail.location,radius, function (result){
-		                new qq.maps.Panorama(document.getElementById('e2'), {
-					        pano: result.svid,
-					        disableMove: false,
-					        pov:{
-					            heading:20,
-					            pitch:15
-					        },
-					        zoom:1
-					    });
-		            });
-		        }
-		    });
-		    this.geocoder.getLocation(address);
-		},
-		addEvent:function(){
-
-			var This = this;
-
-			var address = document.getElementById('address');
-
-			this.eventHander(address,'change',function(){
-
-				var _val = this.value;
-
-				This.geocoder.getLocation(_val);
-			});
-		},
-		eventHander:function(obj,type,fn){
-
-			if( obj.attacheEvent ){
-				obj.attacheEvent('on'+type,fn);
-			}else{
-				obj.addEventListener(type,fn,false);
-			}
-		}
-	};
-	tengMap.init('e2');
-
-</script>
 <% include manager-includes/foot.html %>
+<script type="text/javascript">
+	kvm.module.invoke('/dist/js/lib/houseUpdate.js');
+</script>

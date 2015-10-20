@@ -1,17 +1,35 @@
 <% include includes/head.html %>
 	<div class="room-banner" id="roomShow">
-		
-			<ul>
+		<div class="big-img">
+			<ul class="clearfix">
 				<% house.scollUrl.forEach(function( img ){ %>
 
 					<% if( img != '' ){ %>
-						<li><a href="#"><img src="<%=img %>" alt="banner-1" title=""/></a></li>
+						<li><a href="javascript:void(0)" style="background-image:url('..<%=img %>');"><img src="<%=img %>" alt="banner-1" title=""/></a></li>
 					<% } %>
 					
 				<% }) %>
 			</ul>
-		<a class="btn-pre"><i class="icon-pre"></i></a>
-		<a class="btn-next"><i class="icon-next"></i></a>
+			<a class="btn-pre" href="javascript:void(0)"><i class="icon-pre"></i></a>
+			<a class="btn-next" href="javascript:void(0)"><i class="icon-next"></i></a>
+			<div class="banner-bg">
+			</div>
+		</div>
+		<div class="small-img">
+
+			<% house.scollUrl.forEach(function( img ){ %>
+
+				<% if( img != '' ){ %>
+					
+					<span class="si-item">
+						<img src="<%=img %>"/>
+					</span>
+				<% } %>
+				
+			<% }) %>
+			
+		</div>
+
 	</div>
 
 	<section class="main" style="margin-top:0">
@@ -37,8 +55,10 @@
 
 									<% house.require.forEach(function(val){
 									%>
-
-										<span><%=val %></span>
+										<% if( val != '' ){ %>
+											<span><%=val %></span>
+										<% } %>
+										
 									<% }) %>
 									
 								</li>
@@ -227,7 +247,9 @@
 				<div class="appointmen">
 					<input type="hidden" value="<%=house._id  %>" name="_id" class="apt-id"/>
 
-					<a href="javascript:void(0)" class="btn-apt" id="btn-apt" data-action="house-appoint">	
+					<a href="javascript:void(0)" class="btn-apt" id="btn-apt" data-action="house-appoint" <% if( user.username ){ %>
+								data-require="<%=user.nameID.telephone %>"
+							<%	} %>>	
 								立即预约
 						</a>
 						<% if( sign ){ %>
@@ -362,7 +384,7 @@
 			<form action="" id="registerForm">
 				<legend>
 					注册
-					<a class="close"></a>
+					<a class="close" data-action="close-modal"></a>
 				</legend>
 				<div class="form-group norInput">
 					<input type="text" name="username" placeholder="邮箱/手机" autocomplete="off"  id="loginU"/>
@@ -372,14 +394,14 @@
 					<input type="text" name="qr" placeholder="请输入验证码" autocomplete="off"/>
 					<input type="hidden" autocomplete="off" name="registerBy"/>
 					<input type="hidden" name="sendqr" autocomplete="off"/>
-					<button type="button" class="btn-send" id="send-code" >发送验证码</button>
+					<button type="button" class="btn-send" id="send-code" data-action="reg-sendMessage">发送验证码</button>
 				</div>
 				<div class="form-group">
 					<label><input type="checkbox" />我同意并遵守上述的 《<a href="#">租租侠服务协议</a>》</label>
 				</div>
 
 				<div class="form-group submit">
-					<button type="button" id="register">完成并登录</button>
+					<button type="button" id="register" data-action="reg-submit">完成并登录</button>
 					<!-- <input type="button" value="完成并登录" id="register"/> -->
 				</div>
 				<div class="form-group">
@@ -391,7 +413,7 @@
 			<form action="loginAction" method="post" id="loginForm">
 				<legend>
 					登录
-					<a class="close"></a>
+					<a class="close" data-action="close-modal"></a>
 				</legend>
 				<div class="form-group norInput">
 					<input type="text" name="username" placeholder="账号" autocomplete="off"  />
@@ -400,10 +422,10 @@
 				<div class="form-group remember">
 					<label><input type="checkbox" name="1" value="0"/>记住账号</label>
 
-					<a class="btn-getPass" href="javascript:void(0)" id="forgetPass">忘记密码</a>
+					<a class="btn-getPass" href="javascript:void(0)" id="forgetPass" data-action="open-getPass-modal">忘记密码</a>
 				</div>
 				<div class="form-group submit">
-					<button type="button" id="btn-lg" >登录</button>
+					<button type="button" id="btn-lg" data-action="login">登录</button>
 					<!-- <input type="button" value="登录" id="btn-lg" disabled/> -->
 				</div>
 				<div class="form-group">
@@ -420,7 +442,7 @@
 			<form action="" id="resetForm">
 				<legend>
 					找回密码
-					<a class="close"></a>
+					<a class="close" data-action="close-modal"></a>
 				</legend>
 				<div class="form-group norInput">
 					<input type="text" name="username" placeholder="邮箱/手机" autocomplete="off"/>
@@ -430,10 +452,10 @@
 				<div class="form-group spcInput">
 					<input type="text" name="qr" placeholder="请输入验证码" autocomplete="off"/>
 					<input type="hidden" name="sendqr" autocomplete="off"/>
-					<button type="button" class="btn-send" id="reset-code" >发送验证码</button>
+					<button type="button" class="btn-send" id="reset-code" data-action="forget-sendMessage">发送验证码</button>
 				</div>
 				<div class="form-group submit">
-					<button type="button" id="resetPass">修改并登录</button>
+					<button type="button" id="resetPass" data-action="forgetPass-submit">修改并登录</button>
 					<!-- <input type="button" value="完成并登录" id="register"/> -->
 				</div>
 				<div class="form-group">
@@ -441,110 +463,24 @@
 				</div>
 			</form>
 		</div>
-		
 	</div>
-<div class="apt-fail">
-	<img src="" alt=""/>
-	<p>马上去登录吧~~</p>
-	<a class="" href="#">立即登录</a>
-	<a></a>
-</div>
+	<div class="apt-fail" id="apt-fail">
+		<span class="icon-apt-faild"></span>
+		<p>您还未登录~~</p>
+		<a class="login" href="javascript:void(0)" data-action="open-login-modal">立即登录</a>
+		<a class="reg" href="javascript:void(0)" data-action="open-reg-modal">马上注册</a>
+	</div>
+	<div class="apt-fail" id="apt-succ" id="apt-succ">
+		<span class="icon-apt-succ"></span>
+		<p>预约成功~~</p>
+		<p class="move-center">
+			点击个人中心><a href="/personCenter">我的预约</a>可以查看历史预约记录
+		</p>
+	</div>
+	
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9f5d468870788eaa79a8865781872668"></script>
 <script src="http://map.qq.com/api/js?v=2.exp&key=d84d6d83e0e51e481e50454ccbe8986b"></script>
-<script type="text/javascript">
-
-		var BmapInit = {
-			searchType:['btnBuilding','btnBus','btnHotel','btnBank','btnSuperMarket','btnShop','btnSchool','btnHospital','btnFurniture','btnDecoration','btnGasstation'],
-			init:function(el){
-
-				// 百度地图API功能
-				var map = new BMap.Map(el);
-				this.local = new BMap.LocalSearch(map, {
-					renderOptions:{map: map}
-				});
-				var point = new BMap.Point(116.331398,39.897445);
-				map.centerAndZoom(point,12);
-				var city = document.getElementById(el).getAttribute('data-map');
-				var address = document.getElementById(el).getAttribute('data-address');
-				// 创建地址解析器实例
-				var myGeo = new BMap.Geocoder();
-				// 将地址解析结果显示在地图上,并调整地图视野
-				myGeo.getPoint(city, function(point){
-					console.log(point);
-					if (point) {
-						map.centerAndZoom(point, 16);
-						map.addOverlay(new BMap.Marker(point));
-					}else{
-						alert("您选择地址没有解析到结果!");
-					}
-				},'中国');
-
-				this.mapSearch();
-			},
-			mapSearch:function(){
-
-				var local = this.local;
-				var searchType = this.searchType;
-				var This = this;
-				searchType.forEach(function(elem,index){
-
-					This.addEvent( document.getElementById(elem),'click', function(event){
-
-							var _val = this.getAttribute('value');
-							if( this.checked ){
-								console.log(_val);
-								This.local.search(_val);
-							}else{
-								This.local.search();
-							}
-							
-					});
-				});
-			},
-			addEvent:function(obj,type,fn){
-
-				if(obj.attacheEvent){
-					obj.attacheEvent( 'on'+type,fn );
-				}else{
-					obj.addEventListener( type,fn,false );
-				}
-			},
-			clickEvent:function(){
-
-				console.log( this );
-			}
-		};
-		var tengMap = {
-			init:function(el){
-				this.address = document.getElementById('e2').getAttribute('data-map');
-			    this.pano_service = new qq.maps.PanoramaService();
-			    this.geocoder();
-			},
-			geocoder:function(){
-
-				var pano_service = this.pano_service;
-				var address = this.address;
-
-				var geocoder = new qq.maps.Geocoder({
-			        complete : function(result){
-		                var radius;
-			    		pano_service.getPano(result.detail.location,radius, function (result){
-			                new qq.maps.Panorama(document.getElementById('e2'), {
-						        pano: result.svid,
-						        disableMove: false,
-						        pov:{
-						            heading:20,
-						            pitch:15
-						        },
-						        zoom:1
-						    });
-			            });
-			        }
-			    });
-			    geocoder.getLocation(address);
-			}
-		};
-		BmapInit.init('e1');
-		tengMap.init('e2');
-</script>
 <% include includes/foot.html %>
+<script type="text/javascript">
+ 	kvm.module.invoke("/dist/js/lib/detailMessage.js");
+</script>

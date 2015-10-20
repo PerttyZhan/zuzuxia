@@ -97,9 +97,11 @@ module.exports = function(app){
 			if( req.session.user ){
 
 				user = req.session.user;
+
 				var appoint = new personAppoint({
 					user:user.username,
-					houseID:_id
+					houseID:_id,
+					telephone:user.nameID.telephone
 				});
 				
 				appoint.save(function(err,appoint){
@@ -110,7 +112,6 @@ module.exports = function(app){
 			}
 			
 		});
-
 
 	app.route('/collectHouse')
 		.post(function(req,res){
@@ -125,6 +126,7 @@ module.exports = function(app){
 					houseID:_id
 				});
 				
+
 				collect.save(function(err,appoint){
 					return res.send({err:'',yes:'ok'});
 				});
@@ -133,14 +135,14 @@ module.exports = function(app){
 			}
 		});
 
-
-	app.route('/removeAppointHouse')
+	app.route('/deleCollectHouse')
 		.post(function(req,res){
 
 			var _id = req.body._id;
+
 			if( req.session.user ){
 
-				personAppoint.removeAppoint(req.session.username,_id,function(err,appoint){
+				personCollect.removeCollect(_id,function(err,appoint){
 
 					if( err ){
 						return console.log( err );
@@ -149,10 +151,13 @@ module.exports = function(app){
 					return res.send({err:'',yes:'yes'});
 
 				});
+
 			}else{
 				return res.send({err:'no login',yes:''}); 
 			}
 		});
+
+
 	app.route('/siteapt')
 		.post(function(req,res){
 
@@ -230,6 +235,7 @@ module.exports = function(app){
 			var user = {},deferred = Q.defer(),count =  args['count'] == undefined ? 1 : args['count'];
 			if( getUser(req) ){
 				user = req.session.user ;
+
 				Q.all([
 					personAppoint.findAppointByUsername(user.username,count,function(err,appoint){
 
@@ -250,12 +256,13 @@ module.exports = function(app){
 
 					var appoint = arguments['0'];
 
+					console.log( appoint );
 					return res.render('personCenter',{ 
 						title:'租租侠---大学生租房平台',
 						user:user,
 						appoints:appoint.slice( (count - 1)*5,count*5 ),
 						count:count,
-						all:Math.ceil( appoint.length/5 ) == 0?1:appoint.length,
+						all:Math.ceil( appoint.length/5 ) == 0?1:Math.ceil( appoint.length/5 ),
 						personinfo:Array.prototype.slice.call(arguments)[1][0].nameID
 					});
 				});
@@ -349,14 +356,19 @@ module.exports = function(app){
 				arr.value.push( body[i] );
 			}
 
+			user = req.session.user ;
+			user.nameID[ arr.key[1] ] = arr.value[1];
+			req.session.user = user;
+
 			personInfoModel.updatePersonInfoById(arr,function(err,personInfo){
 				if( err ){
 					return console.log( err );
 				}
+
 				res.send();
 			});
 		});
-	app.route('/collectHouse')
+	app.route('/personCenterCollect')
 		.get(function(req,res){
 
 			var user,deferred = Q.defer();
@@ -381,7 +393,8 @@ module.exports = function(app){
 					})
 					]).spread(function(){
 
-					return res.render('collectHouse',{ 
+						console.log( arguments['0'] );
+					return res.render('personCenterCollect',{ 
 						title:'租租侠---大学生租房平台',
 						user:user,
 						collects:arguments['0'],
@@ -508,67 +521,81 @@ module.exports = function(app){
 	app.route('/register')
 		.post(function(req,res){
 
-			var params = req.body || req.params;
-			var user = {
-				username:params.username,
-				password:params.password,
-				registerBy:params.registerBy,
-				registerS:params.username
+			var params = req.body || req.params,
+				deferred,
+				user = {
+					username:params.username,
+					password:params.password,
+					registerBy:params.registerBy,
+					registerS:params.username
+				},personInfo,md5;
+
+			//生成密码的 md5 值
+			md5 = crypto.createHash('md5'),
+			user.password = md5.update( user.password ).digest('hex');
+
+			var promise = function(){
+
+				deferred = Q.defer();
+
+				adminModel.findRegisterIsOne(user.username,function(err,count){	
+					if( !count ){
+						deferred.resolve();
+					}else{
+						return res.send({
+							msg:'no',
+							val:'账号已存在'
+						})
+					}
+
+				});
+
+				return deferred.promise;
 			};
+			promise().then(function(){
+				deferred = Q.defer();
+				personInfo = new personInfoModel({
+					name:user.username
+				});
 
-			adminModel.findRegisterIsOne(user.username,function(err,count){
+				personInfo.save(function(err,person){
 
-				//生成密码的 md5 值
-				var md5 = crypto.createHash('md5'),
-					password = md5.update( user.password ).digest('hex');
-				if( !count ){
+					if( err ){
+						return console.errord( err );
+					}
+					deferred.resolve(person);
+				});
 
-					
+				return deferred.promise;
+			}).then(function(data){
 
-					var personInfo = new personInfoModel({
-						name:user.username
-					});
+				var admin = new adminModel({
+					username:user.username,
+					password:user.password,
+					registerBy:user.registerBy,
+					registerS:user.registerS,
+					nameID:data._id
+				});
 
-					personInfo.save(function(err,person){
+				admin.save(function(err,admin){
 
-						if( err ){
-							return console.log( err );
-						}
+					if(err){
+						return conole.error( err );
+					}
+					delete req.session.user;
 
-						var admin = new adminModel({
-							username:user.username,
-							password:password,
-							registerBy:user.registerBy,
-							registerS:user.registerS,
-							nameID:person._id
-						});
+					admin.nameID = data;
 
-						admin.save(function(err,admin){
+					req.session.user = admin;
 
-							if(err){
-								return conole.log( err );
-							}
-
-							delete req.session.username;
-							req.session.username = admin.username;
-							req.session.bgimg = admin.bgimg;
-							return res.send({
-								msg:'yes',
-								val:''
-							});
-						});
-					});
-					
-
-				}else{
-
+					console.log( admin );
 					return res.send({
-						msg:'no',
-						val:'账号已存在'
-					})
-				}
-
+						msg:'yes',
+						val:''
+					});
+				});
 			});
+
 
 		});
 
@@ -690,79 +717,50 @@ module.exports = function(app){
 				}else{
 
 					var inputFile = files.imgUrl;
-					var uploadPath,dstPath,dir;
+					var uploadPath,dstPath,dir,val,name,temp;
 
 					dir = 'public/image/'+fields._id;
-					if( fs.exists(dir) ){
 
-							uploadPath = inputFile[0].path;
-							dstPath = dir+'/'+inputFile[0].originalFilename;
+					fs.mkdir( dir,function(){
+						uploadPath = inputFile[0].path;
+						dstPath = dir+'/'+inputFile[0].originalFilename;
 
-							images(uploadPath)
-							  // .size(387,300)		//宽度为387，高度300
-							  .save(dstPath,{
-							  	quality:50     //图片质量为50
-							  });
+						if( fields.changeType == 'scollUrl' ){
+							name = 'scollUrl';
 
-							  fs.unlinkSync(uploadPath);
+						images(uploadPath)
+						  .size(1898,700)		//宽度为552
+						  .save(dstPath,{
+						  	quality:50     //图片质量为50
+						  });
 
-							// for( var i=0;i<fields.imgUrl.length;i++ ){
-
-							// 	if( fields.imgUrl[i] == ''){
-							// 		fields.imgUrl[i] = '/image/'+fields._id+'/'+inputFile[0].originalFilename;
-							// 		break;
-							// 	}
-							// }
-
-							// var val = fields.imgUrl.toString();
-
-							// houseMessage.updateById(fields._id,'imgUrl',val,function(err,info){
-							// 	if( err ){
-							// 		 console.log(err);	 
-							// 	}	
-							// });
-						// res.redirect('/house/'+fields._id);
-						console.log('已经创建过此目录了');
+						}else{
+							name = 'coverUrl';
+						images(uploadPath)
+						  .size(456,341)		//宽度为552
+						  .save(dstPath,{
+						  	quality:50     //图片质量为50
+						  });
+						}
 						
-					}else{
-						fs.mkdir( dir,function(){
-							uploadPath = inputFile[0].path;
-							dstPath = dir+'/'+inputFile[0].originalFilename;
-
-							images(uploadPath)
-							  // .size(387,300)		//宽度为552
-							  .save(dstPath,{
-							  	quality:50     //图片质量为50
-							  });
-							  fs.unlinkSync(uploadPath);
-
-							var val,name,temp;
-
-							if( fields.changeType == 'scollUrl' ){
-								name = 'scollUrl';
-							}else{
-								name = 'coverUrl';
+						for( var i=0;i<fields[name].length;i++ ){
+							temp = fields[name];
+							if( temp[i] == '1'){
+								temp[i] = '/image/'+fields._id+'/'+inputFile[0].originalFilename;
+								break;
 							}
-							
-							for( var i=0;i<fields[name].length;i++ ){
-								temp = fields[name];
-								if( temp[i] == '1'){
-									temp[i] = '/image/'+fields._id+'/'+inputFile[0].originalFilename;
-									break;
-								}
-							}
-							val = fields[name].toString();
-							houseMessage.updateById(fields._id,name,val,function(err,info){
+						}
+						val = fields[name].toString();
+						houseMessage.updateById(fields._id,name,val,function(err,info){
 
-								if( err ){
-									 console.log(err);
-								}
-							});
-						} );
-						console.log('更新目录已创建成功\n');
-						res.end('');
+							if( err ){
+								 console.log(err);
+							}
+						});
+					} );
+					console.log('更新目录已创建成功\n');
+					res.end('');
 						// res.redirect('/house/'+fields._id);
-					}	
 				}
 			});
 

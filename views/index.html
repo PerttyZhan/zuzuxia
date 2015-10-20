@@ -8,9 +8,12 @@
 				<li><a href="javascript:void(0)"><img src="/image/banner-2.jpg" alt="banner-1" title="" width="1900"/></a></li>
 				<li><a href="javascript:void(0)"><img src="/image/banner-3.jpg" alt="banner-1" title="" width="1900"/></a></li>
 			</ul>
+		<div class="banner-bg">
+		</div>
 		<a class="btn-pre"><i class="icon-pre"></i></a>
 		<a class="btn-next"><i class="icon-next"></i></a>
 	</div>
+	
 	<div class="banner-search" id="banner-search">
 		<div class="container">
 			<div class="wrap">
@@ -29,14 +32,14 @@
 							</dl>
 						</li>
 						<li>
-							<input type="text" name="starttime" placeholder="起始时间"  onClick="WdatePicker()" readonly id="starttime"/>
+							<input type="text" name="starttime" placeholder="起始时间"  readonly id="starttime" data-action="open-satrt-modal"/>
 							<i class="icon-arrow-botom"></i>
 						</li>
 
 						<li>
 							<dl>
-								<dt class="choosetime" data-close="open-time-modal">
-									<input type="text" name="week" value="" placeholder="入住周期" readonly id="duringtime"/>
+								<dt class="choosetime" data-action="open-time-modal">
+									<input type="text" name="week" value="" placeholder="入住周期" readonly id="duringtime" />
 									
 									<i class="icon-arrow-botom"></i>
 								</dt>
@@ -60,7 +63,13 @@
 							
 						</li>
 						<li>
-							<button type="button" class="submit" id="apt-sub" data-action="index-apt">立即预约</buton>
+	
+							<button type="button" class="submit" id="apt-sub" data-action="index-apt" 
+							<% if( user.username ){ %>
+								data-require="<%=user.nameID.telephone %>"
+							<%	} %>
+								data-require=""
+							>立即预约</buton>
 						</li>
 					</ul>
 				</form>
@@ -78,7 +87,43 @@
 		</div>
 	</div>
 
+	
 	<section class="main" id="main">
+		<div class="nav">
+			<div class="nav-feature">
+				<ul class="clearfix">
+					<li>
+						<h2>轻松</h2>
+						<span>EASY</span>
+						<hr/>
+						<p>轻松租房</p>
+						<p>押一付一</p>
+					</li>
+					<li>
+						<h2>享受</h2>
+						<span>ENJOY</span>
+						<hr/>
+						<p>贴心管家</p>
+						<p>完善配套</p>
+					</li>
+					<li>
+						<h2>品质</h2>
+						<span>QUALITY</span>
+						<hr/>
+						<p>绿色装修</p>
+						<p>宜家家居</p>
+					</li>
+					<li>
+						<h2>生活</h2>
+						<span>LIFE</span>
+						<hr/>
+						<p>Q2Q社交</p>
+						<p>有朋友才叫生活</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+
 		<div>
 			<div class="title">
 				<span>杭州</span>
@@ -107,9 +152,57 @@
 				<% }) %>
 			</div>
 		</div>
-
 	</section>
-
+	<div class="live-show">
+		<div class="live-img">
+			<h2>生活有更多可能</h2>
+			<p>我们期待崇尚健康的生活方式，热爱运动，乐于分享并且追求美好生活的你加入我们。</p>
+			<div class="section-img table">
+				<div class="fix1 table-cell clearfix">
+					<div class="size-1">
+						<img src="" alt="" title=""/>
+					</div>
+					<div class="size-3">
+						<img src="" alt="" title=""/>
+					</div>
+					<div class="size-4">
+						<img src="" alt="" title=""/>
+					</div>
+					<div class="size-2">
+						<img src="" alt="" title=""/>
+					</div>
+				</div>
+				<div class="fix2 table-cell">
+					<div class="size-4">
+						<img src="" alt="" title=""/>
+					</div>
+					<div class="size-2">
+						<img src="" alt="" title=""/>
+					</div>
+					<div class="size-1">
+						<img src="" alt="" title=""/>
+					</div>
+					<div class="size-3">
+						<img src="" alt="" title=""/>
+					</div>
+				</div>
+				<div class="fix3 table-cell">
+					<div class="size-3">
+						<img src="" alt="" title=""/>
+					</div>
+					<div class="size-1">
+						<img src="" alt="" title=""/>
+					</div>
+					<div class="size-2">
+						<img src="" alt="" title=""/>
+					</div>
+					<div class="size-4">
+						<img src="" alt="" title=""/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<footer class="footer">
 		<div id="footer">
@@ -203,7 +296,6 @@
 				</div>
 				<div class="form-group submit">
 					<button type="button" id="resetPass" data-action="forgetPass-submit">修改并登录</button>
-					<!-- <input type="button" value="完成并登录" id="register"/> -->
 				</div>
 				<div class="form-group">
 					<p class="errorL" id="reseterror"></p>
@@ -211,20 +303,11 @@
 			</form>
 		</div>
 	</div>
-	<div class="apt-fail" id="apt-fail">
-		<img src="/image/apt-faild.gif" alt=""/>
-		<p>马上去登录吧~~</p>
-		<a class="login" href="javascript:void(0)">立即登录</a>
-		<a class="reg" href="javascript:void(0)">马上注册</a>
-	</div>
-<script src="/My97DatePicker/WdatePicker.js"></script>
 
 <% include includes/foot.html %>
-
-
-
-
-
+<script type="text/javascript">
+ 	kvm.module.invoke("/dist/js/lib/index.js");
+</script>
 
 
 

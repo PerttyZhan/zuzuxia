@@ -63,6 +63,7 @@ personAppoint.statics = {
 		return this
 				.find({user:username})
 				.populate('houseID')
+				.sort({createTime:-1})
 				// .skip( (count -1)*5 )
 				// .limit(5)
 				.exec(cb);
@@ -71,6 +72,7 @@ personAppoint.statics = {
 		return this
 				.find({})
 				.populate('houseID')
+				.sort({createTime:-1})
 				.exec(cb);
 	}
 

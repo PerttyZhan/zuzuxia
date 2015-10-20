@@ -33,6 +33,7 @@ collecSchema.statics = {
 		if( username == undefined ){
 			username = 'undefined';
 		}
+
 		return this
 				.count({user:username,houseID:_id})
 				.exec(cb);
@@ -42,6 +43,11 @@ collecSchema.statics = {
 		return this
 				.find({user:username})
 				.populate('houseID')
+				.exec(cb);
+	},
+	removeCollect:function(_id,cb){
+		return this
+				.remove({_id:_id})
 				.exec(cb);
 	}
 

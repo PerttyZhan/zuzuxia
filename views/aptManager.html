@@ -32,7 +32,7 @@
 						</li>
 					</ol>
 				</div>
-				<div class="house">
+				<div class="house" style="padding-bottom:50px;">
 					<div class="show-all">
 						<table  border="0" cellpadding="0" cellspacing="0" bordercolor="#dedede">
 							<thead>
@@ -61,23 +61,31 @@
 							<tfoot>
 								<tr>
 									<td colspan="7">
-									<% if( count != 1 ){ %>
-										<a href="aptManager?count=<%= (count-1) %>" class="pre" >上一页</a> 
-									<% } %>
+									<a 
+										<% if( count != 1 ){ %>
+										href="aptManager?count=<%= (parseInt(count)-1) %>" 
+										<% }else{ %>
+										href="javascript:void(0) %>" 
+										<% } %>
+										class="pre" >上一页</a> 
 									
+
 									<span><strong><%=count %></strong>/<%=all %></span> 
-									
-									<% if( count != all ){ %>
-										<a class="next " href="aptManager?count=<%= (count+1) %>">下一页</a>
-									<% } %>
-										<a class="trun" href="javascript:void(0)" id="open-turn">
+										<a  
+										<% if( count != all ){ %>
+											href="aptManager?count=<%= (parseInt(count)+1) %>" 
+										<% }else{ %>
+											href="javascript:void(0)" 
+										<% } %>
+										class="next" >下一页</a>
+										<a class="trun" href="javascript:void(0)" id="open-turn" data-action="open-page-choose">
 											跳转
 											<span class="page-choose">
 												<p>
 													<input type="hidden" name="all" value="<%=all %>"/>
 													跳转至 <input type="text" name="page" /> 页
 												</p>
-												<button type="button" id="turn-page">确定</button>
+												<button type="button" id="turn-page" data-action="page-turn">确定</button>
 											</span>
 										</a>
 										
@@ -92,3 +100,6 @@
 	</div>
 
 <% include manager-includes/foot.html %>
+<script type="text/javascript">
+	kvm.module.invoke('/dist/js/lib/aptManager.js');
+</script>

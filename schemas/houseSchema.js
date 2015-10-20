@@ -152,8 +152,9 @@ houserSchema.statics = {
 			set = { $set:{ scollUrl:arr } };
 		}else if( key == 'coverUrl' ){
 			set = { $set:{ coverUrl:val } };
+		}else if( key == 'bh' ){
+			set = { $set:{ bh:val } };
 		}
-
 		console.log( query );
 		console.log( set );
 		return this

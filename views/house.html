@@ -40,9 +40,9 @@
 							<div class="thumbnail">
 								<a href="house/<%=house._id %>">
 									<% if( house.coverUrl == '' ){ %>
-										<img src="image/default-curimg.png" width=""/>
+										<img data-src="image/default-curimg.png" width=""/>
 									<% }else{ %>
-										<img src="<%=house.coverUrl %>" width=""/>
+										<img data-src="<%=house.coverUrl %>" width=""/>
 									<% } %>
 									<div class="mask">
 										<div class="ma table">
@@ -77,3 +77,6 @@
 	</div>
 
 <% include manager-includes/foot.html %>
+ <script type="text/javascript">
+ 	kvm.module.invoke('/dist/js/lib/houseShow.js');
+ </script>

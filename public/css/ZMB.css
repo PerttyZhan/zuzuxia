@@ -25,6 +25,14 @@ li {
 a {
   text-decoration: none;
 }
+.clearfix{
+  zoom:1;
+}
+.clearfix:before,.clearfix:after{
+  content:"";
+  display: table;
+}
+.clearfix:after{clear:both;} 
 .table {
   display: table;
   width: 100%;
@@ -35,12 +43,12 @@ a {
 #header {
   width: 100%;
   background-color: #fff;
+ 
 }
 #header .container {
   width: 1200px;
   margin: 0 auto;
   padding: 20px 0;
-  overflow: hidden;
 }
 .header-logo {
   float: left;
@@ -74,14 +82,12 @@ a {
   padding-left: 34px;
   font-size: 12px;
   color: #ccc;
-  line-height: 25px;
-  background: url('/image/ZMB-icon-1.png') no-repeat 0 -10px;
+  line-height: 32px;
+  background: url('/image/ZMB-icon-1.png') no-repeat 0 -5px;
 }
 #main {
-  width: 100%;
-  height: 100%;
   background-color: #e7e7e7;
-  padding-top: 34px;
+  margin-top: 34px;
 }
 #main .container {
   width: 1200px;
@@ -101,7 +107,7 @@ a {
   display: block;
 }
 #main .fun {
-  font-size: 12px;
+  font-size: 14px;
   color: #999;
   width: 100%;
   margin: 30px 30px 0 30px;
@@ -110,7 +116,7 @@ a {
   background: url('/image/ZMB-icon-1.png') no-repeat 0 -49px;
 }
 #main .manager {
-  font-size: 12px;
+  font-size: 14px;
   color: #999;
   display: block;
   width: 100%;
@@ -124,10 +130,14 @@ a {
 }
 #main .dropMenu a {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   color: #333;
   width: 100%;
   text-indent: 60px;
+  line-height: 34px;
+}
+#main .dropMenu a:hover{
+  background-color: rgba(102, 153, 0, 0.2);
 }
 #main .dropMenu li {
   margin-top: 18px;
@@ -141,6 +151,7 @@ a {
 #main .content {
   position: relative;
   border: 1px solid #ebebeb;
+  height: 2000px;
 }
 #main .title {
   border-bottom: 1px solid #ebebeb;
@@ -206,7 +217,6 @@ a {
 
 #main .thumbnail a {
   text-decoration: none;
-  transition: color 1s;
   display: block;
   position: relative;
 }
@@ -391,8 +401,8 @@ a {
   width: 31%;
   margin-bottom: 30px;
   overflow: hidden;
-  -webkit-animation: slide .8s ease 0s both;
-  animation: slide .8s ease 0s both;
+/*  -webkit-animation: slide .8s ease 0s both;
+  animation: slide .8s ease 0s both;*/
 }
 #main .mask-icon {
   padding-top: 10px;

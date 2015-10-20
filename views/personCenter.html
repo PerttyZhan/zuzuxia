@@ -1,6 +1,6 @@
 
 <% include includes/head.html %>
-	<div id="banner" >
+	<div id="roomShow" >
 		<div class="bg">
 			<img src="<%=user.bgimg %>" width="1897" alt="" title=""/>
 			<form method="post" name="form" encType="multipart/form-data" title="改变背景" action="uploadbgImg">
@@ -32,7 +32,7 @@
 					<p>预约</p>
 					
 				</a>
-				<a class="collection" href="/collectHouse">
+				<a class="collection" href="/personCenterCollect">
 					<i></i>
 					<p>收藏</p>
 					
@@ -50,10 +50,12 @@
 							<tr>
 								<td><%=appoint._id %></td>
 								<td>
-									<% if( appoint.area != '' ){ %>
-
+									<% if( appoint.houseID ){ %>
+										<%=appoint.houseID.bh %>
+									<% }else{ %>
 										<%=appoint.area %>
 									<% } %>
+									
 								</td>
 								<td><%=appoint.user %></td>
 								<td><%=appoint.telephone %></td>
@@ -66,15 +68,25 @@
 						<tfoot>
 							<tr>
 								<td colspan="7">
-									<% if( count != 1 ){ %>
-										<a href="personCenter?count=<%= (count-1) %>" class="pre" >上一页</a> 
-									<% } %>
+									
+										<a 
+										<% if( count != 1 ){ %>
+										href="personCenter?count=<%= (parseInt(count)-1) %>" 
+										<% }else{ %>
+										href="javascript:void(0) %>" 
+										<% } %>
+										class="pre" >上一页</a> 
+									
 
 									<span><strong><%=count %></strong>/<%=all %></span> 
-
-									<% if( count != all ){ %>
-										<a class="next " href="personCenter?count=<%= (count+1) %>">下一页</a>
-									<% } %>
+										<a  
+										<% if( count != all ){ %>
+											href="personCenter?count=<%= (parseInt(count)+1) %>" 
+										<% }else{ %>
+											href="javascript:void(0)" 
+										<% } %>
+										class="next" >下一页</a>
+									
 									 <input type="hidden" name="allnum" value="<%=all %>" /> 
 									<input type="text" name="pagenum" value="" /> 
 									<a class="trun" href="javascript:void(0)" class="trun-page" id="trun-page" data-action="turn-page">
@@ -106,5 +118,7 @@
 			</div>
 		</div>
 	</footer>
-<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
 <% include includes/foot.html %>
+<script type="text/javascript">
+ 	kvm.module.invoke("/dist/js/lib/personCenter.js");
+</script>

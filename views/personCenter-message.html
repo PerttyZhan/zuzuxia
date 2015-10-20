@@ -1,6 +1,6 @@
 
 <% include includes/head.html %>
-	<div id="banner" >
+	<div id="roomShow" >
 		<div class="bg">
 			<img src="<%=user.bgimg %>" width="1897" alt="" title=""/>
 			<form method="post" name="form" encType="multipart/form-data" title="改变背景" action="uploadbgImg">
@@ -15,6 +15,7 @@
 				<p><%=personinfo.sign %></p>
 			</div>
 		</div>
+		
 	</div>
 	<section class="main" id="main" style="background-color:#fff">
 		<div >
@@ -32,7 +33,7 @@
 					<p>预约</p>
 					
 				</a>
-				<a class="collection" href="/collectHouse">
+				<a class="collection" href="/personCenterCollect">
 					<i></i>
 					<p>收藏</p>
 					
@@ -48,62 +49,6 @@
 						</tr>
 					</thead>
 					<tbody>
-						
-						<!-- <tr class="title">
-							<td>
-								<a href="#">
-									哈呼东湖UI等官方对手公司等空间
-									<strong>new</strong>
-								</a>
-							</td>
-							<td>
-								2015-07-19
-							</td>
-						</tr>
-						<tr class="detail-mess">
-							<td  colspan="2">
-								<div>
-									<p>哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间</p>
-								</div>
-							</td>
-						</tr>
-						<tr class="title">
-							<td>
-								<a href="#">
-									哈呼东湖UI等官方对手公司等空间
-									<strong>new</strong>
-								</a>
-							</td>
-							<td>
-								2015-07-19
-							</td>
-						</tr>
-							<tr class="detail-mess">
-							<td  colspan="2">
-								<div>
-									<p>哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间</p>
-								</div>
-							</td>
-						</tr>
-						<tr class="title">
-							<td>
-								<a href="#">
-									哈呼东湖UI等官方对手公司等空间
-									<strong>new</strong>
-								</a>
-							</td>
-							<td>
-								2015-07-19
-							</td>
-						</tr>
-						<tr class="detail-mess">
-						<td  colspan="2">
-							<div>
-								<p>哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间哈呼东湖UI等官方对手公司等空间</p>
-							</div>
-						</td>
-						</tr> -->
-
 						<% messages.forEach(function(message){ %>
 						<tr class="title">
 							<td>
@@ -153,6 +98,7 @@
 			</div>
 		</div>
 	</footer>
-
-<script src="/dist/js/allunivlist.js?201510111920"></script>
 <% include includes/foot.html %>
+<script type="text/javascript">
+ 	kvm.module.invoke("/dist/js/lib/personCenterMessage.js");
+</script>
