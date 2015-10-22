@@ -34,245 +34,87 @@
 
 	<section class="main" style="margin-top:0">
 		<div id="main" style="background-color:#fff">
-			<div class="container detail-messaege">
-				<div class="table">
-					<div class="table-cell house-des">
-						<div class="house-name">
-							<p><%=house.title %></p>
+			<div class="detail-messaege">
+				<div class="house-des">
+					<div class="detail-title house-name">
+						<p><%=house.title %></p>
 
-							<% house.keywords.forEach(function(keyword){ %>
+						<% house.keywords.forEach(function(keyword){ %>
 
-								<span><%=keyword %></span>
+							<span><%=keyword %></span>
 
-							<% }) %>
-						</div>
-
-						<div class="house-detail">
-							<ul>
-								<li>
-									<i></i>
-									<p><strong><%=house.price %></strong>元/月</p>
-
-									<% house.require.forEach(function(val){
-									%>
-										<% if( val != '' ){ %>
-											<span><%=val %></span>
-										<% } %>
-										
-									<% }) %>
-									
-								</li>
-								<li>
-									<div class="table">
-										<i></i>
-										<% house.des.forEach(function(val){
-										%>
-											<p class="table-cell">	<%= val %></p>
-										<% }) %>
-									</div>
-								</li>
-								<li><i></i><p><%=house.address %></p></li>
-								<!-- <li><p>快速公交929</p></li> -->
-							</ul>
-						</div>
+						<% }) %>
 					</div>
-					<div class="table-cell house-config">
-						<table border="1" cellpadding="0" cellspacing="0" bordercolor="#dedede">
-							<thead>
-								<tr>
-									<th colspan="7"><i class="icon-room"></i>房间配置</th>
-								</tr>
-							</thead>
-							<tbody>
+					<div class="house-detail">
+						<ul>
+						<li>
+								<div class="table">
+									<% house.des.forEach(function(val){
+									%>
+										<p class="table-cell">	<%= val %></p>
+									<% }) %>
+								</div>
+							</li>
+							<li>
+								<p><strong><%=house.price %></strong> 元/月</p>
 
-								<tr>
-									<td>网络</td>
-									<td colspan="2">电器</td>
-									<td colspan="2">家具</td>
-									<td>软饰</td>
-									<td>其它</td>
-								</tr>
-								<tr>
+								<% house.require.forEach(function(val){
+								%>
+									<% if( val != '' ){ %>
+										<span><%=val %></span>
+									<% } %>
+									
+								<% }) %>
+							</li>
 
-									<td rowspan="3">
-										
-											<% if( !house.houseconfig || house.houseconfig.internet == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.internet %>
-											<% } %>
-										
-									</td>
-									<td>
-										
-											<% if( !house.houseconfig || house.houseconfig.electri[0] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.electri[0] %>
-											<% } %>
-										
-									</td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.electri[1] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.electri[1] %>
-											<% } %>
-									</td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.furniture[0] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.furniture[0] %>
-											<% } %>
-									</td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.furniture[1] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.furniture[1] %>
-											<% } %>
-									</td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.other[0] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.other[0] %>
-											<% } %>
-									</td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.other[1] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.other[1] %>
-											<% } %>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										
-											<% if( !house.houseconfig || house.houseconfig.electri[2] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.electri[2] %>
-											<% } %>
-										
-									</td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.electri[3] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.electri[3] %>
-											<% } %>
-								</td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.furniture[2] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.furniture[2] %>
-											<% } %>
-									</td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.furniture[3] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.furniture[3] %>
-											<% } %>
-									</td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.other[4] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.other[4] %>
-											<% } %>
-									</td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.other[3] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.other[3] %>
-											<% } %>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										
-											<% if( !house.houseconfig || house.houseconfig.electri[4] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.electri[4] %>
-											<% } %>
-										
-									</td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.electri[5] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.electri[5] %>
-											<% } %>
-									</span></td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.furniture[4] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.furniture[4] %>
-											<% } %>
-									</td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.furniture[5] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.furniture[5] %>
-											<% } %>
-									</td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.other[4] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.other[4] %>
-											<% } %>
-									</td>
-									<td>
-										<% if( !house.houseconfig || house.houseconfig.other[5] == '' ){ %>
-												
-											<% }else{%>
-												<%=house.houseconfig.other[5] %>
-											<% } %>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+						</ul>
 					</div>
 				</div>
+
 				<div class="appointmen">
 					<input type="hidden" value="<%=house._id  %>" name="_id" class="apt-id"/>
 
-					<a href="javascript:void(0)" class="btn-apt" id="btn-apt" data-action="house-appoint" <% if( user.username ){ %>
-								data-require="<%=user.nameID.telephone %>"
-							<%	} %>>	
-								立即预约
-						</a>
+					
 						<% if( sign ){ %>
 							<a href="javascript:void(0)" class="collect" id="apt-collect" data-action="house-collect">	
 								收藏
 							</a>
 						<% }else{ %>
 							<a href="javascript:void(0)" class="collect alreadyapt">	
-								收藏
+								已收藏
 							</a>
 						<% } %>
-						
 
-						
-					</a>
+						<a href="javascript:void(0)" class="btn-apt" id="btn-apt" data-action="house-appoint" <% if( user.username ){ %>
+								data-require="<%=user.nameID.telephone %>"
+							<%	} %>>	
+								预约
+						</a>
 				</div>
-				<div>
+
+				<div class="house-config">
+					<div class="container">
+						<div class="detail-title">
+							<p>房间配置</p>
+						</div>
+						<div class="table">
+							<div class="table-cell"><span class="config bed">床</span></div>
+							<div class="table-cell"><span class="config tv">数字电视</span></div>
+							<div class="table-cell"><span class="config air">空调</span></div>
+							<div class="table-cell"><span class="config washer">洗衣机</span></div>
+							<div class="table-cell"><span class="config wifi">WIFI全覆盖</span></div>
+							<div class="table-cell"><span class="config hotWrater">24h热水</span></div>
+						</div>
+					</div>
 				</div>
 				<div class="mapShow">
-					<ul class="map-title clearfix">
-						<li ><a href="javascript::void(0)">街景</a></li>
-						<li class="active"><a href="javascript::void(0)">地图</a></li>
-					</ul>
+					<div class="detail-title">
+						<p>公寓位置</p>
+					</div>
+					<div class="map-title clearfix">
+						<a href="javascript::void(0)" class="streetscape">街景</a>
+						<a href="javascript::void(0)" class="Baimap active">地图</a>
+					</div>
 					<div class="map-content">
 						<div class="map" id="e1" data-map="<%=house.address %>" data-address="<%=house.address %>">
 						</div>
@@ -301,6 +143,9 @@
 			</div>
 		</div>
 		<div class="apt-process">
+			<div class="detail-title">
+				<p>入住流程</p>
+			</div>
 			<div class="container">
 				<ul >
 					<li>
@@ -346,7 +191,7 @@
 	<section class="section-fz">
 		<div class="container">
 			<div class="fz-content">
-				<h1>公寓管家</h1>
+				<h2>公寓管家</h2>
 				<p>生活总是充满惊喜，就像不经意间我会遇见你, 在没有预约的日子里，我们总是能够不期而遇
 
 </br>
@@ -485,5 +330,5 @@
 <script src="http://map.qq.com/api/js?v=2.exp&key=d84d6d83e0e51e481e50454ccbe8986b"></script>
 <% include includes/foot.html %>
 <script type="text/javascript">
- 	kvm.module.invoke("/dist/js/lib/detailMessage.js");
+ 	kvm.module.invoke("/dist/js/lib/detailMessage.js?20151022");
 </script>

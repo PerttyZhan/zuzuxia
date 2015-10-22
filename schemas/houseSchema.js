@@ -44,7 +44,7 @@ var houserSchema = new mongoose.Schema({
 	},
 	coverUrl:{
 		type:String,
-		default:'/image/1438176413433.jpg',
+		default:'/image/default-curimg.png',
 	},
 	scollUrl:{
 		type:[String],

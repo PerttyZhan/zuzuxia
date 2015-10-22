@@ -9,13 +9,13 @@ define(["require","module","exports"],function(require,module,exports){
 			this.$qqshare = $btn;
 			console.log( $btn );
 			this.qqconfig = {
-				url:location.href,
-				showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
-				desc:'',/*默认分享理由(可选)*/
-				summary:'',/*分享摘要(可选)*/
-				title:'',/*分享标题(可选)*/
+				url:'http://young.so',
+				showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
+				desc:'描述部分',/*默认分享理由(可选)*/
+				summary:'QQ登录是QQ互联的一种接入方式，通过接入QQ登录，用户可以使用QQ账号直接登录接入的站点，QQ登录同时提供API授权，帮助网站主将用户操作同步到QQ空间和朋友网；',/*分享摘要(可选)*/
+				title:'如此好的房子，你还在等什么！',/*分享标题(可选)*/
 				site:'',/*分享来源 如：腾讯网(可选)*/
-				pics:'', /*分享图片的路径(可选)*/
+				pics:'http://young.so/image/banner-1.jpg', /*分享图片的路径(可选)*/
 				style:'203',
 				width:22,
 				height:22

@@ -62,6 +62,7 @@ define(["require","module","exports"],function(require,module,exports){
 				e.stopPropagation();
 				e.preventDefault();
 
+				
 				//鼠标滚轮的滚动方向 >0 up;<0 down
                var _delta = parseInt(e.originalEvent.wheelDelta || -e.originalEvent.detail),
                		$a = $ul.find('li:eq('+This.index+')').find('a'),
@@ -88,8 +89,6 @@ define(["require","module","exports"],function(require,module,exports){
                  maxX = width * ( rate -100)/100;
                  maxY = height * ( rate -100)/100;
 
-                 console.log( posx );
-                 console.log( maxX );
                  if( Math.abs( posx ) >= maxX){
                  	posx = -maxX
                  }
@@ -121,7 +120,6 @@ define(["require","module","exports"],function(require,module,exports){
 						disx = ( posx + x1 -x ),
 						disy = ( posy + y1 -y );
 
-						console.log( maxX );
 						if( disx >= 0 ){
 							disx = 0;
 						}else if( Math.abs(disx) >= maxX ){

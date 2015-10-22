@@ -14,7 +14,7 @@ define(["require"],function(require){
 	$('#e2').hide();
 	$('#e1').show();
 	$('.btn-group').show();
-	$('.map-title').find('li').hover(function(){
+	$('.map-title').find('a').hover(function(){
 		
 		$(this).attr('class','active').siblings().removeClass('active');
 		if( $(this).index() == 0 ){
