@@ -10,15 +10,18 @@ module.exports = {
 		app_secret:'22cbfcd65bcff2a68b33dc8194667953'
 	},
 	sms:{
-		host:'smtp.ym.163.com',
+		host:'smtp.mxhichina.com',
 		 auth: {
-	        user: "system@incobook.com",
-	        pass: "WjXcozj3D8v1lBaL"
+	        user: "zh@young.so",
+	        pass: "YoungSoengineer2013"
 	    }
 	}
 };
 
 /*
+postmaster@young.so
+YOUNGso2015
+
 system@incobook.com
 WjXcozj3D8v1lBaL
 */

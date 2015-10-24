@@ -24,7 +24,7 @@ app.set('view engine','html');
 
 //uncomment after placing you favicon in /public
 
-app.use(favicon(__dirname + '/public/image/favicon.ico'));
+app.use(favicon(__dirname + '/public/image/bitbug_favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:false }));

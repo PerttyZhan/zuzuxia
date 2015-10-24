@@ -1,5 +1,7 @@
 var nodemailer = require("nodemailer");
 var settings = require('../settings');
+
+console.log( settings );
 var smtpTransport = nodemailer.createTransport("SMTP",{
     host:settings.sms.host,
     secureConnection:true,
@@ -18,7 +20,7 @@ var body = '<table width="800"  border="0"  align="center"  cellpadding="0"  cel
 var _html = _style + body;
 // setup e-mail data with unicode symbols
 var mailOptions = {
-        from: "system@incobook.com", // sender address
+        from: "zh@young.so", // sender address
         to: _to, // list of receivers
         subject: "租租侠邮箱验证码", // Subject line
         text: "", // plaintext body
@@ -45,5 +47,3 @@ var mailOptions = {
 
 
 module.exports = sendEmail;
-
-
