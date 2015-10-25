@@ -8,21 +8,17 @@ define(['require','module','exports'],function(require,module,exports){
 
 		oParent.css('opacity',1).find('ul').height( oParent.find('a').height() ).find('li:eq(0)').addClass('active');
 
-		if( oParent.attr('id') != 'roomShow' ){
-			var bannerTimer = setInterval(function(){
-				if( oParent.height() ){
 
-					if( $('#banner-search').length ){
-						$(document.body).css('padding-top',oParent.height() - 1 +'px').show();
-						//-$('#banner-search').outerHeight()-$('#header').outerHeight()
-					}
-					
-					clearInterval( bannerTimer );
-					bannerTimer = null;
+			var bannerTimer = setInterval(function(){
+			if( oParent.height() ){
+
+				$(document.body).css('padding-top',oParent.height() - 1 +'px').show();
+				clearInterval( bannerTimer );
+				bannerTimer = null;
 				}
 
 			},20);
-		}
+		
 		this.$oParent = oParent;
 		this.$btnPre = btnPre;
 		this.$btnNext = btnNext;

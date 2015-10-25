@@ -20,6 +20,13 @@ define(["require"],function(require){
 
 	});
 
+	QC.Login({
+       btnId:"qq-login",    //插入按钮的节点id
+       scope:"all"
+   },function(reqData, opts){
+
+   		console.log( reqData );
+   });
 	/* 登录后的 */
 	$('#dropRole').hover(function(e){
 		e.stopPropagation();

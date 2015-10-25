@@ -1,9 +1,7 @@
 define(["require"],function(require){
 
-	var bannerRun = require('bannerRun'), 	//bannerRun的组件;
-		clickList = require('clickList');			//点击事件集合 
+	var clickList = require('clickList');			//点击事件集合 
 
-	var banner = new bannerRun( $('#banner'),function(){});
 
 	/* 登录后的 */
 	$('#dropRole').hover(function(e){

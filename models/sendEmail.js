@@ -1,7 +1,6 @@
 var nodemailer = require("nodemailer");
 var settings = require('../settings');
 
-console.log( settings );
 var smtpTransport = nodemailer.createTransport("SMTP",{
     host:settings.sms.host,
     secureConnection:true,

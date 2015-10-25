@@ -1,7 +1,6 @@
 define(["require"],function(require){
 
-	var bannerRun = require('bannerRun'), 	//bannerRun的组件;
-		clickList = require('clickList'),			//点击事件集合 
+	var clickList = require('clickList'),			//点击事件集合 
 		$thumbnail = $('.thumbnail'),
 		imageShow = require('imageShow'),			//图片的预加载
 		qqShare = require('qqshare');
@@ -42,6 +41,5 @@ define(["require"],function(require){
 	//qq分享
 
 	qqShare.init($('.qq-login'));
-	var banner = new bannerRun( $('#banner'),function(){});
 	imageShow.init( $thumbnail );
 })

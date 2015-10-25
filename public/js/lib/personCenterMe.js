@@ -2,11 +2,9 @@ define(["require"],function(require){
 
 	var allunivlist = require('allunivlist'),
 		schoolSelect = require('schoolSelect'),
-		bannerRun = require('bannerRun'), 	//bannerRun的组件;
 		_id = $('#_id').val(),$error =$('#error') ,name,value;
 
 	schoolSelect.init($('#schoolText'),$('#gj'),$('#sf'),$('#list'),$('#intersetText'),$('.interset-type'));
-	var banner = new bannerRun( $('#banner'),function(){});
 
     $('#personInfoFrom').delegate('input','change',function(){
 
