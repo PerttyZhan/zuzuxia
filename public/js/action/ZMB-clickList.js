@@ -15,11 +15,12 @@ define(["require","module","exports"],function(require,module,exports){
 		'alive-input':function($this){
 			$this.data('val',$this.val());	
 		},
-		'dele-img':function(){
+		'dele-img':function($this){
 
 			var $img = $('.pic-show').find('.alive-img'),
 				type = $('#changeType').val(),
 				_id = $('#_id').val(),
+				url = $this.data('url'),
 				$input,arr;
 
 			if( $img.length == 0 ){
@@ -38,11 +39,12 @@ define(["require","module","exports"],function(require,module,exports){
 				}
 
 				$.ajax({
-					url:'/updateMessage',
+					url:'/'+url,
 					type:'post',
 					data:'_id='+_id+'&key='+type+'&val='+arr,
 					success:function(msg){
 
+						console.log( '删除成功' );
 					}
 				});
 			}

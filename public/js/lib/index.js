@@ -3,7 +3,6 @@ define(["require"],function(require){
 	var bannerRun = require('bannerRun'), 	//bannerRun的组件
 		searchChange = require('searchChange'),	//bannerSearch的组件
 		imageShow = require('imageShow'),			//图片的预加载
-		
 		clickList = require('clickList');			//点击事件集合
 
 	var $banner = $('#banner'),
@@ -20,13 +19,6 @@ define(["require"],function(require){
 
 	});
 
-	QC.Login({
-       btnId:"qq-login",    //插入按钮的节点id
-       scope:"all"
-   },function(reqData, opts){
-
-   		console.log( reqData );
-   });
 	/* 登录后的 */
 	$('#dropRole').hover(function(e){
 		e.stopPropagation();
@@ -60,4 +52,15 @@ define(["require"],function(require){
 		$('.detailtime').removeClass('active');
 
 	});
+
+	/* 检测当前登录状态 获取当前登录用户的Access Token以及OpenID*/
+
+	if( QC.Login.check() ){
+
+		QC.Login.getMe(function(openId, accessToken){
+
+			console.log( openId );
+			console.log( accessToken );
+		})
+	}
 });

@@ -8,7 +8,7 @@
 					<a href="javascript:void(0)" class="fun">功能</a>
 					<ul class="dropMenu">
 						<li ><a href="#">群发功能</a></li>
-						<li><a href="#">轮播图</a></li>
+						<li><a href="/setBanner">轮播图</a></li>
 						<li class="active"><a href="/house">公寓详情</a></li>
 					</ul>
 				</div>
@@ -76,11 +76,11 @@
 						<input type="hidden" name="changeNum" value="" id="changeNum"/>
 						<button type="button">上传<input type="file" name="imgUrl" accept="image/*" /></button>
 						<button type="button">从图片库选择</button>
-						<button type="button" class="dele" data-action="dele-img">删除</button>
+						<button type="button" class="dele" data-action="dele-img" data-url="updateMessage">删除</button>
 				</div>
-				<ul class="pic-show">
+				<div class="pic-show">
 					<div class="cover-img">
-						<a href="javascript:void(0)" data-name="coverUrl" data-action="changeUrl-first">
+						<a href="javascript:void(0)" data-name="coverUrl" >
 							<img src="<%=house.coverUrl %>" title=""/>
 							<p class="size">
 								尺寸 456 : 341
@@ -90,7 +90,7 @@
 					</div>
 					<div class="scroll-img">
 						<% house.scollUrl.forEach(function(img){ %>
-							<a href="javascript:void(0)" data-name="scollUrl" data-action="changeUrl-first"><img src="<%=img %>" title="" data-name="scollUrl"/>
+							<a href="javascript:void(0)" data-name="scollUrl" ><img src="<%=img %>" title="" data-name="scollUrl"/>
 								<input type="hidden" name="scollUrl" value="<%=img %>"/>
 								<p class="size">
 									尺寸 1898 : 700
@@ -98,7 +98,7 @@
 							</a>
 						<% }) %>
 					</div>
-				</ul>
+				</div>
 				</form>
 			</div>
 		</div>
@@ -333,6 +333,7 @@
 					</div>
 		<div class="btn">
 
+			<input type="hidden" value="<%=house.status %>" id="status"/>
 			<% if(house.status == '2'){ %>
 				<button id="under" type="btn" data-action="update-house-status">下架</button>
 				<button id="dele" type="btn" data-action="update-house-status">删除</button>
@@ -342,9 +343,7 @@
 			<% }else{ %>
 				<button id="release" type="btn" data-action="update-house-status">发布</button>
 			<% } %>	
-			<!-- <button id="release" type="btn">发布</button> -->
-			
-			
+
 		</div>
 	</div>
 </div>
@@ -356,9 +355,9 @@
 		</div>
 	</div>
 	<iframe name="hidden_frame" id="hidden_frame" style="display:none"></iframe>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9f5d468870788eaa79a8865781872668"></script>
-<script src="http://map.qq.com/api/js?v=2.exp&key=d84d6d83e0e51e481e50454ccbe8986b"></script>
+<!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9f5d468870788eaa79a8865781872668"></script>
+<script src="http://map.qq.com/api/js?v=2.exp&key=d84d6d83e0e51e481e50454ccbe8986b"></script> -->
 <% include manager-includes/foot.html %>
 <script type="text/javascript">
-	kvm.module.invoke('/dist/js/lib/houseUpdate.js?20151022');
+	kvm.module.invoke('/js/lib/houseUpdate.js?20151022');
 </script>

@@ -1,5 +1,6 @@
 var settings = require('../settings');
 var db = require('../models/db');
+
 var adminModel = require('../models/admin');
 var personInfoModel = require('../models/personInfo');
 var personMessage = require('../models/personMessage');
@@ -9,6 +10,7 @@ var mailSend = require('../models/sendEmail');
 var houseconfig = require('../models/houseConfig');
 var managerAdmin = require('../models/managerAdmin');
 var personCollect = require('../models/collectModel');
+var pageSet = require('../models/pageSet');
 
 var Promise = require('promise');
 var URL = require('url');
@@ -26,31 +28,48 @@ module.exports = function(app){
 	app.route('/')
 		.get(function(req,res){
 
-			var user = {};
+			var user = {},deferred = Q.defer();;
 			if( getUser(req) ){
 				user = req.session.user
 			}
-			console.log( user );
 			var url = client.getAuthorizeURLForWebsite('http://young.so/wechat/login');
 
-			houseMessage.findHouseByArea('杭州',function(err,house){
+			Q.all([
+				houseMessage.findHouseByArea('杭州',function(err,house){
 
-				if( err ){
-					return console.log( err );
-				}
+					if( err ){
+						return console.log( err );
+					}	
+					deferred.resolve(house);
+					return deferred.promise;
+				}),
+				pageSet.fetch(function(err,sets){
+
+					if( err ){
+						return console.log( err );
+					}	
+					deferred.resolve(sets);
+					return deferred.promise;
+				})
+			]).spread(function(){
+
+				console.log( arguments[0] );
+
 				res.render('index',{ 
 					title:'租租侠---大学生租房平台',
 					user:user,
-					houses:house,
+					houses:arguments[0],
+					sets:arguments[1][0],
 					webLogin:url
 				});
 			});
+			
 		});
 	app.route('/detailMessage/:_id')
 		.get(function(req,res){
 			var user = getUser(req)?req.session.user:{},sign = true,deferred = Q.defer();
 			 var url = client.getAuthorizeURLForWebsite('http://young.so/wechat/login');
-			 console.log( user.username == undefined);
+
 			if( req.params._id ){
 
 				Q.all([
@@ -76,7 +95,6 @@ module.exports = function(app){
 					})
 					]).spread(function(){
 
-						console.log( arguments[0][0] );
 						return res.render('detailMessage',{ 
 							title:'租租侠---大学生租房平台',
 							user:user,
@@ -729,7 +747,7 @@ module.exports = function(app){
 							name = 'scollUrl';
 
 						images(uploadPath)
-						  .size(1898,700)		//宽度为552
+						  .size(1900,700)		//宽度为552
 						  .save(dstPath,{
 						  	quality:50     //图片质量为50
 						  });
@@ -872,11 +890,96 @@ module.exports = function(app){
 			});
 		});
 
+	//后台轮播图设置
+	app.route('/setBanner')
+		.get(function(req,res){
+
+			if( !getManagerUser(req) ){
+
+				return res.redirect('/admin');
+
+			}
+
+			pageSet.fetch(function(err,sets){
+				if( err ){
+					return console.log( err );
+				}
+
+				return res.render('setBanner',{ 
+					title:'租租侠---轮播图',
+					sets:sets[0]
+				});
+			});
+		});
+
+	app.route('/updatePageSet')
+		.post(function(req,res){
+
+			var _id = req.body._id,
+				 key = req.body.key,
+				 val = req.body.val,
+				 arr = [],vals = val.split(',');
+
+			for( var i = 0;i<vals.length;i++){
+				arr.push(vals[i]);
+			}
+
+			pageSet.updateById(_id,key,arr,function(err,set){
+
+				if(err){
+					return console.log( err );
+				}
+				return console.log( set );
+			});
+
+		});
+
+	app.route('/updateBanner')
+		.post(function(req,res){
+
+			var form = new multiparty.Form({uploadDir:'./public/image/banner/'}),
+				inputFile,changeType,val,_id;
+			
+			form.parse(req,function(err,fields,files){
+
+				inputFile = files.bannerUrl;
+				val = fields.bannerUrl;
+				_id = fields._id;
+				changeType = fields.changeType,despath = '/image/banner/' + inputFile[0].originalFilename;
+
+				val.forEach(function(el,index,arr){
+
+					if( el == 'undefined' ){
+
+						arr[index] = despath;
+					}
+				});
+
+				images(inputFile[0].path)
+				  .size(1900,700)		//宽度为1900
+				  .save('public/'+despath,{
+				  	quality:50     //图片质量为50
+				  });
+
+				  fs.unlinkSync(inputFile[0].path);
+				 pageSet.updateById( _id,changeType,val,function(err,set){
+
+				 	if( err ){
+				 		return console.log( err );
+				 	}
+
+				 	return console.log( set );
+				 } );
+
+				 res.end('');
+			})
+		});
+
 	app.route('/quitManager')
 		.get(function(req,res){
 
 			delete req.session.managerUser;
-
+			
 			res.redirect('/admin');
 
 		});

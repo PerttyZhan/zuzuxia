@@ -522,14 +522,28 @@ a {
   width: 197px;
   height: 163px;
 }
-#main .cover-img a {
+.setBanner div:nth-of-type(1),.setBanner div:nth-of-type(3){
+  margin-right: 25px;
+}
+
+.banner-img{
+  float: left;
+  width:446px;
+  height: 166px;
+  position: relative;
+  margin-bottom:25px;
+}
+#main .cover-img a,.banner-img a{
   height: 100%;
   cursor: pointer;
   border: 1px solid #d6d6d6;
   position: relative;
   display: block;
 }
-#main .cover-img p,#main .scroll-img p{
+.alive-img{
+  border:1px solid rgb(110, 209, 110) !important;
+}
+#main .cover-img p,#main .scroll-img p,.banner-img p{
   position: absolute;
   width:100%;
   color:#999;
@@ -544,7 +558,7 @@ a {
   margin-left: 10px;
   width: 525px;
 }
-#main .scroll-img a {
+ .scroll-img a {
   width: 228px;
   height: 79px;
   border: 1px solid #d6d6d6;

@@ -56,6 +56,9 @@ define(["require","module","exports"],function(require,module,exports){
 				}
 			});
 		},
+		'qq-login':function(){
+			QC.Login.showPopup();
+		},
 		'reg-sendMessage':function(This){
 
 			var $loginu = $('#loginU');

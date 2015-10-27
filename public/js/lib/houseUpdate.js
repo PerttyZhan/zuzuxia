@@ -2,8 +2,19 @@ define(["require"],function(require){
 
 	var clickList = require('ZMB-clickList'),
 		mapInit = require('mapInit'),
-		$main = $('#main');
+		$main = $('#main'),
+		$status = $('#status');
 
+	if( $status.val() == '1' ){
+
+
+	}else if( $status.val() == '2' ){
+
+		$('input').attr('readonly','');
+		$('.btn-group').remove();
+		$('.add-sign').remove();
+
+	}
 	$(document.body).on('click','[data-action]',function(e){
 
 		var $this = $(e.target),
@@ -18,32 +29,32 @@ define(["require"],function(require){
 	$('.pic-show').find('a').on('click',function(event){
 
 		var name = $(this).data('name');
-		$(this).parents('.pic-show').find('a').css('border','1px solid #d6d6d6').removeClass('alive-img');
-		$(this).css('border','1px solid #6ed16e').addClass('alive-img');
+		$('.pic-show').find('a').removeClass('alive-img');
+		$(this).addClass('alive-img');
 		$('#changeType').val( name );
 	});
 
-	$('#e2').hide();
-	$('#e1').show();
-	$('.map-btn').show();
-	$('.map-title').find('li').hover(function(){
+	// $('#e2').hide();
+	// $('#e1').show();
+	// $('.map-btn').show();
+	// $('.map-title').find('li').hover(function(){
 		
-		$(this).attr('class','active').siblings().removeClass('active');
-		if( $(this).index() == 0 ){
+	// 	$(this).attr('class','active').siblings().removeClass('active');
+	// 	if( $(this).index() == 0 ){
 
-			$('#e2').show();
-			$('#e1').hide();
-			$('.map-btn').hide();
-		}else{
-			$('#e2').hide();
-			$('#e1').show()
-			$('.map-btn').show();
-		}
+	// 		$('#e2').show();
+	// 		$('#e1').hide();
+	// 		$('.map-btn').hide();
+	// 	}else{
+	// 		$('#e2').hide();
+	// 		$('#e1').show()
+	// 		$('.map-btn').show();
+	// 	}
 
-	});
+	// });
 
-	mapInit.Bmap.init('e1');
-	mapInit.tengMap.init('e2');
+	// mapInit.Bmap.init('e1');
+	// mapInit.tengMap.init('e2');
 
 	$main.find('input.alive-input').on('keydown',function(){
 		var $this = $(this),
@@ -58,7 +69,7 @@ define(["require"],function(require){
 		$this.next().find('strong').text(_length);
 
 	});
-
+ 
 	$main.find('input.alive-input').on('change',function(){
 		var  $this = $(this),
 			key = $this.attr('name'),
@@ -117,6 +128,7 @@ define(["require"],function(require){
 			}
 		})
 	});
+	
 	$main.delegate('.can-edit','dblclick',function(event){
 
 		var text = $.trim( $(this).text() );
@@ -158,4 +170,5 @@ define(["require"],function(require){
 		},500 );
 	});
 
-})
+
+});

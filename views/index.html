@@ -4,9 +4,11 @@
 	<div class="banner" id="banner">
 		
 			<ul>
-				<li class="active"><a href="javascript:void(0)"><img src="/image/banner-1.jpg" alt="banner-1" title="" width="1900"/></a></li>
-				<li><a href="javascript:void(0)"><img src="/image/banner-2.jpg" alt="banner-1" title="" width="1900"/></a></li>
-				<li><a href="javascript:void(0)"><img src="/image/banner-3.jpg" alt="banner-1" title="" width="1900"/></a></li>
+				<% sets.bannerUrl.forEach(function(banner){ %>
+					<% if( banner != '' ){ %>
+						<li><a href="javascript:void(0)"><img src="<%=banner %>" alt="banner-1" title="" width="1900"/></a></li>
+					<%	} %>
+				<% }) %>
 			</ul>
 		<div class="banner-bg">
 		</div>
@@ -78,10 +80,6 @@
 						在线预订
 						<i class=""></i>
 					</div>
-					<!-- <div class="tab-b">
-						预约参观
-
-					</div> -->
 				</div>
 			</div>
 		</div>
@@ -274,7 +272,7 @@
 				<div class="form-group other-login">
 					<label>第三方登录</label>
 					<a class="wx-login"  href="<%=webLogin %>" id="wx-login"></a>
-					<a class="qq-login" href="#" id="qq-login"></a>
+					<a class="qq-login" href="javascript:void(0)" id="qq-login" data-action="qq-login"></a>
 				</div>
 			</form>
 		</div>
@@ -306,7 +304,7 @@
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101257803" data-redirecturi="http://young.so" charset="utf-8"></script>
 <% include includes/foot.html %>
 <script type="text/javascript">
- 	kvm.module.invoke("/js/lib/index.js?20151022");
+ 	kvm.module.invoke("/js/lib/index.js?update=20151027");
 </script>
 
 
