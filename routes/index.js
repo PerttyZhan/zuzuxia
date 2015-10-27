@@ -28,7 +28,13 @@ module.exports = function(app){
 	app.route('/')
 		.get(function(req,res){
 
-			var user = {},deferred = Q.defer();;
+			var user = {},deferred = Q.defer(),code,state;
+			code = req.body.code || req.params.code || '';
+			state = req.body.state || req.params.state || '';
+
+
+			console.log( code );
+			console.log( state );
 			if( getUser(req) ){
 				user = req.session.user
 			}
