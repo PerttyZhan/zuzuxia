@@ -63,4 +63,31 @@ module.exports = function(app){
 			});
 
 		});
+
+	app.route('/pc/createHouse')
+		.get(function(req,res){
+
+			var config = new houseconfig({});
+			
+
+			config.save(function(err,config){
+
+				if(err){ return console.log( err );}
+				var house = new houseMessage({
+					houseconfig:config._id
+				});
+				house.save(function(err,house){
+
+					if( err ){return console.log(err)}
+
+					// res.render('createHouse',{
+					// 	title:'租租侠---后台--新建公寓',
+					// 	house:house,
+					// 	config:config
+					// });
+
+					res.redirect('/pc/house/'+house._id);
+				});
+			})
+		});
 }
