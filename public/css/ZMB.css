@@ -1017,6 +1017,10 @@ margin: 0 auto;
   z-index: 100;
   letter-spacing: 2px;
   display: none;
+  left: 50%;
+  transform:translateX(-50%);
+  -webkit-transform:translateX(-50%);
+  -moz-transform:translateX(-50%);
 }
 
 /*animate*/

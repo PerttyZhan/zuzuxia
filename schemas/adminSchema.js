@@ -3,12 +3,27 @@
 var mongoose = require('mongoose');
 
 var adminSchema = new mongoose.Schema({
-	// _id:mongoose.Schema.Types.ObjectId,  //主键
-	// _fk:mongoose.Schema.Types.ObjectId,  //外键
-	username:String,
+	username:{
+		type:String,
+		default:''
+	},
+	email:{
+		type:String,
+		default:''
+	},
+	phone:{
+		type:String,
+		default:''
+	},
+	openid:{
+		type:String,
+		default:''
+	},
+	registerBy:{
+		type:String,
+		default:''
+	},
 	password:String,
-	registerBy:String,
-	registerS:String,
 	nameID:{
 		type:mongoose.Schema.ObjectId,
 		ref:'personInfo'
@@ -28,10 +43,6 @@ var adminSchema = new mongoose.Schema({
 	bgimg:{
 		type:String,
 		default:'/image/personCenter/sense-img.png'
-	},
-	openid:{
-		type:String,
-		default:''
 	}
 });
 

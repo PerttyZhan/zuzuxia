@@ -14,7 +14,7 @@ define(["require"],function(require){
 		$(elem).on('click',function(event){
 			var _val = $(this).text();
 			event.preventDefault();
-			$(this).parents('dd').prev().find('input').val(_val);
+			$(this).parents('dd').prev().css('border','none').find('input').val(_val);
 		});
 
 	});
@@ -28,7 +28,7 @@ define(["require"],function(require){
 		$(this).removeClass('active');
 	});
 
-	var banner = new bannerRun( $banner,function(){},$('.btn-pre'),$('.btn-next'));
+	var banner = new bannerRun( $banner,$('.btn-pre'),$('.btn-next'));
 	searchChange.init($banner_search,'search-fiexd');
 	imageShow.init( $thumbnail );
 
@@ -55,12 +55,20 @@ define(["require"],function(require){
 
 	/* 检测当前登录状态 获取当前登录用户的Access Token以及OpenID*/
 
-	if( QC.Login.check() ){
+	// if( QC.Login.check() ){
 
-		QC.Login.getMe(function(openId, accessToken){
+	// 	QC.api("get_user_info", paras)
+	// 	.success(function(s){
+			
+	// 		alert("获取用户信息成功！当前用户昵称为："+s.data.nickname);
+	// 	})
+	// 	.error(function(f){
+	// 		alert("获取用户信息失败！");
+	// 	})
+	// 	.complete(function(c){
+	// 		alert("获取用户信息完成！");
+	// 	});
+	// }
 
-			console.log( openId );
-			console.log( accessToken );
-		})
-	}
+
 });

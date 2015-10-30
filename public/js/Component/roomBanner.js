@@ -29,7 +29,7 @@ define(["require","module","exports"],function(require,module,exports){
 
 				var index = This.index == 0 ? (length -1) : (This.index-1),
 					offsetLeft = width * index;
-				$ul.css('left','-'+offsetLeft + 'px');
+				$ul.find('ul').css('left','-'+offsetLeft + 'px');
 				$thumbnail.find('span').removeClass('active').eq(index).addClass('active');
 
 				This.index = index;
@@ -40,7 +40,7 @@ define(["require","module","exports"],function(require,module,exports){
 
 				var index = ( This.index == (length-1) ) ? 0 : (This.index+1),
 					offsetLeft = width * index;
-				$ul.css('left','-'+offsetLeft + 'px');
+				$ul.find('ul').css('left','-'+offsetLeft + 'px');
 				$thumbnail.find('span').removeClass('active').eq(index).addClass('active');
 
 				This.index = index;
@@ -50,7 +50,7 @@ define(["require","module","exports"],function(require,module,exports){
 
 				var index = $(this).index(),
 					offsetLeft = width * index;
-				$ul.css('left','-'+offsetLeft + 'px');
+				$ul.find('ul').css('left','-'+offsetLeft + 'px');
 				$thumbnail.find('span').removeClass('active').eq(index).addClass('active');
 
 				This.index = index;

@@ -2,7 +2,10 @@ define(["require"],function(require){
 
 	var clickList = require('clickList');			//点击事件集合 
 
+	$('#changeBg').on('change',function(){
 
+        $(this).parent().submit();
+    });
 	/* 登录后的 */
 	$('#dropRole').hover(function(e){
 		e.stopPropagation();

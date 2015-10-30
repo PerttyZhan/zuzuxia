@@ -25,16 +25,12 @@ var client = new oAuth(settings.wx.app_id,settings.wx.app_secret);
 
 module.exports = function(app){
 
+
 	app.route('/')
 		.get(function(req,res){
 
-			var user = {},deferred = Q.defer(),code,state;
-			code = req.body.code || req.params.code || '';
-			state = req.body.state || req.params.state || '';
+			var user = {},deferred = Q.defer();
 
-
-			console.log( code );
-			console.log( state );
 			if( getUser(req) ){
 				user = req.session.user
 			}
@@ -58,8 +54,6 @@ module.exports = function(app){
 					return deferred.promise;
 				})
 			]).spread(function(){
-
-				console.log( arguments[0] );
 
 				res.render('index',{ 
 					title:'租租侠---大学生租房平台',
@@ -225,17 +219,6 @@ module.exports = function(app){
 
 					var url = fields.url;
 					uploadPath = inputFile[0].path;
-
-					// dir = 'public/image/personCenter/'+fields._id;
-					// var dstPath = dir+'/'+inputFile[0].originalFilename;
-
-					// images(uploadPath)
-					//   // .size(387,300)		//宽度为387，高度300
-					//   .save(dstPath,{
-					//   	quality:50     //图片质量为50
-					//   });
-
-					//   fs.unlinkSync(uploadPath);
 					adminModel.updateBgImg(username,upload,function(err,admin){
 
 						if(err){

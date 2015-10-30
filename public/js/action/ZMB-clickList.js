@@ -62,8 +62,7 @@ define(["require","module","exports"],function(require,module,exports){
 				val = '3';
 			}
 
-			console.log($bh.data('val'));
-			if( $bh.data('val') == '' ){
+			if( $bh.data('val') == '' && _text == '发布' ){
 
 				$bh.focus();
 				return alert('编码不能为空');
@@ -78,7 +77,7 @@ define(["require","module","exports"],function(require,module,exports){
 				success:function(msg){
 
 					if( val == '3' ){
-						window.location.href = '/house';
+						window.location.href = '/pc/house';
 					}else{
 						window.location.reload();
 					}

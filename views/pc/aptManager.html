@@ -1,0 +1,105 @@
+
+<% include manager-includes/head.html %>
+
+	<div class="main" id="main">
+		<div class="container table">
+			<div class="table-cell sider">
+				<div class="list">
+					<a href="javascript:void(0)" class="fun">功能</a>
+					<ul class="dropMenu">
+						<li ><a href="#">群发功能</a></li>
+						<li ><a href="setBanner">轮播图</a></li>
+						<li ><a href="house">公寓详情</a></li>
+					</ul>
+				</div>
+				<div class="list">
+					<a  href="#" class="manager">管理</a>
+					<ul class="dropMenu">
+						<li><a href="#">素材管理</a></li>
+						<li class="active"><a href="aptManager">预约管理</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="table-cell content">
+				<div class="title">
+					<h4>预约管理</h4>
+					<ol>
+						<li class="active">
+							<a href="/aptManager">预约入住</a>
+						</li>
+						<li>
+							<a href="/aptfeel" class="createHouse">预约体验</a>
+						</li>
+					</ol>
+				</div>
+				<div class="house" style="padding-bottom:50px;">
+					<div class="show-all">
+						<table  border="0" cellpadding="0" cellspacing="0" bordercolor="#dedede">
+							<thead>
+								<tr>
+									<th>预约号</th><th>公寓编号</th><th>客户姓名</th><th>联系方式</th><th>入住时间</th><th>提交时间</th><th>备注</th>
+								</tr>
+							</thead>
+							<tbody>
+							<% appoints.forEach(function(appoint){ %>
+								<tr>
+									<td><%=appoint._id %></td>
+									<td>
+										<% if( appoint.area != '' ){ %>
+
+											<%=appoint.area %>
+										<% } %>
+									</td>
+									<td><%=appoint.user %></td>
+									<td><%=appoint.telephone %></td>
+									<td><%=appoint.startTime %> -- <%=appoint.endTime %></td>
+									<td><%=appoint.createTime %></td>
+									<td><%=appoint.state %></td>
+								</tr>
+								<% }) %>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="7">
+									<a 
+										<% if( count != 1 ){ %>
+										href="aptManager?count=<%= (parseInt(count)-1) %>" 
+										<% }else{ %>
+										href="javascript:void(0) %>" 
+										<% } %>
+										class="pre" >上一页</a> 
+									
+
+									<span><strong><%=count %></strong>/<%=all %></span> 
+										<a  
+										<% if( count != all ){ %>
+											href="aptManager?count=<%= (parseInt(count)+1) %>" 
+										<% }else{ %>
+											href="javascript:void(0)" 
+										<% } %>
+										class="next" >下一页</a>
+										<a class="trun" href="javascript:void(0)" id="open-turn" data-action="open-page-choose">
+											跳转
+											<span class="page-choose">
+												<p>
+													<input type="hidden" name="all" value="<%=all %>"/>
+													跳转至 <input type="text" name="page" /> 页
+												</p>
+												<button type="button" id="turn-page" data-action="page-turn">确定</button>
+											</span>
+										</a>
+										
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<% include manager-includes/foot.html %>
+<script type="text/javascript">
+	kvm.module.invoke('/dist/js/lib/aptManager.js?upDate=20151030');
+</script>

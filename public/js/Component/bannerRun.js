@@ -1,10 +1,7 @@
 
 define(['require','module','exports'],function(require,module,exports){
 
-
-
-	//banner
-	function bannerRun(oParent,hoverfn,btnPre,btnNext,btnNum){
+	function bannerRun(oParent,btnPre,btnNext){
 
 		oParent.css('opacity',1).find('ul').height( oParent.find('a').height() ).find('li:eq(0)').addClass('active');
 
@@ -22,9 +19,7 @@ define(['require','module','exports'],function(require,module,exports){
 		this.$oParent = oParent;
 		this.$btnPre = btnPre;
 		this.$btnNext = btnNext;
-		this.$btnNum = btnNum;
 		this.defaultSign = 1;
-		this.hoverfn = hoverfn;
 		this.aLi = this.$oParent.find('li');
 		this.length = this.aLi.length;
 		this.index = 0;
@@ -95,24 +90,6 @@ define(['require','module','exports'],function(require,module,exports){
 			if( this.$btnNext != null ){
 				this.$btnNext.on('click',$.proxy( This.nextEvent,This ) );
 			}
-			if( this.$btnNum ){
-
-				this.numAli = this.$btnNum.find('li');
-				this.numAli.on('click',function(event){
-
-					event.preventDefault();
-					event.stopPropagation();
-
-					if( This.$oParent.timer ){
-
-
-						clearInterval( This.$oParent.timer );
-						This.$oParent.timer = null;
-					}
-					var targetIndex = $(this).index();
-					This.runPic.call(This,targetIndex);
-				});
-			}
 		},
 		removeEvent:function(){
 
@@ -123,10 +100,6 @@ define(['require','module','exports'],function(require,module,exports){
 			if( this.$btnNext != null ){
 				this.$btnNext.off('click' );
 			}
-			if( this.$btnNum ){
-				this.numAli.off('click');
-			}
-
 		},
 		preEvent:function(){
 
@@ -154,9 +127,6 @@ define(['require','module','exports'],function(require,module,exports){
 			var targetIndex = (oIndex + 1 < this.aLi.length )?(oIndex + 1):0;
 
 			this.runPic.call(This,targetIndex);
-		},
-		numToPic:function(){
-			
 		}
 	};
 

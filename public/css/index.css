@@ -67,6 +67,7 @@ a {
   padding: 0 23px;
   line-height: 54px;
   text-overflow: ellipsis;
+  text-align: center;
 }
 .peroson-info .dropMenu {
   position: absolute;
@@ -493,7 +494,8 @@ a {
   position: relative;
   height: 500px;
   width:100%;
-    opacity: 0
+    opacity: 0;
+    overflow: hidden;
 }
 .small-img{
   bottom: 0;
@@ -519,6 +521,7 @@ a {
 }
 #roomShow .active{
   border-color:#fff;
+  overflow: hidden;
 }
 .si-item:hover{
   background-color: #fff;
@@ -551,7 +554,6 @@ a {
   width: 100%;
   position: relative;
   height: 700px;
-  overflow: hidden;
 }
 
 .banner li {

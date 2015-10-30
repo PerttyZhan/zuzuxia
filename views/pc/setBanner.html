@@ -1,0 +1,70 @@
+
+<% include  manager-includes/head.html %>
+	
+	<div class="main" id="main">
+		<div class="container table">
+			<div class="table-cell sider">
+				<div class="list">
+					<a href="javascript:void(0)" class="fun">功能</a>
+					<ul class="dropMenu">
+						<li ><a href="#">群发功能</a></li>
+						<li class="active"><a href="setBanner">轮播图</a></li>
+						<li ><a href="house">公寓详情</a></li>
+					</ul>
+				</div>
+				<div class="list">
+					<a  href="#" class="manager">管理</a>
+					<ul class="dropMenu">
+						<li><a href="#">素材管理</a></li>
+						<li><a href="aptManager">预约管理</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="table-cell content">
+				<div class="title">
+					<h4>轮播图</h4>
+					<ol>
+						<li class="active">
+							<a href="/house">轮播图设置</a>
+						</li>
+					</ol>
+				</div>
+				<div class="house-update">
+					<div class="index-show">
+						<form action="/mg/updateBanner" method="post" encType="multipart/form-data" target="hidden_frame">
+						<input type="hidden" name="_id" value="<%=sets._id %>" id="_id"/>
+						<span class="list-title">照片</span>
+							<div class="btn-group">
+								
+									<input type="hidden" name="changeType" value="bannerUrl" id="changeType"/>
+									<button type="button">上传<input type="file" name="bannerUrl" accept="image/*" /></button>
+									<button type="button">从图片库选择</button>
+									<button type="button" class="dele" data-action="dele-img" data-url="updatePageSet">删除</button>
+							</div>
+							<div class="pic-show clearfix setBanner">
+
+								<% sets.bannerUrl.forEach(function(set){ %>
+
+									<div class="banner-img">
+										<a href="javascript:void(0)" >
+											<img src="<%=set %>" title="" />
+											<input type="hidden" name="bannerUrl" value="<%=set %>"/>
+											<p class="size">
+												建议尺寸 1900 : 700
+											</p>
+										</a>
+									</div>
+
+								<% }) %>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<iframe name="hidden_frame" id="hidden_frame" style="display:none"></iframe>
+<% include manager-includes/foot.html %>
+<script type="text/javascript">
+	kvm.module.invoke('/dist/js/lib/setBanner.js?upDate=20151030');
+</script>

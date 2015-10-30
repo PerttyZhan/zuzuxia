@@ -10,11 +10,7 @@ define(["require"],function(require){
 
          name = $(this).attr('name');
          value = $(this).val();
-        // if( ( name == 'telephone' || name == 'name') && value == '' ){
-        //         $error.text('电话和姓名不能空').show();
-        //         return $(this).focus();
-        // }
-
+         
         $.ajax({
                 url:'/updatePersonInfo',
                 type:'post',
@@ -26,7 +22,15 @@ define(["require"],function(require){
 
                 }
         });
-});
+
+    });
+
+    $('#changeBg').on('change',function(){
+
+        alert('change');
+        $(this).parent().submit();
+    });
+
 	/* 登录后的 */
 	$('#dropRole').hover(function(e){
 		e.stopPropagation();

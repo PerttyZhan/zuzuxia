@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="keywords" content="大学生,创业,租房,白领" />
+	<meta name="description" content="青年颂"/>
+	<title>青年颂 --青年创客社区</title>
+</head>
+<body>
+</body>
+<script>
+	//平台、设备和操作系统   
+	var system ={  
+	win : false,  
+	mac : false,  
+	xll : false  
+	};  
+	//检测平台   
+	var p = navigator.platform;  
+	system.win = p.indexOf("Win") == 0;  
+	system.mac = p.indexOf("Mac") == 0;  
+	system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);  
+	//跳转语句   
+	if(system.win||system.mac||system.xll){ //转向电脑端
+		window.location.href="/pc";  
+	}else{  
+		window.location.href="/h5";  			//转向手机端  
+	}
+</script>
+</html>

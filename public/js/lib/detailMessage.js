@@ -5,7 +5,7 @@ define(["require"],function(require){
 		clickList = require('clickList'),			//点击事件集合 
 		roomBanner = require('roomBanner'),
 		width = $(window).width(),
-		height = $('.big-img').find('img:eq(0)').css('width',width+'px').height();	
+		height = $('.big-img').find('img').css('width',width+'px').height();	
 
 		$('.big-img').css({'opacity':1,'height':height+'px'}).find('');
 

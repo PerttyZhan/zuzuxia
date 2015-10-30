@@ -23,7 +23,7 @@ define(["require","module","exports"],function(require,module,exports){
 			$shawdow.hide().find('input').not('input[type="button"]').val('');
 			$shawdow.find('.error,.errorL').hide();
 		},
-		'login':function(){
+		'login':function(This){
 
 			var $error = $('#error'),$loginForm = $('#loginForm');
 			var user = {
@@ -39,9 +39,10 @@ define(["require","module","exports"],function(require,module,exports){
 				return $error.text('密码不能为空').show();
 			};
 
+			console.log( This.data('url') );
 			$.ajax({
 				type:'post',
-				url:'/loginAction',
+				url:This.data('url'),
 				data:'username='+user.username+'&password='+user.password,
 				success:function(msg){
 					if( msg.err == '' ){
@@ -96,7 +97,7 @@ define(["require","module","exports"],function(require,module,exports){
 				}
 			},1000);
 			$.ajax({
-				url:'/sendMessage',
+				url:This.data('url'),
 				type:'post',
 				data:'src='+_val,
 				success:function(msg){
@@ -110,7 +111,7 @@ define(["require","module","exports"],function(require,module,exports){
 
 			});
 		},
-		'reg-submit':function(){
+		'reg-submit':function(This){
 			var $register = $('#registerForm');
 			var $error = $('#regerror');
 			var register = {
@@ -118,11 +119,9 @@ define(["require","module","exports"],function(require,module,exports){
 				password:$register.find('input[name="password"]').val(),
 				registerBy:$register.find('input[name="registerBy"]').val()
 			};
-
 			if( register.username == '' || register.password == ''){
 				return $error.text('用户名/密码不能空').show();
 			}
-
 			// if( $register.find('input[name="qr"]').val() == '' || ( $register.find('input[name="qr"]').val() != $register.find('input[name="sendqr"]').val() ) ){
 			// 	return $error.text('验证码不正确').show();
 			// }
@@ -130,9 +129,9 @@ define(["require","module","exports"],function(require,module,exports){
 				return $error.text('请看协议,看后没意见请打钩').show();
 			}
 
-			console.log( register );
+			console.log( This.data('url') );
 			$.ajax({
-				url:'/register',
+				url:This.data('url'),
 				type:'post',
 				data:'username='+register.username+'&password='+register.password+'&registerBy='+register.registerBy,
 				success:function(msg){
@@ -149,7 +148,7 @@ define(["require","module","exports"],function(require,module,exports){
 				}
 			});
 		},
-		'forgetPass-submit':function(){
+		'forgetPass-submit':function(This){
 			var $resetPass = $('#resetForm');
 			var $error = $('#reseterror');
 			var wcode = $resetPass.find('input[name="qr"]').val();
@@ -188,7 +187,7 @@ define(["require","module","exports"],function(require,module,exports){
 			}
 
 			$.ajax({
-				url:'/resetPass',
+				url:This.data('url'),
 				type:'post',
 				data:'username='+user.username+'&password='+user.onepass,
 				success:function(msg){
@@ -239,7 +238,7 @@ define(["require","module","exports"],function(require,module,exports){
 				}
 			},1000);
 			$.ajax({
-				url:'/sendMessage',
+				url:$this.data('url'),
 				type:'post',
 				data:'src='+_val,
 				success:function(msg){
@@ -252,10 +251,10 @@ define(["require","module","exports"],function(require,module,exports){
 
 			});
 		},
-		'lgoinOut':function(){
+		'lgoinOut':function(This){
 
 			$.ajax({
-				url:'/loginOut',
+				url:This.data('url'),
 				type:'get',
 				success:function(msg){
 
@@ -314,7 +313,6 @@ define(["require","module","exports"],function(require,module,exports){
 				$mnl.removeClass('fadeOutRight animated-fadeOUt').show().addClass('fadeInUp animated-login');
 				return setTimeout(function(){
 					$mnl.removeClass('fadeInUp animated-login').addClass('fadeOutRight animated-fadeOUt');
-
 				},1000);
 			}
 			if( require == '' ){
@@ -326,9 +324,8 @@ define(["require","module","exports"],function(require,module,exports){
 			}
 			var $this = This;
 
-			console.log( _id );
 			$.ajax({
-			url:'/appointHouse',
+			url:This.data('url'),
 			type:'post',
 			data:'_id='+_id,
 			success:function(msg){
@@ -354,7 +351,7 @@ define(["require","module","exports"],function(require,module,exports){
 
 			$.ajax({
 				type:'post',
-				url:'/reviseMessageStatus',
+				url:This.data('url'),
 				data:'_id='+_id,
 				success:function(){
 					$elem.remove();
@@ -428,7 +425,7 @@ define(["require","module","exports"],function(require,module,exports){
 			
 			if( document.getElementById('dropMenu') == null ){
 
-				$mnl.removeClass('fadeOutRight animated-fadeOUt').show().addClass('fadeInUp animated-login');
+				$mnl.removeClass('fadeOutRight animated-fadeOUt').show().addClass('fadeInUp animated-login').find('span').text( '您还为登录' );
 				return setTimeout(function(){
 					$mnl.removeClass('fadeInUp animated-login').addClass('fadeOutRight animated-fadeOUt');
 
@@ -447,7 +444,11 @@ define(["require","module","exports"],function(require,module,exports){
 				$input.eq(i).parent().css('border','none');
 				if( $input.eq(i).val() == '' ){
 					$input.eq(i).parent().css('border','1px solid red');
-					return ;
+					$mnl.removeClass('fadeOutRight animated-fadeOUt').show().addClass('fadeInUp animated-login').find('span').text( $input.eq(i).attr('placeholder')+'不能为空' );
+					return setTimeout(function(){
+						$mnl.removeClass('fadeInUp animated-login').addClass('fadeOutRight animated-fadeOUt');
+
+					},1000);
 				}
 			}
 
