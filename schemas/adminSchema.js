@@ -102,7 +102,7 @@ adminSchema.statics = {
 	},
 	findRegisterIsOne:function(val,cb){
 		return this
-				.count({registerS:val})
+				.count({username:val})
 				.exec(cb);
 	},
 	updateBgImg:function(username,img,cb){

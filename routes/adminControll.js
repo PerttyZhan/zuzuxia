@@ -4,10 +4,15 @@
 */
 var adminModel = require('../models/admin');
 var personInfoModel = require('../models/personInfo');
+var settings = require('../settings');
 
 var mailSend = require('../models/sendEmail');
+var Promise = require('promise');
 var Q = require('q');
 var crypto = require('crypto');
+var URL = require('url');
+var oAuth = require('wechat-oauth');
+var client = new oAuth(settings.wx.app_id,settings.wx.app_secret);
 
 module.exports = function(app){
 	app.route('/admin/login')
@@ -288,7 +293,6 @@ module.exports = function(app){
                 					var admin = new adminModel({
                 						username:person.name,
                 						registerBy:'微信',
-                						registerS:person.name,
                 						nameID:person._id
                 					});
 
