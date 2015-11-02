@@ -114,6 +114,7 @@ adminSchema.statics = {
 	findIsRegisterByOpenId:function(openid,cb){
 		return this
 				.find({openid:openid})
+				.populate('nameID')
 				.exec(cb);
 	},
 	resetPassword:function(username,pass,cb){

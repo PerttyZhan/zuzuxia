@@ -59,7 +59,13 @@
 					<div class="mask-icon clearfix">
 						<span class="btn-share">
 							<div class="share-icon">
-								<p class="qq-login" id="qq-share"></p>
+								<p class="qq-login" id="qq-share" data-share=
+								'{
+									"summary":"<%=collect.houseID.summary %>",
+									"title":"<%=collect.houseID.title %>",
+									"pics":"<%=collect.houseID.scollUrl %>",
+									"url":"http://young.so/pc/detailMessage/<%=collect.houseID._id %>"
+								}'></p>
 								<p class="wx-login"></p>
 							</div>
 						</span>
