@@ -264,7 +264,6 @@ module.exports = function(app){
                 }).then(function(userinfo){	
 
 			var wxuser = userinfo;
-
                 	adminModel.findIsRegisterByOpenId(wxuser.openid,function(err,users){
 				
 
@@ -273,7 +272,7 @@ module.exports = function(app){
                 		}else{
 
                 			if( users.length ){
-                				req.session.user = user[0];
+                				req.session.user = users[0];
                 				res.redirect('/');
                 			}else{
 
@@ -293,16 +292,20 @@ module.exports = function(app){
                 					var admin = new adminModel({
                 						username:person.name,
                 						registerBy:'微信',
-                						nameID:person._id
+                						nameID:person._id,
+                						openid:wxuser.openid
                 					});
 
                 					admin.save(function(err,admin){
 
                 						if(err){return console.log(err);}
+                						adminModel.findPersonByUsername(admin.username,function(err,admin){
+                							if(err){return console.log(err);}
+                							req.session.user = admin[0];
 
-                						req.session.user = admin;
-
-                						return res.redirect('/');
+                							return res.redirect('/');
+                						});
+                						
                 					});
                 				});
                 				

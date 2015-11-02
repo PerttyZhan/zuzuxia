@@ -56,11 +56,10 @@ a {
 .header-logo a {
   display: inline-block;
   vertical-align: middle;
-  width: 32px;
 }
 .header-logo img {
   display: block;
-  width: 100%;
+  width: 92px;
   height: auto;
 }
 .header-logo span {
@@ -70,7 +69,7 @@ a {
 }
 .header-logo p {
   display: block;
-  font-size: 25px;
+  font-size: 22px;
   color: #e7e7e7;
   line-height: 25px;
 }

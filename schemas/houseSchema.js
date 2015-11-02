@@ -167,3 +167,4 @@ houserSchema.statics = {
 				.exec(cb);
 	}
 }
+
