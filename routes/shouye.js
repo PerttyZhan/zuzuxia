@@ -13,7 +13,7 @@ module.exports = function(app){
 
 			var user = getUser(req),
 				deferred = Q.defer();
-
+			console.log(user);
 			Q.all([
 				houseMessage.findHouseByArea('杭州',function(err,house){
 

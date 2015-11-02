@@ -192,7 +192,6 @@ module.exports = function(app){
 			}
 			var mail = mailSend(_src,random);
 
-			console.log( _src + '|' + random );
 			mail.transport.sendMail(mail.options, function(error, response){
 			    if(error){
 			        console.log(error);
@@ -305,7 +304,6 @@ module.exports = function(app){
 
                 							return res.redirect('/');
                 						});
-                						
                 					});
                 				});
                 				
