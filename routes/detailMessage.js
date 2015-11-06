@@ -98,6 +98,48 @@ module.exports = function(app){
 			
 		});
 
+	app.route('/h5/detail/:_id')
+		.get(function(req,res){
+
+			var user = getUser(req),sign = true,deferred = Q.defer();
+
+			if( req.params._id ){
+
+				Q.all([
+					houseMessage.findHouseById(req.params._id,function(err,house){
+
+						if( err ){
+							return console.log( err );
+						}	
+						
+						deferred.resolve(house[0]);
+						return deferred.promise;
+					}),
+					personCollect.findIsAlive(user.username,req.params._id ,function(err,count){
+			    		
+			    		console.log('count = '+count);
+						if( count ){
+							sign = false;
+						}else{
+							sign = true;
+						}
+						deferred.resolve();
+						return deferred.promise;
+					})
+					]).spread(function(){
+
+						res.render('h5/detailHouse',{ 
+							title:'具体信息',
+							user:user,
+							house:arguments[0][0],
+							sign:sign
+						});
+					});
+			}
+			else{
+				return res.redirect('/');
+			}
+		});
 }
 
 function getUser(req,username){

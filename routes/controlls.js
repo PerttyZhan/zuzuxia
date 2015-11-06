@@ -16,6 +16,9 @@ var houseDone = require('./houseDone');
 var uploadImg = require('./imgupload');
 var house = require('./manager/house');
 
+/* 手机上的 */
+var phone = require('./app/index');
+
 module.exports = function(app){
 
 	app.route('/')
@@ -25,6 +28,7 @@ module.exports = function(app){
 			res.render('judgeDevice',{});
 		});
 
+	phone(app);
 	shoueyeControl(app);
 	adminControl(app);
 	managers(app);

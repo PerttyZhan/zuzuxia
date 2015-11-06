@@ -38,15 +38,19 @@ define(["require","module","exports"],function(require,module,exports){
 			if( user.password == '' ){
 				return $error.text('密码不能为空').show();
 			};
-
-			console.log( This.data('url') );
 			$.ajax({
 				type:'post',
 				url:This.data('url'),
 				data:'username='+user.username+'&password='+user.password,
 				success:function(msg){
 					if( msg.err == '' ){
-						location.reload();
+
+						if( This.data('to') != undefined){
+							window.location.href = This.data('to') ;
+						}else{
+							location.reload();
+						}
+						
 					}else{
 						$error.text(msg.err).show();
 					}
@@ -292,7 +296,6 @@ define(["require","module","exports"],function(require,module,exports){
 						console.log( msg.err );
 					}else{
 						console.log( msg.yes );
-
 						location.reload();
 					}
 				}
@@ -422,8 +425,7 @@ define(["require","module","exports"],function(require,module,exports){
 
 			var $mnl = $('#message-no-login'),$mnp = $('#message-no-perfect'),require=This.data('require');
 
-			
-			if( document.getElementById('dropMenu') == null ){
+			if( document.getElementById('loginIn') != null ){
 
 				$mnl.removeClass('fadeOutRight animated-fadeOUt').show().addClass('fadeInUp animated-login').find('span').text( '您还为登录' );
 				return setTimeout(function(){
@@ -438,7 +440,7 @@ define(["require","module","exports"],function(require,module,exports){
 
 				},1000);
 			}
-			var $form = This.parents('form'),$input = $form.find('input[type="text"]');
+			var $form = This.parents('form'),$input = $form.find('input[type="text"],input[type="date"]');
 
 			for( var i=0,max=$input.length;i<max;i++ ){
 				$input.eq(i).parent().css('border','none');
@@ -453,6 +455,28 @@ define(["require","module","exports"],function(require,module,exports){
 			}
 
 			This.parents('form').submit();
+		},
+		'open-menu':function(This){
+
+			var $menu = $('#dropMenu');
+			$menu.slideToggle();
+
+			if( This.hasClass('active') ){
+				This.removeClass('active');
+			}else{
+				This.addClass('active');
+			}
+		},
+		'open-satrt-modal':function(){
+			WdatePicker();
+		},
+		'show-modal':function(This){
+			var oParent = This.parent();
+			if( oParent.hasClass('active') ){
+				oParent.removeClass('active');
+			}else{
+				oParent.addClass('active');
+			}
 		},
 		valiType:function( val ){
 			var reg_phone = /^1\d{10}$/;

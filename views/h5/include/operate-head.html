@@ -1,0 +1,71 @@
+
+<div class="head" id="header">
+	<div class="container">
+		<% if( title != 'null' ){ %>
+			<h3><%=title  %></h3>
+			<a href="javascript:history.go(-1)" class="back"></a>
+		<% }else{ %>
+			<a class="logo" href="/h5">
+				<img src="/image/newlogo.png" title="青年颂" alt="青年颂" width="" height=""/>
+			</a>
+		<% } %>
+		
+		<a class="btn-open" data-action="open-menu" >
+			<span class="strings"></span>
+			<span class="strings"></span>
+			<span class="strings"></span>
+		</a>
+	</div>
+	<div class="dropMenu" id="dropMenu" >
+		<ul>
+			<li>
+				<p>租房热线：<a href="tele:15757176843">157571768</a></p>
+			</li>
+			<% if( user.username ){ %>
+				<li>
+					<a href="javascript:void(0)">姓名：<%=user.nameID.name%></a>
+				</li>
+				<li>
+					<a href="/h5/centerMe" >我的信息</a>
+				</li>
+				<li>
+					<a href="/h5/centerApt">预约</a>
+				</li>
+				<li>
+					<a href="/h5/centerClt">收藏</a>
+				</li>
+				<li>
+					<a href="/h5/centerMeg">信息</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" data-action="lgoinOut" data-url="/admin/loginOut">退出</a>
+				</li>
+			<% }else{ %>
+				<li>
+					<a href="/h5/login" id="loginIn">登录</a>
+				</li>
+				<li>
+					<a href="/h5/reg">注册</a>
+				</li>
+			<% } %>
+			
+		</ul>
+	</div>
+</div>
+
+<div class="message-modal" id="message-modal">
+	<div class="modal-body">
+		<div class="message-no-login" id="message-no-login">
+			<i class="icon icon-no-login"></i>
+			<span >您还未登录</span>
+		</div>
+		<div class="message-no-perfect" id="message-no-perfect">
+			<i class="icon icon-no-perfect"></i>
+			<span>请去个人中心完善信息(电话和姓名)</span>
+		</div>
+		<div class="message-no-perfect" id="message-apt-success">
+			<i class="icon icon-no-perfect"></i>
+			<span>预约成功</span>
+		</div>
+	</div>
+</div>

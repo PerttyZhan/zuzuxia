@@ -1,0 +1,82 @@
+
+<% include include/head.html %>
+<% include include/operate-head.html %>	
+
+	<div class="banner" id="banner">
+		<div class="container">
+			<ul class="clearfix" id="wrap">
+				<% sets.bannerUrl.forEach(function(banner){ %>
+					<% if( banner != '' ){ %>
+						<li><a href="javascript:void(0)"><img src="<%=banner %>"/></a></li>
+					<%	} %>
+				<% }) %>
+			</ul>
+		</div>
+	</div>
+
+	<div class="house" id="main">
+		<div class="nav">
+			<div class="nav-feature">
+				<ul class="clearfix">
+					<li>
+						<h2>轻松</h2>
+						<span>EASY</span>
+						<hr/>
+						<p>轻松租房</p>
+						<p>押一付一</p>
+					</li>
+					<li>
+						<h2>享受</h2>
+						<span>ENJOY</span>
+						<hr/>
+						<p>贴心管家</p>
+						<p>完善配套</p>
+					</li>
+					<li>
+						<h2>品质</h2>
+						<span>QUALITY</span>
+						<hr/>
+						<p>绿色装修</p>
+						<p>宜家家居</p>
+					</li>
+					<li>
+						<h2>生活</h2>
+						<span>LIFE</span>
+						<hr/>
+						<p>Q2Q社交</p>
+						<p>有朋友才叫生活</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="container">
+			<h3>杭州</h3>
+
+			<% houses.forEach(function(house,i){ %>
+				<div class="item">
+					<a href="/h5/detail/<%=house._id %>">
+					<% if( house.coverUrl == '' ){ %>
+						<img src="/image/default-curimg.png" alt="" title="">
+					<% }else{ %>
+						<img src="/image/homepic1.jpg" alt="" title=""/>
+					<% } %>
+					</a>
+					<p class="des clearfix">
+						<span class="site"><i class="ico-site"></i><%=house.address %></span>
+						<span class="price"><i class="ico-price"></i><%=house.price %></span>
+					</p>
+				</div>
+			<% }) %>
+
+		</div>
+	</div>
+	<div class="menu" id="menu">
+		<p class="menu-title" data-action="show-modal">
+			菜单
+		</p>
+		<div class="menu-body">
+			<a href="/h5/aptHouse" class="">预约</a>
+		</div>
+	</div>
+
+<% include include/foot.html %>

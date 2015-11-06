@@ -1,0 +1,37 @@
+<% include include/head.html %>
+<% include include/operate-head.html %>	
+
+	<div class="main" id="main">
+		
+		<form id="loginForm">
+			<a class="form-pic" href="/h5"></a>
+			<div class="input-name">
+				<input type="text" name="username" placeholder="请输入手机号/邮箱"/>
+			</div>
+			<div class="input-pass">
+				<input type="password" name="pass" placeholder="请输入密码"/>
+			</div>
+			<div class="forget clearfix">
+				<a href="/h5/reg" class="qc-reg">快速注册</a>
+				<a href="javascript:void(0)" class="fg-pass">忘记密码?</a>
+			</div>
+			<div class="input-submit">
+				<button type="button" class="btn-sub" data-action="login" data-url="/admin/login" data-to="/h5">登录</button>
+			</div>
+			<div class="input-error">
+				<p id="error">adsadasd</p>
+			</div>
+		</form>
+	</div>
+<% if( user.username ){ %>
+	
+	<script type="text/javscript">
+		window.location.href="/";
+	</script>
+
+<% }else{ %>
+	<script type="text/javscript">
+		alert('asdasd');
+	</script>
+<%} %>
+<% include include/foot.html %>

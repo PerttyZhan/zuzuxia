@@ -1,0 +1,67 @@
+<% include include/head.html %>
+<% include include/operate-head.html %>	
+<div class="banner" id="banner">
+	<ul class="clearfix">
+		<li> <img src="/image/1429499630762.jpg" alt="" title=""/> </li>
+	</ul>
+</div>
+
+<div class="show-table">
+				<table  border="0" cellpadding="0" cellspacing="0" bordercolor="#dedede">
+						<thead>
+							<tr>
+								<th>公寓编号</th><th>客户姓名</th><th>联系方式</th><th>入住时间</th><th>提交时间</th>
+							</tr>
+						</thead>
+						<tbody>
+						<% appoints.forEach(function(appoint){ %>
+							<tr>
+								<td>
+									<% if( appoint.houseID ){ %>
+										<%=appoint.houseID.bh %>
+									<% }else{ %>
+										<%=appoint.area %>
+									<% } %>
+									
+								</td>
+								<td><%=appoint.user %></td>
+								<td><%=appoint.telephone %></td>
+								<td><%=appoint.startTime %> -- <%=appoint.endTime %></td>
+								<td><%=appoint.createTime %></td>
+							</tr>
+							<% }) %>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="5">
+										<a 
+										<% if( count != 1 ){ %>
+										href="centerApt?count=<%= (parseInt(count)-1) %>" 
+										<% }else{ %>
+										href="javascript:void(0) %>" 
+										<% } %>
+										class="pre" >上一页</a> 
+									
+
+									<span><strong><%=count %></strong>/<%=all %></span> 
+										<a  
+										<% if( count != all ){ %>
+											href="centerApt?count=<%= (parseInt(count)+1) %>" 
+										<% }else{ %>
+											href="javascript:void(0)" 
+										<% } %>
+										class="next" >下一页</a>
+									
+									 <input type="hidden" name="allnum" value="<%=all %>" /> 
+									<input type="text" name="pagenum" value="" /> 
+									<a class="trun" href="javascript:void(0)" class="trun-page" id="trun-page" data-action="turn-page">
+										跳转
+									</a>
+									
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+			</div>
+
+<% include include/foot.html %>
