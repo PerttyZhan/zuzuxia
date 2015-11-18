@@ -7,8 +7,7 @@
 	<meta charset="utf-8" />
 	<meta name="keywords" content="大学生,创业,租房,白领" />
 	<meta name="description" content="青年颂"/>
-	<link href="/dist/css/index.css?upDate=20151030" rel="stylesheet" type="text/css"/>
-	<link href="/dist/css/normalize.css?upDate=20151030" rel="stylesheet" type="text/css"/>
+	<link href="/css/index2.css?t=20151118" rel="stylesheet" type="text/css"/>
 	<title>青年颂 --青年创客社区</title>
 </head>
 
@@ -18,10 +17,10 @@
 <!--  头部 -->
 <header class="header " id="header">
 	<div class="container clearfix">
-		<div class="header-logo">
-			<a href="/"><img src="/image/newlogo.png" title="青年颂" alt="青年颂" width="352" height="50"/></a>
-		</div>
-		<div class="header-contact">
+		<a href="/" class="floatL header-logo">
+			<img src="/image/newlogo.png" title="青年颂" alt="青年颂" width="352" height="50"/>
+		</a>
+		<div class="floatR header-contact">
 			<a href="" class="phone">租房热线  0571-88208777</a>
 			<% if( user.username ) {%>
 				<div class="peroson-info"  id="dropRole" 
@@ -46,7 +45,7 @@
 			<% } else{ %>
 				<a href="javascript:void(0)" class="login" data-action="open-login-modal" id="loginIn">登陆</a>
 				<a href="javascript:void(0)" class="reg" data-action="open-reg-modal">注册</a>
-				<a href="" class="qr" style="border:none">
+				<a href="" class="qr">
 			<% } %>
 			
 				<i class="icon-qr"></i>
@@ -61,18 +60,6 @@
 	</div>
 </header>
 <div class="message-modal" id="message-modal">
-		<div class="modal-body">
-			<div class="message-no-login" id="message-no-login">
-				<i class="icon icon-no-login"></i>
-				<span >您还未登录</span>
-			</div>
-			<div class="message-no-perfect" id="message-no-perfect">
-				<i class="icon icon-no-perfect"></i>
-				<span>请去个人中心完善信息(电话和姓名)</span>
-			</div>
-			<div class="message-no-perfect" id="message-apt-success">
-				<i class="icon icon-no-perfect"></i>
-				<span>预约成功</span>
-			</div>
-		</div>
+	<div class="modal-body" id="modal-body">
 	</div>
+</div>

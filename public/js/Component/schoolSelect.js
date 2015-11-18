@@ -1,5 +1,6 @@
 define(["require","module","exports"],function(require,module,exports){
 
+	var allunivlist = require('allunivlist');
 	//学校选择
 	var schoolSelect = {
 		init:function($text,$gj,$sf,$list,$intersetText,$intersetContent){
@@ -43,12 +44,15 @@ define(["require","module","exports"],function(require,module,exports){
 			var This = this;
 			
 
-			$text.on('click',function(){
+			$text.on('click',function(e){
+
+				e.stopPropagation();
 				$gj.show();
 				$list.hide();
 				$sf.hide();
 			});
-			$intersetText.on('focus',function(){
+			$intersetText.on('focus',function(e){
+				e.stopPropagation();
 				$intersetContent.show();
 			});
 
@@ -57,9 +61,10 @@ define(["require","module","exports"],function(require,module,exports){
 				$intersetContent.hide();
 
 			});
-			$intersetContent.find('a').on('click',function(event){
+			$intersetContent.find('a').on('click',function(e){
 
-				event.preventDefault();
+				e.preventDefault();
+				e.stopPropagation();
 				$intersetText.val( $intersetText.val() + ',' + $(this).text() );
 				$(this).parent().hide();
 
@@ -76,12 +81,13 @@ define(["require","module","exports"],function(require,module,exports){
 			});
 
 			$gj.delegate('a','click',function(e){
-
+				e.stopPropagation();
 				var aid = $(this).data('aid'),name = $(this).data('name');
 				This.getSheng(aid,name);
 
 			});
 			$sf.delegate('a','click',function(e){
+				e.stopPropagation();
 				var gid = $(this).data('gid'),pid = $(this).data('pid'),name = $(this).data('name');
 
 				This.getSchool(gid,pid,name);

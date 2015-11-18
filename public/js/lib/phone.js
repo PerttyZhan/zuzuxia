@@ -1,6 +1,6 @@
 define(['require'],function(require){
 
-	var phoneClick = require('clickList'),
+	var phoneClick = require('phoneClick'),
 		 attachFastClick = require('fastclick'),
 		 slip = require('Slip'),
 		 $head = $('head'),

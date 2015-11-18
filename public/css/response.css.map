@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,qCAAsC,CAIpC,gBAAgB,CACd,SAAS,CAAE,MAAM,EAGrB,qCAAsC,CACpC,UAAW,CACT,SAAS,CAAE,MAAM,EAGrB,qCAAsC,CACpC,gBAAiB,CACf,SAAS,CAAE,MAAM,CAEnB,uBAAwB,CACtB,SAAS,CAAE,MAAM,CAEnB,UAAW,CACT,SAAS,CAAE,IAAI,CAGjB,aAAc,CACZ,SAAS,CAAE,iBAAiB,EAGhC,qCAAsC,CACpC,aAAc,CACZ,SAAS,CAAE,IAAI",
+"sources": ["response.scss"],
+"names": [],
+"file": "response.css"
+}

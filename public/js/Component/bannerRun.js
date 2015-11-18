@@ -3,23 +3,12 @@ define(['require','module','exports'],function(require,module,exports){
 
 	function bannerRun(oParent,btnPre,btnNext){
 
-		oParent.css('opacity',1).find('ul').height( oParent.find('a').height() ).find('li:eq(0)').addClass('active');
-
-
-			var bannerTimer = setInterval(function(){
-			if( oParent.height() ){
-
-				$(document.body).css('padding-top',oParent.height() - 1 +'px').show();
-				clearInterval( bannerTimer );
-				bannerTimer = null;
-				}
-
-			},20);
+		var _height = oParent.find('a').height();
 		
 		this.$oParent = oParent;
 		this.$btnPre = btnPre;
 		this.$btnNext = btnNext;
-		this.defaultSign = 1;
+		this.defaultSign = false;
 		this.aLi = this.$oParent.find('li');
 		this.length = this.aLi.length;
 		this.index = 0;
@@ -49,7 +38,7 @@ define(['require','module','exports'],function(require,module,exports){
 			var oLeft = this.oLeft[oIndex%2];
 			var targetIndex = (typeof target == 'number')? target:(oIndex+1 < length)?oIndex+1:0;
 
-			this.removeEvent();
+			This.defaultSign = true;
 
 			aLi.eq( oIndex ).css({
 				'z-index':1,
@@ -58,11 +47,6 @@ define(['require','module','exports'],function(require,module,exports){
 			}).animate({
 				opacity:0
 			},1500);
-
-			if( this.numAli ){
-				
-				this.numAli.removeClass('active').eq(targetIndex).addClass('active');
-			}
 
 			aLi.eq( targetIndex ).css({
 				'z-index':10,
@@ -76,7 +60,12 @@ define(['require','module','exports'],function(require,module,exports){
 				if( This.$oParent.timer == null){
 					This.$oParent.timer = setInterval( $.proxy( This.runPic,This ),4000 );
 				}
-				This.addEvent();
+
+				setTimeout(function(){
+
+					This.defaultSign = false;
+
+				},1000)
 			});
 
 			this.index = targetIndex;
@@ -84,22 +73,8 @@ define(['require','module','exports'],function(require,module,exports){
 		addEvent:function(){
 
 			var This = this;
-			if( this.$btnPre != null ){
-				this.$btnPre.on('click',$.proxy( This.preEvent,This ) );
-			}
-			if( this.$btnNext != null ){
-				this.$btnNext.on('click',$.proxy( This.nextEvent,This ) );
-			}
-		},
-		removeEvent:function(){
-
-			var This = this;
-			if( this.$btnPre != null ){
-				this.$btnPre.off('click');
-			}
-			if( this.$btnNext != null ){
-				this.$btnNext.off('click' );
-			}
+			this.$btnPre.on('click',$.proxy( This.preEvent,This ) );
+			this.$btnNext.on('click',$.proxy( This.nextEvent,This ) );
 		},
 		preEvent:function(){
 
@@ -117,7 +92,9 @@ define(['require','module','exports'],function(require,module,exports){
 		},
 		nextEvent:function(){
 			var This = this;
-
+			if( This.defaultSign ){
+				return ;
+			}
 			if( this.$oParent.timer ){
 				clearInterval( this.$oParent.timer );
 				this.$oParent.timer = null;

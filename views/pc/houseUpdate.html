@@ -1,4 +1,4 @@
-
+<% include  manager-includes/style.html %>
 <% include manager-includes/head.html %>
 
 	<div class="main" id="main">
@@ -76,7 +76,7 @@
 						<input type="hidden" name="changeNum" value="" id="changeNum"/>
 						<button type="button">上传<input type="file" name="imgUrl" accept="image/*" /></button>
 						<button type="button">从图片库选择</button>
-						<button type="button" class="dele" data-action="dele-img" data-url="updateMessage">删除</button>
+						<button type="button" class="dele" data-action="dele-img">删除</button>
 				</div>
 				<div class="pic-show">
 					<div class="cover-img">
@@ -359,5 +359,5 @@
 <script src="http://map.qq.com/api/js?v=2.exp&key=d84d6d83e0e51e481e50454ccbe8986b"></script>
 <% include manager-includes/foot.html %>
 <script type="text/javascript">
-	kvm.module.invoke('/dist/js/lib/houseUpdate.js?upDate=20151030');
+	kvm.module.invoke('/js/lib/houseUpdate.js');
 </script>

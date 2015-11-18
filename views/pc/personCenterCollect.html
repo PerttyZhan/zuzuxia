@@ -42,9 +42,9 @@
 					<div class="thumbnail">
 					<a href="detailMessage/<%=collect.houseID._id %>" class="thumbnail-body">
 						<% if( collect.houseID.coverUrl == '' ){ %>
-							<img data-src="image/default-curimg.png" width=""/>
+							<img src="image/default-curimg.png" width=""/>
 						<% }else{ %>
-							<img data-src="<%=collect.houseID.coverUrl %>" width=""/>
+							<img src="<%=collect.houseID.coverUrl %>" width=""/>
 						<% } %>
 						
 						<div class="mask">
@@ -77,22 +77,9 @@
 		</div>
 	</section>
 
-	<footer class="footer">
-		<div id="footer">
-			<div class="wrap">
-				<div class="copyRight">
-					<p>© 2015  租租侠版权所有</p>
-				</div>
-				<div class="wrap-r">
-					<a href="#">用户协议</a>
-					<a href="#">投诉建议</a>
-					<a href="#">联系我们</a>
-				</div>
-			</div>
-		</div>
-	</footer>
 <script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
 <% include includes/foot.html %>
+<% include includes/script.html %>
 <script type="text/javascript">
  	kvm.module.invoke("/js/lib/personCenterCollect.js?upDate=20151030");
 </script>

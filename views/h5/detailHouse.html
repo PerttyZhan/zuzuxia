@@ -2,12 +2,12 @@
 <% include include/operate-head.html %>	
 		
 	
-	<div class="banner" id="banner">
-		<div class="container">
-			<ul class="clearfix">
-				<li> <img src="/image/1429499630762.jpg" alt="" title=""/> </li>
-			</ul>
-		</div>
+	<div class="detail-banner">
+		<% if( house.coverUrl == '' ){ %>
+			<img src="/image/default-curimg.png" alt="" title="">
+		<% }else{ %>
+			<img src="<%=house.coverUrl %>" alt="" title=""/>
+		<% } %>
 	</div>
 
 	<div class="house-des" id="house-des">
@@ -56,11 +56,26 @@
 				</span>
 			</div>
 		</div>
+		<div class="banner" id="banner">
+			<div class="container">
+				<ul class="clearfix" id="wrap">
+					<% house.scollUrl.forEach(function( img ){ %>
+
+						<% if( img != '' ){ %>
+							<li><a href="javascript:void(0)" style="background-image:url('<%=img %>');"><img src="<%=img %>" alt="banner-1" title=""/></a></li>
+						<% } %>
+						
+					<% }) %>
+				</ul>
+			</div>
+		</div>
 		<div class="Housekeeper">
 			<p class="title">管家信息</p>
 			<div class="container">
 				<div class="table">
-					<img src="/image/fz-pic.png" alt="" titlte="" class="table-cell"/>
+					<div class="table-cell">
+						<img src="/image/fz-pic.png" alt="" titlte=""/>
+					</div>
 					<p class="table-cell">
 						<span>科科</span>
 						<span>房间数量：<strong>200间</strong></span>
@@ -84,10 +99,8 @@
 			菜单
 	</p>
 		<div class="menu-body">
-			<a href="/h5/aptHouse" class="">预约</a>
-			<div class="menu-col">
-				<a href="/h5/centerClt" class="">收藏</a>
-			</div>
+			<a href="/h5/aptHouse" class="">在线预约</a>
+			<a href="tel:15757176843" class="">电话预约</a>
 		</div>
 	</div>
 <% include include/foot.html %>

@@ -1,6 +1,6 @@
 define(["require"],function(require){
 
-	var clickList = require('clickList');	//点击事件集合 
+	var centers = require('action/center.action.js');
 
 
 	//对于click 事件做的。用事件代理的方式
@@ -11,9 +11,9 @@ define(["require"],function(require){
 		
 		var $this = $(this),
 			actionName = $this.data('action'),
-			action = clickList[actionName];
+			action = centers[actionName];
 
-		if( $.isFunction(action) ) action($this);
+		if( $.isFunction(action) ) action.call(centers,$this);
 	});
 
 	/* 登录后的 */

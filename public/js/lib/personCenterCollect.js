@@ -1,45 +1,73 @@
 define(["require"],function(require){
 
-	var clickList = require('clickList'),			//点击事件集合 
-		$thumbnail = $('.thumbnail'),
-		imageShow = require('imageShow'),			//图片的预加载
-		qqShare = require('qqshare');
+	var clicks = require('action/center.action.js'),
+		qqShare = require('qqshare');	
 
-	//对于click 事件做的。用事件代理的方式
-	$(document.body).on('click','[data-action]',function(e){
+	var index = {
+		init:function(){
+			this.dataInit();	//数据缓存
+			this.contentInit(); //界面改变
+			this.cpInit();		//组件初始化
+			this.eventInit();	//事件初始化
+		},
+		dataInit:function(){
 
-		e.preventDefault();
-		e.stopPropagation();
-		
-		var $this = $(this);
-		var actionName =$this.data('action'),action = clickList[actionName]
+			typeof this.data == 'undefined'?this.data = {}:void(0);
+			$.extend(this.data,{
+				$dr:$('#dropRole'),
+				$th:$('.thumbnail'),
+				$qs:$('.qq-login')
+			});
+		},
+		eventInit:function(){
 
-		if( $.isFunction(action) ) action.call(clickList,$this);	
-			
-	});
+			var $dm = this.data['$dr'],
+				$th = this.data['$th']
+			/* 登录后的 */
+			$dm.hover(function(e){
+				e.stopPropagation();
+				$(this).addClass('active');
+			},function(e){
+				$(this).removeClass('active');
+			});
 
-	/* 登录后的 */
-	$('#dropRole').hover(function(e){
-		e.stopPropagation();
-		$(this).addClass('active');
-	},function(e){
-		
-		$(this).removeClass('active');
-	});
+			//对于click 事件做的。用事件代理的方式
+			$(document.body).on('click','[data-action]',function(e){
 
-	$thumbnail.hover(function(){
+				e.preventDefault();
+				e.stopPropagation();
+				var $this = $(this),
+					actionName = $this.data('action'),
+					action = clicks[actionName];
+				if( $.isFunction(action) ) action.call(clicks,$this);
+			});
 
-		$(this).find('.mask-icon').animate({
-			top:0
-		},200);
-	},function(){
+			$th.hover(function(){
+				$(this).find('.mask-icon').animate({
+						top:0
+					},200);
+				},function(){
 
-		$(this).find('.mask-icon').animate({
-			top:'-40px'
-		},200);
-	});
-	//qq分享
+				$(this).find('.mask-icon').animate({
+						top:'-40px'
+				},200);
+			});
+		},
+		cpInit:function(){
+			//qq分享
+			qqShare.init(this.data['$qs']);
+		},
+		contentInit:function(){
+			//调整间距
+			var $oAi = this.data['$th'],reg =/^[0-9]*[0-9][0-9]*$/;
+			for( var i=0,max=$oAi.length;i<max;i++){
 
-	qqShare.init($('.qq-login'));
-	imageShow.init( $thumbnail );
+				if( reg.test( (i-1)/3 ) ){
+					$oAi.eq(i).addClass('middle-div');
+				}
+			}
+		}
+	};
+
+	index.init();
 })

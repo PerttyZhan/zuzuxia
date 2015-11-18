@@ -1,19 +1,20 @@
 <% include include/head.html %>
 <% include include/operate-head.html %>	
 	<div class="main" id="main">
-		<form action="/siteapt" method="post" class="form-apt">
+		<form action="/phoneApt" method="post" class="form-apt">
 			<div class="input-site">
 				<label>
 					公寓位置
-					<select name="site">
+					<select name="area">
 						<option value="浙江">浙江</option>
 					</select>
 				</label>
 			</div>
 			<div class="input-start-time">
 				起始时间
-				<input type="date" name="starttime" value="" placeholder="起始时间" id="starttime"/>
+				<input type="date" name="startTime" value="" placeholder="起始时间" id="starttime"/>
 			</div>
+			
 			<div class="input-dur-time">
 				<label>
 					入住周期
@@ -28,10 +29,14 @@
 			</div>
 			<div class="input-end-time">
 				结束时间
-				<input type="text" name="endtime" value="" placeholder="结束时间" readonly data-action="calc-endtime"/>
+				<input type="text" name="endTime" value="" placeholder="结束时间" readonly data-action="calc-endtime"/>
+			</div>
+			<div class="input-phone">
+				联系方式
+				<input type="text" name="telephone" value="" placeholder="联系方式" id="phone"/>
 			</div>
 			<div class="input-submit">
-				<button type="button" class="btn-sub" data-action="index-apt"
+				<button type="button" class="btn-sub" data-action="phone-apt"
 				<% if( user.username ){ %>
 					data-require="<%=user.nameID.telephone %>"
 				<%	} %>
@@ -40,4 +45,4 @@
 		</form>
 	</div>
 
-<% include include/foot.html %>
+<% include include/script.html %>

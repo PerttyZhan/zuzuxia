@@ -13,16 +13,7 @@ module.exports = function(app){
 	app.route('/siteapt')
 		.post(function(req,res){
 
-			var user = getUser(req),
-				agent = req.headers['user-agent'],
-				system ={  
-					win : false,  
-					mac : false,  
-					xll : false  
-				};
-				system.win = agent.indexOf("Win") == 0;  
-				system.mac = agent.indexOf("Mac") == 0;  
-				system.x11 = (agent == "X11") || (agent.indexOf("Linux") == 0);  
+			var user = getUser(req);
 			if( !!user.username ){
 
 				var appoint = new personAppoint({
@@ -35,18 +26,31 @@ module.exports = function(app){
 				
 				appoint.save(function(err,appoint){
 
-					if(system.win||system.mac||system.xll){ //转向电脑端
-						return res.redirect('/pc/personCenter');
-					}else{  
-						return res.redirect('/h5/centerApt');//转向手机端  
-					}
+					return res.redirect('/pc/personCenter');
 				});
 			}else{
 				res.send({err:'no login',yes:''}); 
 			}
 
 		});
+	app.route('/phoneApt')
+		.post(function(req,res){
 
+				var appoint = new personAppoint({})
+					datas = JSON.parse(req.body.data);
+
+				console.log( datas );
+
+				for( var key in  datas){
+					console.log( key );
+					appoint[key] = datas[key];
+				}
+				console.log( appoint );
+				appoint.save(function(err,appoint){
+
+					return res.send('ok')
+				});
+		});
 	app.route('/collectHouse')
 		.post(function(req,res){
 

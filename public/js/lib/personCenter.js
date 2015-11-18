@@ -1,30 +1,52 @@
 define(["require"],function(require){
 
-	var clickList = require('clickList');			//点击事件集合 
+	var clicks = require('action/center.action.js');
 
-	$('#changeBg').on('change',function(){
+	var index = {
+		init:function(){
+			this.dataInit();	//数据缓存
+			this.eventInit();	//事件初始化
+		},
+		dataInit:function(){
 
-        $(this).parent().submit();
-    });
-	/* 登录后的 */
-	$('#dropRole').hover(function(e){
-		e.stopPropagation();
-		$(this).addClass('active');
-	},function(e){
-		
-		$(this).removeClass('active');
-	});
+			typeof this.data == 'undefined'?this.data = {}:void(0);
+			$.extend(this.data,{
+				$dr:$('#dropRole'),
+                $cb:$('#changeBg')
+			});
 
-	//对于click 事件做的。用事件代理的方式
-	$(document.body).on('click','[data-action]',function(e){
+		},
+		eventInit:function(){
 
-		e.preventDefault();
-		e.stopPropagation();
-		
-		var $this = $(this);
-		var actionName =$this.data('action'),action = clickList[actionName]
+			var $dm = this.data['$dr'],
+				$cb = this.data['$cb'];
 
-		if( $.isFunction(action) ) action.call(clickList,$this);	
-			
-	});
+			 //背景的改变
+            $cb.on('change',function(){
+                $(this).parent().
+                        submit();
+            });
+
+			/* 登录后的 */
+			$dm.hover(function(e){
+				e.stopPropagation();
+				$(this).addClass('active');
+			},function(e){
+				$(this).removeClass('active');
+			});
+
+			//对于click 事件做的。用事件代理的方式
+			$(document.body).on('click','[data-action]',function(e){
+
+				e.preventDefault();
+				e.stopPropagation();
+				var $this = $(this),
+					actionName = $this.data('action'),
+					action = clicks[actionName];
+				if( $.isFunction(action) ) action.call(clicks,$this);
+			});
+		}
+	};
+
+	index.init();
 })

@@ -20,11 +20,11 @@ module.exports = function(app){
 			if( req.session.managerUser ){
 				return res.redirect('/pc/house');
 			}
-			if( req.session.err != '' ){
+			if( !!req.session.err ){
+				console.log( req.session.err );
 				err = req.session.err;
 				delete req.session.err;
 			}
-			
 			return res.render('pc/admin-login',{
 					title:'租租侠后台登录',
 					err:err
@@ -63,9 +63,9 @@ module.exports = function(app){
 	app.route('/UsernameIsOnly')
 		.post(function(req,res){
 
-			var username = req.body.username;
+			var user = JSON.parse( decodeURIComponent(req.body.data) );
 
-			managerAdmin.isOnlyByUsername(username,function(err,count){
+			managerAdmin.isOnlyByUsername(user.username,function(err,count){
 
 				if( !count ){
 					return res.send('no');

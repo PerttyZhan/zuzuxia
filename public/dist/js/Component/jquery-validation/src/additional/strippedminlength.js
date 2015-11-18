@@ -1,0 +1,1 @@
+$.validator.addMethod("strippedminlength",function(a,b,c){return $(a).text().length>=c},$.validator.format("Please enter at least {0} characters"));

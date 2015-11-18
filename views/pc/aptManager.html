@@ -1,4 +1,4 @@
-
+<% include  manager-includes/style.html %>
 <% include manager-includes/head.html %>
 
 	<div class="main" id="main">
@@ -65,7 +65,7 @@
 										<% if( count != 1 ){ %>
 										href="aptManager?count=<%= (parseInt(count)-1) %>" 
 										<% }else{ %>
-										href="javascript:void(0) %>" 
+										href="javascript:void(0) %>" style="cursor:no-drop"
 										<% } %>
 										class="pre" >上一页</a> 
 									
@@ -75,7 +75,7 @@
 										<% if( count != all ){ %>
 											href="aptManager?count=<%= (parseInt(count)+1) %>" 
 										<% }else{ %>
-											href="javascript:void(0)" 
+											href="javascript:void(0)" style="cursor:no-drop"
 										<% } %>
 										class="next" >下一页</a>
 										<a class="trun" href="javascript:void(0)" id="open-turn" data-action="open-page-choose">
@@ -101,5 +101,5 @@
 
 <% include manager-includes/foot.html %>
 <script type="text/javascript">
-	kvm.module.invoke('/dist/js/lib/aptManager.js?upDate=20151030');
+	kvm.module.invoke('/js/lib/aptManager.js?upDate=20151030');
 </script>

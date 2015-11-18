@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="keywords" content="大学生,创业,租房" />
-    <meta name="description" content="租租侠"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-    <link rel="shortcut icon" href="/image/bitbug_favicon.ico" type="image/x-icon">
-    <link href="/dist/css/ZMB.css?upDate=20151030" rel="stylesheet" type="text/css"/>
-    <link href="/dist/css/normalize.css?upDate=20151030" rel="stylesheet" type="text/css"/>
-    <title><%= title %></title>
-</head>
-
-<body>
-
-
+<% include manager-includes/style.html %>
 <div id="container">
 
 <ul id="anitOut"> 
@@ -39,20 +22,21 @@
        <input type="text" name="username" password="password" placeholder="用户名">
         <input type="password" name="password" placeholder="密码">
         <button type="submit" id="btn-login" data-action="zmb-login">登录</button>
+
+         <% if( err !='' ){ %>
+            <div  >
+                 <p class="error" id="error" style="display:block"><%=err %></p>
+             </div>
+        <% }else{ %>
+            <div >
+                 <p class="error" id="error">用户名不能空</p>
+             </div>
+        <% } %>
     </form>
-    <% if( err !='' ){ %>
-        <div class="err" id="error" style="display:block">
-             <p><%=err %></p>
-         </div>
-    <% }else{ %>
-        <div class="err" id="error">
-             <p>用户名不能空</p>
-         </div>
-    <% } %>
     
 </div>
 </div>
 <% include manager-includes/foot.html %>
 <script type="text/javascript">
-    kvm.module.invoke('/dist/js/lib/ZMB-login.js');
+    kvm.module.invoke('/js/lib/ZMB-login.js');
 </script>

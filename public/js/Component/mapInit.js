@@ -1,6 +1,6 @@
 define(["require","module","exports"],function(require,module,exports){
 
-var Bmap = {
+	var Bmap = {
 		searchType:['btnBuilding','btnBus','btnHotel','btnBank','btnSuperMarket','btnShop','btnSchool','btnHospital','btnFurniture','btnDecoration','btnGasstation'],
 		init:function(el){
 
@@ -61,7 +61,6 @@ var Bmap = {
 				if (point) {
 					map.centerAndZoom(point, 16);
 					map.addOverlay(new BMap.Marker(point));
-
 				}else{
 					alert("您选择地址没有解析到结果!");
 				}

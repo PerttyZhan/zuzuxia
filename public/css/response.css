@@ -1,0 +1,2 @@
+@media screen and (min-width: 1600px){#main .container{max-width:1600px}}@media screen and (max-width: 1600px){.container{max-width:1400px}}@media screen and (max-width: 1400px){#main .container{max-width:1200px}.apt-process .container{max-width:1200px}.apt-des p{font-size:15px}#footer .wrap{max-width:1200px !important}}@media screen and (max-width: 1200px){.apt-des span{font-size:23px}}
+/*# sourceMappingURL=response.css.map */

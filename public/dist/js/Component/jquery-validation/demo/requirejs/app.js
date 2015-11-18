@@ -1,0 +1,1 @@
+require(["jquery","../../dist/jquery.validate"],function(a){a.validator.setDefaults({submitHandler:function(){alert("submitted!")}}),a("#commentForm").validate()});

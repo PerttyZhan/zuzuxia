@@ -15,29 +15,56 @@ var oAuth = require('wechat-oauth');
 var client = new oAuth(settings.wx.app_id,settings.wx.app_secret);
 
 module.exports = function(app){
-	app.route('/admin/login')
-		.post(function(req,res){
 
+	//验证用户是否唯一
+	app.route('/admin/valiUsername')
+		.post(function(req,res){
+			var username = req.body.username || "";
+			adminModel.valiUsernameAlive(username,function(err,count){
+				if( count ){
+					return res.send(true);
+				}else{
+					return res.send(false);
+				}
+			});
+		});
+
+	//验证用户名和密码是否匹配
+	app.route('/admin/valiPassowrd')
+		.post(function(req,res){
 			var user = {
-				username:req.body.username,
-				password:req.body.password
+				username:req.body.username || "",
+				password:req.body.password || ""
 			};
 			//生成密码的 md5 值
 			var md5 = crypto.createHash('md5');
 			user.password = md5.update( user.password ).digest('hex');
+			adminModel.valiUsernameIsRight(user,function(err,user){
+				console.log( user.length );
+				if( user.length ){
+					return res.send(true);
+				}
+				return res.send(false);
+			});
+		})
+	//登录
+	app.route('/admin/login')
+		.post(function(req,res){
+
+			var user = JSON.parse( decodeURIComponent(req.body.data) );
+			//生成密码的 md5 值
+			var md5 = crypto.createHash('md5');
+			user.password = md5.update( user.password ).digest('hex');
+
 
 			adminModel.valiUsernameAlive(user.username,function(err,count){
-
 				if( count ){
-				
 					adminModel.valiUsernameIsRight(user,function(err,user){
 						
 						if( user.length ){
 
 							delete req.session.user;
 							req.session.user = user[0];
-
-
 							return res.send({'err':'','yes':'/loginAfter'});
 						}
 						return res.send({'err':'用户密码不对','yes':''});
@@ -47,22 +74,18 @@ module.exports = function(app){
 				}
 			});
 		});
+
 	app.route('/admin/register')
 		.post(function(req,res){
 
-
-			var params = req.body || req.params,
-				deferred,
-				user = {
-					username:params.username,
-					password:params.password,
-					registerBy:params.registerBy
-				},personInfo,md5;
+			var deferred,
+				user = JSON.parse( decodeURIComponent(req.body.data) ),
+				personInfo,md5;
 
 			if( user.registerBy == '邮箱' ){
-				user.email = params.username;
+				user.email = user.username;
 			}else{
-				user.phone = params.username;
+				user.phone = user.username;
 			}
 
 			//生成密码的 md5 值
@@ -143,20 +166,20 @@ module.exports = function(app){
 
 	app.route('/admin/resetPass')
 		.post(function(req,res){
-			var username = req.body.username;
-			 var pass = req.body.password;
+			
+			var user = JSON.parse( decodeURIComponent(req.body.data) );
 
 			 var md5 = crypto.createHash('md5'),
-					pass = md5.update( pass ).digest('hex');
-			adminModel.valiUsernameAlive(username,function(err,count){
+					pass = md5.update( user.agapass ).digest('hex');
+			adminModel.valiUsernameAlive(user.username,function(err,count){
 
 				if(count){
 
-					adminModel.resetPassword(username,pass,function(err,admin){
+					adminModel.resetPassword(user.username,pass,function(err,admin){
 
 						if(err){return console.log(err);}
 
-						adminModel.findPersonByUsername(username,function(err,user){
+						adminModel.findPersonByUsername(user.username,function(err,user){
 
 							delete req.session.user;
 							req.session.user = user[0];

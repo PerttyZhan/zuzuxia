@@ -1,6 +1,6 @@
 define(["require"],function(require){
 
-	var clickList = require('ZMB-clickList'),
+	var clicks = require('action/house.update.js');
 		mapInit = require('mapInit'),
 		$main = $('#main'),
 		$status = $('#status');
@@ -19,10 +19,10 @@ define(["require"],function(require){
 
 		var $this = $(e.target),
 			 actionName = $this.data('action'),
-			 action = clickList[actionName];
+			 action = clicks[actionName];
 
 		if( actionName != undefined ){ e.preventDefault() };
-		if( $.isFunction( action ) ){ action($this) };
+		if( $.isFunction( action ) ){ action.call(clicks,$this) };
 	});
 
 
@@ -34,9 +34,6 @@ define(["require"],function(require){
 		$('#changeType').val( name );
 	});
 
-	$('#e2').hide();
-	$('#e1').show();
-	$('.map-btn').show();
 	$('.map-title').find('li').hover(function(){
 		
 		$(this).attr('class','active').siblings().removeClass('active');
@@ -52,7 +49,6 @@ define(["require"],function(require){
 		}
 
 	});
-
 	mapInit.Bmap.init('e1');
 	mapInit.tengMap.init('e2');
 

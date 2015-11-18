@@ -1,7 +1,12 @@
 
 <% include include/head.html %>
-<% include include/operate-head.html %>	
-
+	<div class="head" id="index-header">
+		<div class="container">
+			<a class="logo" href="/h5">
+				<img src="/image/newlogo.png" title="青年颂" alt="青年颂" width="" height=""/>
+			</a>
+		</div>
+	</div>
 	<div class="banner" id="banner">
 		<div class="container">
 			<ul class="clearfix" id="wrap">
@@ -11,7 +16,9 @@
 					<%	} %>
 				<% }) %>
 			</ul>
+
 		</div>
+
 	</div>
 
 	<div class="house" id="main">
@@ -58,7 +65,7 @@
 					<% if( house.coverUrl == '' ){ %>
 						<img src="/image/default-curimg.png" alt="" title="">
 					<% }else{ %>
-						<img src="/image/homepic1.jpg" alt="" title=""/>
+						<img src="<%=house.coverUrl %>" alt="" title=""/>
 					<% } %>
 					</a>
 					<p class="des clearfix">
@@ -74,8 +81,10 @@
 		<p class="menu-title" data-action="show-modal">
 			菜单
 		</p>
-		<div class="menu-body">
-			<a href="/h5/aptHouse" class="">预约</a>
+		<div class="menu-body clearfix">
+
+			<a href="/h5/aptHouse" class="">在线预约</a>
+			<a href="tel:15757176843" class="">电话预约</a>
 		</div>
 	</div>
 

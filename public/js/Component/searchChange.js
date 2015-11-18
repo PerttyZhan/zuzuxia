@@ -5,7 +5,7 @@ define(["require","module","exports"],function(require,module,exports){
 
 		init:function(oParent,overClass){
 			this.$oParent = oParent;
-			this.oTop = $('#banner').find('a').height();
+			this.oTop = oParent.position().top;
 			this._class = overClass;
 			this.addEvent();
 		},
@@ -14,10 +14,13 @@ define(["require","module","exports"],function(require,module,exports){
 			$(document).on('scroll',$.proxy(This.scollEvent,This) );
 		},
 		scollEvent:function(event){
+
 			if( $(document).scrollTop() > parseInt( this.oTop )+50 ){
 				this.$oParent.addClass( this._class );
+
 			}else{
 				this.$oParent.removeClass( this._class );
+
 			}
 		}
 	};
