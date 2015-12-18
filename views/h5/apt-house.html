@@ -1,0 +1,43 @@
+{{ include include/head }}
+{{ include include/operate-head }}	
+	<div class="main" id="main">
+		<form action="/phoneApt" method="post" class="form-apt">
+			<div class="input-site">
+				<label>
+					公寓位置
+					<select name="area">
+						<option value="浙江">浙江</option>
+					</select>
+				</label>
+			</div>
+			<div class="input-start-time">
+				起始时间
+				<input type="date" name="startTime" value="" placeholder="起始时间" id="starttime"/>
+			</div>
+			
+			<div class="input-dur-time">
+				<label>
+					入住周期
+					<select name="dur" id="duringtime">
+						<option value="3月">3月</option>
+						<option value="6月">6月</option>
+						<option value="9月">9月</option>
+						<option value="12月">12月</option>
+						<option value="15月">15月</option>
+					</select>
+				</label>
+			</div>
+			<div class="input-end-time">
+				结束时间
+				<input type="text" name="endTime" value="" placeholder="结束时间" readonly data-action="calc-endtime"/>
+			</div>
+			<div class="input-phone">
+				联系方式
+				<input type="text" name="telephone" value="" placeholder="联系方式" id="phone"/>
+			</div>
+			<div class="input-submit">
+				<button type="button" class="btn-sub" data-action="phone-apt">立即预约</button>
+			</div>
+		</form>
+	</div>
+{{ include include/script }}

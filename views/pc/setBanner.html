@@ -1,0 +1,67 @@
+{{ include manager-includes/style }}
+{{ include manager-includes/head }}
+	
+	<div class="main" id="main">
+		<div class="container table">
+			<div class="table-cell sider">
+				<div class="list">
+					<a href="javascript:void(0)" class="fun">功能</a>
+					<ul class="dropMenu">
+						<li ><a href="#">群发功能</a></li>
+						<li class="active"><a href="/pc/manager/login/banner/show">轮播图</a></li>
+						<li ><a href="/pc/manager/login/house/show">公寓详情</a></li>
+					</ul>
+				</div>
+				<div class="list">
+					<a  href="#" class="manager">管理</a>
+					<ul class="dropMenu">
+						<li><a href="banner">素材管理</a></li>
+						<li><a href="/pc/manager/login/aptManager/show">预约管理</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="table-cell content">
+				<div class="title">
+					<h4>轮播图</h4>
+					<ol>
+						<li class="active">
+							<a href="/pc/manager/login/banner/show">轮播图设置</a>
+						</li>
+					</ol>
+				</div>
+				<div class="house-update">
+					<div class="index-show">
+						<form action="update" method="post" encType="multipart/form-data" target="hidden_frame">
+						<input type="hidden" name="_id" value="{{ d.sets._id }}" id="_id"/>
+						<span class="list-title">照片</span>
+							<div class="btn-group">
+								
+									<input type="hidden" name="changeType" value="bannerUrl" id="changeType"/>
+									<button type="button">上传<input type="file" name="bannerUrl" accept="image/*" /></button>
+									<button type="button">从图片库选择</button>
+									<button type="button" class="dele" data-action="dele-img">删除</button>
+							</div>
+							<div class="pic-show clearfix setBanner">
+								{{# for( var i =0,len =d.sets.bannerUrl.length;i<len;i++ ){  }}
+									<div class="banner-img">
+										<a href="javascript:void(0)" >
+											<img src="{{ d.sets.bannerUrl[i] }}" title="" />
+											<input type="hidden" name="bannerUrl" value="{{ d.sets.bannerUrl[i] }}"/>
+											<p class="size">
+												建议尺寸 1900 : 700
+											</p>
+										</a>
+									</div>
+								{{# } }}
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<iframe name="hidden_frame" id="hidden_frame" style="display:none"></iframe>
+{{ include manager-includes/foot }}
+<script type="text/javascript">
+	kvm.module.invoke('/js/lib/setBanner.js');
+</script>

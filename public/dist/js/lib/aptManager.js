@@ -1,0 +1,1 @@
+define(["require"],function(require){var a=require("action/apt.manager.js");$(document.body).on("click","[data-action]",function(b){b.preventDefault(),b.stopPropagation();var c=$(b.target),d=c.data("action"),e=a[d];void 0!=d&&b.preventDefault(),$.isFunction(e)&&e.call(a,c)}),$(document).on("click",function(a){$(".page-choose").hide().removeClass("fadeInUp animated-login")})});

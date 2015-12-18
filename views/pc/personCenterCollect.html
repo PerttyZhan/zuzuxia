@@ -1,0 +1,82 @@
+
+{{ include includes/head }}
+	<div id="roomShow" >
+		<div class="bg">
+			<img src="{{ d.user.bgimg }}" width="1897" alt="" title=""/>
+			<form method="post" name="form" encType="multipart/form-data" title="改变背景" action="uploadbgImg">
+				<input type="hidden" name="url" value="/pc/personCenterMe"/>
+				<input type="file" name="bgimg" accept="image/*" title="改变背景" id="changeBg"/>
+			</form>
+		</div>
+		<div class="jumbotron-des">
+			<div class="jump-middle">
+				<h3 class="hiddenTxt">{{ d.personinfo.name }}</h3>
+				<p>{{ d.personinfo.sign }}</p>
+			</div>
+		</div>
+	</div>
+	<section class="main" id="main" style="background-color:#fff">
+			<div class="center-choose">
+				<a class="me " href="/person/showInfo">
+					<i></i>
+					<p>我</p>
+				</a>
+				<a class="message " href="/person/showMessage">
+					<i></i>
+					<p>消息</p>
+				</a>
+				<a class="appointment " href="/person/showApt">
+					<i></i>
+					<p>预约</p>
+				</a>
+				<a class="collection active" href="/person/showColls">
+					<i></i>
+					<p>收藏</p>
+				</a>
+			</div>
+			<div class="show">
+				<div class="container clearfix">
+				{{# for( var i =0,len = d.collects.length;i<len;i++ ){ }}
+					<div class="c3 thumbnail">
+						<a href="/pc/detailMessage/{{ d.collects[i].houseID._id }}" class="thumbnail-body">
+							{{# if( !!d.collects[i].houseID.coverUrl ){ }}
+								<img src="{{d.collects[i].houseID.coverUrl}}" width="" />
+							{{# }else{ }}
+								<img src="'image/default-curimg.png'" width="" />
+							{{# } }}
+							<div class="mask">
+								<div class="ma table">
+									<div class="table-cell">
+										<h3 >{{ d.collects[i].houseID.title }}</h3>
+										<p >{{ d.collects[i].houseID.summary }}</p>
+									</div>
+								</div>
+							</div>
+						</a>
+						<div class="mask-icon clearfix">
+							<span class="btn-share">
+								<div class="share-icon">
+									<p class="qq-login" id="qq-share" data-share=
+									'{
+										"summary":"{{ d.collects[i].houseID.summary }}",
+										"title":"{{ d.collects[i].houseID.title }}",
+										"pics":"{{ d.collects[i].houseID.scollUrl }}",
+										"url":"http://young.so/pc/detailMessage/{{ d.collects[i].houseID._id }}"
+									}'></p>
+									<p class="wx-login"></p>
+								</div>
+							</span>
+							<span class="btn-dele" data-action="dele-collect" data-val="{{ d.collects[i]._id }}"></span>
+						</div>
+					</div>
+				{{# } }}
+				</div>
+			</div>
+	</section>
+
+<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+{{ include includes/foot }}
+{{ include includes/script }}
+<script type="text/javascript">
+ 	kvm.module.invoke("/js/lib/personCenterCollect.js");
+</script>

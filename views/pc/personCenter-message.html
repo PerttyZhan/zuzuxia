@@ -1,0 +1,86 @@
+
+{{ include includes/head }}
+	<div id="roomShow" >
+		<div class="bg">
+			<img src="{{ d.user.bgimg }}" width="1897" alt="" title=""/>
+			<form method="post" name="form" encType="multipart/form-data" title="改变背景" action="uploadbgImg">
+				<input type="hidden" name="url" value="/pc/personCenterMe"/>
+				<input type="file" name="bgimg" accept="image/*" title="改变背景" id="changeBg"/>
+			</form>
+		</div>
+		<div class="jumbotron-des">
+			<div class="jump-middle">
+				<h3 class="hiddenTxt">{{ d.personinfo.name }}</h3>
+				<p>{{ d.personinfo.sign }}</p>
+			</div>
+		</div>
+	</div>
+	<section class="main" id="main" style="background-color:#fff">
+		<div >
+			<div class="center-choose">
+				<a class="me " href="/person/showInfo">
+					<i></i>
+					<p>我</p>
+				</a>
+				<a class="message active" href="/person/showMessage">
+					<i></i>
+					<p>消息</p>
+				</a>
+				<a class="appointment " href="/person/showApt">
+					<i></i>
+					<p>预约</p>
+				</a>
+				<a class="collection" href="/person/showColls">
+					<i></i>
+					<p>收藏</p>
+				</a>
+			</div>
+			<div class="center-message">
+				<table border="0" cellspacing="0" cellpadding="0">
+					<thead>
+						<tr>
+							<th colspan="2">
+								消息
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{# for( var i = 0,len = d.messages.length;i<len;i++ ){ }}
+							<tr class="title">
+								<td>
+									<a href="#">
+										{{ d.messages[i].title  }}
+
+										{{# if( !d.messages[i].isCheck ) { }}
+											<strong>new</strong>
+										{{# }  }}
+									</a>
+								</td>
+								<td>
+									{{ d.messages[i].createTime  }}
+								</td>
+							</tr>
+							<tr class="detail-mess">
+								<td  colspan="2">
+									<div>
+										<p>{{ d.messages[i].content  }}</p>
+										<input type="hidden" name="_id" value="{{ d.messages[i]._id }}"/>
+										{{#  if( !d.messages[i].isCheck ) { }}
+											<button class="check" data-action="check-message">确定查看</button>
+										{{# } }}
+										
+									</div>
+								</td>
+							</tr>
+						{{# } }}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+{{ include includes/foot }}
+{{ include includes/script }}
+<script type="text/javascript">
+ 	kvm.module.invoke("/js/lib/personCenterMessage.js");
+</script>

@@ -1,0 +1,213 @@
+
+{{ include includes/head }}
+
+	<div class="room-banner" id="roomShow">
+		<div class="big-img">
+			<ul class="clearfix">
+				{{# for(var i = 0,len = d.house.scollUrl.length;i<len;i++){  }}
+					{{# if( !!d.house.scollUrl[i] ){ }}
+						<li><a href="javascript:void(0)"><img src="{{ d.house.scollUrl[i] }}" alt="banner-1" title=""/></a></li>
+					{{# }  }}
+				{{# }  }}
+			</ul>
+			<a class="btn-pre" href="javascript:void(0)"></a>
+			<a class="btn-next" href="javascript:void(0)"></a>
+			<div class="bn-ct">
+				<img src="/image/banner/2.jpg" alt="banner-1" />         
+			</div>
+			<div class="banner-bg">
+			</div>
+		</div>
+		<div class="small-img">
+			{{# for(var i = 0,len = d.house.scollUrl.length;i<len;i++){  }}
+				{{# if( !!d.house.scollUrl[i] ){ }}
+					<span class="si-item">
+						<img src="{{ d.house.scollUrl[i] }}"/>
+					</span>
+				{{# }  }}
+			{{# }  }}
+
+		</div>
+
+	</div>
+
+	<section class="main" style="margin-top:0">
+		<div id="main" style="background-color:#fff">
+			<div class="detail-messaege">
+				<div class="house-des">
+					<h2 class="detail-title">
+						{{ d.house.title }}
+						{{# for(var i = 0,len = d.house.keywords.length;i<len;i++){  }}
+							<em>{{ d.house.keywords[i] }}</em>
+						{{# } }}
+					</h2>
+					<div class="house-detail">
+						<ul class="">
+						<li>
+								<div class="table">
+									{{# for(var i = 0,len = d.house.des.length;i<len;i++){  }}
+										<p class="table-cell">{{ d.house.des[i] }}</p>
+									{{# } }}
+								</div>
+							</li>
+							<li>
+								<p><strong>{{ d.house.price }}</strong> 元/月</p>
+
+								{{# for(var i = 0,len = d.house.require.length;i<len;i++){  }}
+									{{# if( !!d.house.require[i] ){ }}
+										<span>{{ d.house.require[i] }}</span>
+									{{# }  }}
+								{{# }  }}
+							</li>
+
+						</ul>
+					</div>
+				</div>
+
+				<div class="appointmen">
+					<input type="hidden" value="{{ d.house._id  }}" name="_id" class="apt-id"/>
+
+						{{# if(d.sign){ }}
+							<a href="javascript:void(0)" class="collect" id="apt-collect" data-action="house-collect" >	
+								收藏
+							</a>
+						{{# }else{ }}
+							<a href="javascript:void(0)" class="collect alreadyapt">	
+								已收藏
+							</a>
+						{{# } }}
+						<a href="javascript:void(0)" class="btn-apt" id="btn-apt" data-action="house-appoint" {{# if(d.user.username){ }}
+								data-require="{{ d.user.nameID.telephone }}"
+							{{# } }}>	
+								预约
+						</a>
+				</div>
+
+				<div class="house-config">
+					<div class="container">
+						<h2 class="detail-title">房间配置</h2>
+						<div class="table">
+							<div class="table-cell"><p class="config bed">床</p></div>
+							<div class="table-cell"><p class="config tv">数字电视</p></div>
+							<div class="table-cell"><p class="config air">空调</p></div>
+							<div class="table-cell"><p class="config washer">洗衣机</p></div>
+							<div class="table-cell"><p class="config wifi">WIFI全覆盖</p></div>
+							<div class="table-cell"><p class="config hotWrater">24h热水</p></div>
+						</div>
+					</div>
+				</div>
+				<div class="mapShow">
+					<h2 class="detail-title">公寓位置</h2>
+					<div class="map-title clearfix">
+						<a href="javascript::void(0)" class="streetscape" data-action="open-site">街景</a>
+						<a href="javascript::void(0)" class="Baimap active" data-action="open-site">地图</a>
+					</div>
+					<div class="map-content">
+						<div class="map" id="e1" data-map="{{ d.house.address }}" data-address="{{ d.house.address }}">
+						</div>
+						<div class="map" id="e2" data-map="{{ d.house.address }}" data-address="{{ d.house.address }}">
+						</div>
+						<div class="btn-group">
+							<h4>
+								可选择查看周边
+							</h4>
+							<div class="Bmap-choose">
+								<label><input type="checkbox" value="周边楼盘"  id="btnBuilding"/>周边楼盘</label>
+								<label><input type="checkbox" value="公交站点"  id="btnBus"/>公交站点</label>
+								<label><input type="checkbox" value="餐饮"  id="btnHotel"/>餐饮</label>
+								<label><input type="checkbox" value="银行"  id="btnBank"/>银行</label>
+								<label><input type="checkbox" value="超市"  id="btnSuperMarket"/>超市</label>
+								<label><input type="checkbox" value="商场"  id="btnShop"/>商场</label>
+								<label><input type="checkbox" value="学校"  id="btnSchool"/>学校</label>
+								<label><input type="checkbox" value="医院"  id="btnHospital"/>医院</label>
+								<label><input type="checkbox" value="家居卖场"  id="btnFurniture"/>家居卖场</label>
+								<label><input type="checkbox" value="装饰公司"  id="btnDecoration"/>装饰公司</label>
+								<label><input type="checkbox" value="加油站"  id="btnGasstation"/>加油站</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="apt-process">
+			<h2 class="detail-title">
+				入住流程
+			</h2>
+			<div class="container">
+				<ul >
+					<li>
+						<span class="apt-icon i-h-c"></span>
+						<div class="apt-des">
+							<span>在线选房</span>
+							<p class="hiddenTxt">全方位3D高清图片</p>
+						</div>
+					</li>
+					<li>
+						<span class="apt-icon i-s-h"></span>
+						<div class="apt-des">
+							<span>预约看房</span>
+							<p class="hiddenTxt">贴心管家陪同看房</p>
+						</div>
+					</li>
+					<li>
+						<span class="apt-icon i-in-h"></span>
+						<div class="apt-des">
+							<span>确定入驻</span>
+							<p class="hiddenTxt">挑选配置</p>
+						<div>
+					</li>
+					<li>
+						<span class="apt-icon i-s-c"></span>
+						<div class="apt-des">
+							<span>签署合同</span>
+							<p class="hiddenTxt">签署合同后即可入住</p>
+						</div>
+					</li>
+					<li>
+						<span class="apt-icon i-in-p"></span>
+						<div class="apt-des">
+							<span>入驻租客</span>
+							<p class="hiddenTxt">恭喜您加入租客大家庭</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-fz">
+		<div class="container fz-content">
+			<h2 class="detail-title">公寓管家</h2>
+			<p>生活总是充满惊喜，就像不经意间我会遇见你, 在没有预约的日子里，我们总是能够不期而遇
+
+				</br>
+				我是青年颂的管家KK很高兴我们能在这里一起生活
+
+			</p>
+			<div class="fz-intro">
+				<img src="/image/fz-pic.png" alt="">
+				<div class="intro-message">
+					<p>科科</p>
+					<p>房间数量：200间</p>
+					<p>可入住房源：12间</p>
+					<p>负责区域:滨江区</p>
+					<p class="tele">****155****</p>
+					<p class="intro-wx"></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{{# if (!d.user.username){ }}
+	{{ include shawdow }}
+{{# } }}
+
+{{ include includes/foot }}
+{{ include includes/script }}
+	
+<!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9f5d468870788eaa79a8865781872668"></script>
+<script src="http://map.qq.com/api/js?v=2.exp&key=d84d6d83e0e51e481e50454ccbe8986b"></script> -->
+<script type="text/javascript">
+ 	kvm.module.invoke("/js/lib/detailMessage.js");
+</script>
+

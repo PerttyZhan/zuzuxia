@@ -1,0 +1,73 @@
+html{
+  width:100%;
+}
+body {
+  position: relative;
+  font-family: "Hiragino Sans GB", "Microsoft Yahei", arial;
+  font-size: 14px;
+  background-color: #ffffff;
+  color: #fff;
+  overflow-x: hidden;
+  text-align: center;
+}
+.index-pd{
+  padding-top: 36.84%;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+// 去除浏览器的默认
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+/*隐藏多余文字*/
+.hiddenTxt{overflow:hidden;white-space:nowrap;text-overflow: ellipsis;}
+// 字体设置 
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+address,em,i{font-style:normal;} 
+// 去除元素轮廓
+div,table,form,input,button,select,textarea,fieldset,legend{outline:none;}/* for google / safari*/
+button[disabled]{cursor:no-drop !important}
+// 重置列表元素
+ul,ol{list-style:none outside none;}
+// 重置链接元素
+a{text-decoration:none; cursor: pointer;color:#fff;}
+//固定图片样式
+img{
+  width:100%;
+  height:auto;
+  display: block;
+}
+// 清除浮动 
+.clearfix{
+  zoom:1;
+}
+.clearfix:before,.clearfix:after{
+  content:"";
+  display: table;
+}
+.clearfix:after{clear:both;} 
+// 基本样式 
+.table {
+  display: table;
+  width: 100%;
+}
+.table-cell {
+  display: table-cell;
+}
+.floatL{
+  float:left
+}
+.floatR{
+  float:right;
+}
+.textL{
+  text-align: left !important;
+}
+.container{
+  margin:0 auto;
+}
+.c3{
+  width:33.333%;
+  float: left;
+}

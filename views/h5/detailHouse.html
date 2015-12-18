@@ -1,0 +1,110 @@
+
+{{ include include/head }}
+{{ include include/operate-head }}		
+	
+	<div class="detail-banner">
+		{{# if( !!d.house.coverUrl ){ }}
+			<img src="{{d.house.coverUrl}}" width="" />
+		{{# }else{ }}
+			<img src="'image/default-curimg.png'" width="" />
+		{{# } }}
+	</div>
+
+	<div class="house-des" id="house-des">
+		<p class="title">房间信息</p>
+		<div class="house-title">
+			<p>{{ d.house.title }}</p>
+			{{# for(var i = 0,len = d.house.keywords.length;i<len;i++){  }}
+				<span>{{ d.house.keywords[i] }}</span>
+			{{# } }}
+		</div>
+		<div class="others">
+			<ul>
+				<li class="keywords">
+					{{# for(var i = 0,len = d.house.des.length;i<len;i++){  }}
+						<p>{{ d.house.des[i] }}</p>
+					{{# } }}
+				</li>
+				<li><p><strong>{{ d.house.price }}</strong> 元/月</p></li>
+				<li><p>{{ d.house.summary }}</p></li>
+				<li><p>{{ d.house.address }}</p></li>
+			</ul>
+		</div>
+		<div class="configs">
+			<div class="config bed">
+				<span>
+					床
+				</span>
+			</div>
+			<div class="config tv">
+				<span>
+					电视
+				</span>
+			</div>
+			<div class="config air">
+				<span>
+					空调
+				</span>
+			</div>
+			<div class="config washer">
+				<span>
+					洗衣机
+				</span>
+			</div>
+			<div class="config wifi">
+				<span>
+					WiFi
+				</span>
+			</div>
+			<div class="config hotWrater">
+				<span>
+					热水
+				</span>
+			</div>
+		</div>
+		<div class="banner" id="banner">
+			<div class="container">
+				<ul class="clearfix" id="wrap">
+					{{# for(var i = 0,len = d.house.scollUrl.length;i<len;i++){  }}
+						{{# if( !!d.house.scollUrl[i] ){ }}
+							<li><a href="javascript:void(0)"><img src="{{ d.house.scollUrl[i] }}" alt="banner-1" title=""/></a></li>
+						{{# }  }}
+					{{# }  }}
+				</ul>
+			</div>
+		</div>
+		<div class="Housekeeper">
+			<p class="title">管家信息</p>
+			<div class="container">
+				<div class="table">
+					<div class="table-cell">
+						<img src="/image/fz-pic.png" alt="" titlte=""/>
+					</div>
+					<p class="table-cell">
+						<span>科科</span>
+						<span>房间数量：<strong>200间</strong></span>
+						<span>可入住房源：<strong>12间</strong></span>
+						<span>负责区域: <strong>滨江区</strong></span>
+						<span>电话: <strong>13148385453</strong></span>
+					</p>
+				</div>
+				<div class="keeper">
+					<p>
+						生活总是充满惊喜，就像不经意间我会遇见你, 在没有预约的日子里，我们总是能够不期而遇 
+						我是青年颂的管家KK很高兴我们能在这里一起生活
+					</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="menu" id="menu">
+		<p class="menu-title" data-action="show-modal">
+			菜单
+	</p>
+		<div class="menu-body">
+			<a href="/h5/aptHouse" class="">在线预约</a>
+			<a href="tel:15757176843" class="">电话预约</a>
+		</div>
+	</div>
+{{ include include/foot }}

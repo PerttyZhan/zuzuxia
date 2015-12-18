@@ -1,0 +1,32 @@
+<% include include/head.html %>
+<% include include/operate-head.html %>	
+<div class="banner" id="banner">
+	<ul class="clearfix">
+		<li> <img src="/image/1429499630762.jpg" alt="" title=""/> </li>
+	</ul>
+</div>
+
+<div class="house" id="main">
+		<div class="container">
+			<h3>杭州</h3>
+			<% collects.forEach(function(collect){ %>
+
+				<div class="item">
+					<a href="/h5/detail/">
+						<% if( collect.houseID.coverUrl == '' ){ %>
+							<img src="image/default-curimg.png" width=""/>
+						<% }else{ %>
+							<img src="<%=collect.houseID.coverUrl %>" width=""/>
+						<% } %>
+					</a>
+					<p class="des clearfix">
+						<span class="site"><i class="ico-site"></i><%=collect.houseID.address %></span>
+						<span class="price"><i class="ico-price"></i><%=collect.houseID.price %></span>
+					</p>
+				</div>
+
+			<% }) %>
+		</div>
+	</div>
+
+<% include include/foot.html %>

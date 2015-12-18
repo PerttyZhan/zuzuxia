@@ -1,0 +1,60 @@
+@media screen and (min-width:1200px){
+  .container{
+    width:1200px;
+  }
+}
+@media screen and (min-width:1080px) and (max-width:1199px){
+  .container{
+    width:1080px;
+  }
+  .nav-feature li:nth-of-type(2){
+    margin: 0 90px !important;
+  }
+  .nav-feature li:nth-of-type(3){
+    margin-right: 90px !important;
+  }
+}
+@media screen and (min-width: 900px) and (max-width: 1079px) {
+  .container{
+    width: 860px;
+  }
+  .nav-feature h2{
+    font-size:30px !important;
+  }
+  .nav-feature li:nth-of-type(2){
+    margin: 0 33px !important;
+  }
+  .nav-feature li:nth-of-type(3){
+    margin-right: 33px !important;
+  }
+  .title{
+    font-size: 30px !important;
+  }
+  .live-img h2{
+    font-size: 30px !important;
+  }
+  .live-img p{
+    font-size:14px !important;
+  }
+  .apt-des span{
+    font-size: 16px !important;
+  }
+  .apt-des p{
+    font-size: 14px !important;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 899px){
+  .container{
+    width: 728px;
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .container{
+    width: 440px;;
+  }
+}
+@media only screen and (max-width: 479px) {
+  .container{
+    width: 300px;
+  }
+}

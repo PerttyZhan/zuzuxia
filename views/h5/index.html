@@ -1,0 +1,93 @@
+{{ include include/head }}
+	<div class="head" id="index-header">
+		<div class="container">
+			<a class="logo" href="/h5">
+				<img src="/image/newlogo.png" title="青年颂" alt="青年颂" width="" height=""/>
+			</a>
+		</div>
+	</div>
+	<div class="banner" id="banner">
+		<div class="container">
+			<ul class="clearfix" id="wrap">
+
+				{{# for( var i = 0,len = d.sets.bannerUrl.length;i<len;i++  ){ }}
+
+					{{# if (!!d.sets.bannerUrl[i]){  }}
+						<li ><a href="javascript:void(0)"><img src="{{ d.sets.bannerUrl[i] }}" alt="banner-1" title="" width="1900"/></a></li>
+					{{# } }}
+				{{#  } }}
+			</ul>
+
+		</div>
+
+	</div>
+
+	<div class="house" id="main">
+		<div class="nav">
+			<div class="nav-feature">
+				<ul class="clearfix">
+					<li>
+						<h2>轻松</h2>
+						<span>EASY</span>
+						<hr/>
+						<p>轻松租房</p>
+						<p>押一付一</p>
+					</li>
+					<li>
+						<h2>享受</h2>
+						<span>ENJOY</span>
+						<hr/>
+						<p>贴心管家</p>
+						<p>完善配套</p>
+					</li>
+					<li>
+						<h2>品质</h2>
+						<span>QUALITY</span>
+						<hr/>
+						<p>绿色装修</p>
+						<p>宜家家居</p>
+					</li>
+					<li>
+						<h2>生活</h2>
+						<span>LIFE</span>
+						<hr/>
+						<p>Q2Q社交</p>
+						<p>有朋友才叫生活</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="container">
+			<h3>精选</h3>
+
+
+			{{# for( var i = 0,len = d.houses.length;i<len;i++ ){ }}
+					
+				<div class="item">
+					<a href="/h5/detail/{{ d.houses[i]._id }}">
+					{{# if( !!d.houses[i].coverUrl ){ }}
+						<img src="{{d.houses[i].coverUrl}}" width="" />
+					{{# }else{ }}
+						<img src="'image/default-curimg.png'" width="" />
+					{{# } }}
+					</a>
+					<p class="des clearfix">
+						<span class="site"><i class="ico-site"></i>{{ d.houses[i].address }}</span>
+						<span class="price"><i class="ico-price"></i>{{ d.houses[i].price }}</span>
+					</p>
+				</div>
+			{{# } }}
+		</div>
+	</div>
+	<div class="menu" id="menu">
+		<p class="menu-title" data-action="show-modal">
+			菜单
+		</p>
+		<div class="menu-body clearfix">
+
+			<a href="/h5/aptHouse" class="">在线预约</a>
+			<a href="tel:15757176843" class="">电话预约</a>
+		</div>
+	</div>
+
+{{ include include/foot }}

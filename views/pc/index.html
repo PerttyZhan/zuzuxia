@@ -1,0 +1,208 @@
+
+
+	{{ include includes/indexhead }}
+
+	<div class="banner" id="banner">
+			<ul>
+
+				{{# for( var i = 0,len = d.sets.bannerUrl.length;i<len;i++  ){ }}
+
+					{{# if (!!d.sets.bannerUrl[i]){  }}
+						<li ><a href="javascript:void(0)"><img src="{{ d.sets.bannerUrl[i] }}" alt="banner-1" title="" width="1900"/></a></li>
+					{{# } }}
+				{{#  } }}
+
+			</ul>
+			<div class="bn-ct">
+				<img src="/image/banner/2.jpg" alt="banner-1" />         
+			</div>
+			<div class="banner-bg">
+			</div>
+		<a class="btn-pre"></a>
+		<a class="btn-next"></a>
+	</div>
+	
+	<div class="banner-search" id="banner-search">
+		<div class="wrap">
+			<form action="siteapt" class="banner-form" novalidate method="post">
+				<ul class="clearfix">
+					<li>
+						<dl>
+							<dt class="chooseSite" data-action="open-site-modal">
+								<input type="text" name="site" value="" placeholder="公寓位置" readonly data-vali="isNoEmpty"/>
+								<i class="icon-arrow-botom"></i>
+							</dt>
+							<dd class="detailsite">
+								<a href="#">浙江杭州</a>
+								
+							</dd>
+						</dl>
+					</li>
+					<li>
+						<input type="text" name="aptName" placeholder="姓名" id="aptName" data-vali="isNoEmpty,less10"
+						{{# if(d.user.username){ }}
+						value="{{ d.user.nameID.name }}"
+						{{# } }}
+						/>
+					</li>
+					<li>
+						<input type="text" name="aptConcat" placeholder="联系方式" id="aptConcat" data-vali="isNoEmpty,isPhone"
+						{{# if(d.user.username){ }}
+						value="{{ d.user.nameID.telephone }}"
+						{{# } }}
+						/>
+						
+					</li>
+					<li>
+						<button type="button" class="submit" id="apt-sub" data-action="index-apt"
+						>立即预约</buton>
+					</li>
+				</ul>
+			</form>
+			<div class="tab-phone">
+				<p>租房热线 0571-88208777</p>
+			</div>
+			<div class="tab">
+				<div class="tab-a floatL">
+					在线预订
+					<i class=""></i>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<section class="main" id="main">
+		<nav class="nav">
+			<div class="container nav-feature">
+				<ul class="clearfix">
+					<li>
+						<h2>轻松</h2>
+						<span>EASY</span>
+						<hr/>
+						<p>轻松租房</p>
+						<p >押一付一</p>
+					</li>
+					<li>
+						<h2>享受</h2>
+						<span>ENJOY</span>
+						<hr/>
+						<p>贴心管家</p>
+						<p>完善配套</p>
+					</li>
+					<li>
+						<h2>品质</h2>
+						<span>QUALITY</span>
+						<hr/>
+						<p>绿色装修</p>
+						<p>宜家家居</p>
+					</li>
+					<li>
+						<h2>生活</h2>
+						<span>LIFE</span>
+						<hr/>
+						<p>Q2Q社交</p>
+						<p>有朋友才叫生活</p>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<artical>
+			<h2 class="title">精选</h2>
+			<div class="show">
+				<div class="container flex">
+				{{# for( var i = 0,len = d.houses.length;i<len;i++ ){ }}
+					
+						<div class="c2 thumbnail">
+							<a href="/house/show/{{ d.houses[i]._id }}" class="thumbnail-body">
+								{{# if( !!d.houses[i].coverUrl ){ }}
+									<img data-src="{{d.houses[i].coverUrl}}" width="" />
+								{{# }else{ }}
+									<img data-src="'image/default-curimg.png'" width="" />
+								{{# } }}
+								<div class="mask">
+									<div class="ma table">
+										<div class="table-cell">
+											<h3 >{{ d.houses[i].title }}</h3>
+											<p >{{ d.houses[i].summary }}</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+				{{# } }}
+
+				</div>
+			</div>
+		</artical>
+	</section>
+	<div class="live-show">
+		<div class="live-img">
+			<h2>生活有更多可能</h2>
+			<p>我们期待崇尚健康的生活方式，热爱运动，乐于分享并且追求美好生活的你加入我们。</p>
+			<div class="section-img container">
+				<div class="table">
+					<div class="fix1 table-cell clearfix">
+						<div class="size-1">
+							<img src="/image/life-img-size-2.jpg" alt="" title=""/>
+						</div>
+						<div class="size-3">
+							<img src="/image/life-img-size-3.jpg" alt="" title=""/>
+						</div>
+						<div class="size-4">
+							<img src="/image/life-img-size-4.jpg" alt="" title=""/>
+						</div>
+						<div class="size-2">
+							<img src="/image/life-img-size-1.jpg" alt="" title=""/>
+						</div>
+					</div>
+					<div class="fix2 table-cell">
+						<div class="size-4">
+							<img src="/image/life-img-size2-4.jpg" alt="" title=""/>
+						</div>
+						<div class="size-2">
+							<img src="/image/life-img-size2-1.jpg" alt="" title=""/>
+						</div>
+						<div class="size-1">
+							<img src="/image/life-img-size2-2.jpg" alt="" title=""/>
+						</div>
+						<div class="size-3">
+							<img src="/image/life-img-size2-3.jpg" alt="" title=""/>
+						</div>
+					</div>
+					<div class="fix3 table-cell">
+						<div class="size-3">
+							<img src="/image/life-img-size3-3.jpg" alt="" title=""/>
+						</div>
+						<div class="size-1">
+							<img src="/image/life-img-size3-2.jpg" alt="" title=""/>
+						</div>
+						<div class="size-2">
+							<img src="/image/life-img-size3-1.jpg" alt="" title=""/>
+						</div>
+						<div class="size-4">
+							<img src="/image/life-img-size3-4.jpg" alt="" title=""/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{{# if (!d.user.username){ }}
+	{{ include shawdow }}
+{{# } }}
+
+{{ include includes/foot }}
+{{ include includes/script }}
+<script type="text/javascript">
+ 	kvm.module.invoke("/dist/js/lib/index.js");
+</script>
+
+
+
+
+
+
+
+

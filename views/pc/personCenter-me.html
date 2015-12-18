@@ -1,0 +1,139 @@
+
+{{ include includes/head }}
+	<div id="roomShow" >
+		<div class="bg">
+			<img src="{{ d.user.bgimg }}" width="1897" alt="" title=""/>
+			<form method="post" name="form" encType="multipart/form-data" title="改变背景" action="uploadbgImg">
+				<input type="hidden" name="url" value="/pc/personCenterMe"/>
+				<input type="file" name="bgimg" accept="image/*" title="改变背景" id="changeBg"/>
+			</form>
+		</div>
+		<div class="jumbotron-des">
+			<div class="jump-middle">
+				<h3 class="hiddenTxt">{{ d.personinfo.name }}</h3>
+				<p>{{ d.personinfo.sign }}</p>
+			</div>
+		</div>
+	</div>
+	<section class="main" id="main" style="background-color:#fff">
+		<div>
+			<div class="center-choose">
+				<a class="me active" href="/person/showInfo">
+					<i></i>
+					<p>我</p>
+				</a>
+				<a class="message " href="/person/showMessage">
+					<i></i>
+					<p>消息</p>
+				</a>
+				<a class="appointment " href="/person/showApt">
+					<i></i>
+					<p>预约</p>
+				</a>
+				<a class="collection" href="/person/showColls">
+					<i></i>
+					<p>收藏</p>
+				</a>
+			</div>
+			<div class="message-edit">
+				<form class="form textL" id="personInfoFrom">
+					<input type="hidden" name="_id" value="{{ d.personinfo._id  }}" id="_id"/>
+					<legend>
+						个人资料
+					</legend>
+					<fieldset>
+						<div class="form-group">
+
+							<label for="name">
+								姓名
+							</label>
+
+							<input type="text" name="name" value="{{ d.personinfo.name  }}" placeholder="请输入姓名"/>
+						</div>
+						<div class="form-group">
+
+							<label for="name">
+								电话
+							</label>
+
+							<input type="text" name="telephone" value="{{ d.personinfo.telephone  }}" placeholder="请输入电话号码"/>
+						</div>
+						<div class="form-group">
+							<label>性别</label>
+							<label>
+								<input type="radio" name="sex" value="男"
+								{{# if( d.personinfo.sex == '男' ){ }} checked  {{# } }}
+								/>
+								男
+							</label>
+							<label>
+								<input type="radio" name="sex" value="女"
+								{{# if( d.personinfo.sex == '女' ){ }} checked  {{# } }}
+								/>
+								女
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="sign">
+								签名
+							</label>
+							<input type="text" name="sign" value="{{ d.personinfo.sign  }}" placeholder="请输入签名"/>
+						</div>
+						<div class="form-group">
+							<label for="school">
+								学校
+							</label>
+							<input type="text" name="school" value="{{ d.personinfo.school  }}" placeholder="请选择学校" id="schoolText" />
+							<div class="choose-school clearfix" >
+								<div class="gj" id="gj">
+								</div>
+								<div class="sf" id="sf">
+								</div>
+								<div class="list" id="list">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="marjor">
+								专业
+							</label>
+							<input type="text" name="marjor" value="{{ d.personinfo.marjor  }}"placeholder="请输入专业"/>
+						</div>
+						<div class="form-group">
+							<label for="interset">
+								兴趣
+							</label>
+							<input type="text" name="interset" value="{{ d.personinfo.interset  }}" placeholder="请输入兴趣" id="intersetText"/>
+
+							<div class="choose-interset">
+								<div class="interset-type">
+									<a href="#">运动</a>
+									<a href="#">游戏</a>
+									<a href="#">游泳</a>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="company">
+								公司
+							</label>
+							<input type="text" name="company" value="{{ d.personinfo.company  }}" placeholder="请输入公司"/>
+						</div>
+						<div class="form-group">
+							<label for="job">
+								职位
+							</label>
+							<input type="text" name="job" value="{{ d.personinfo.job  }}" placeholder="请输入职位"/>
+						</div>
+					</fieldset>
+				</from>
+			</div>
+		</div>
+	</section>
+
+
+{{ include includes/foot }}
+{{ include includes/script }}
+<script type="text/javascript">
+ 	kvm.module.invoke("/js/lib/personCenterMe.js");
+</script>

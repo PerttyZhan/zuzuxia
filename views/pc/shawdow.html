@@ -1,0 +1,83 @@
+
+<div class="shawdow textC" id="shawdow">
+		<div class="regFace">
+			<form id="registerForm">
+				<legend>
+					注册
+					<a class="close" data-action="close-modal"></a>
+				</legend>
+				<div class="form-group norInput">
+					<input type="text" name="username" placeholder="邮箱/手机" autocomplete="off"  id="loginU" data-vali="isNoEmpty,isPhOrEm"/>
+					<input type="password" name="password" placeholder="密码" autocomplete="off" data-vali="isNoEmpty,len10to20"/>
+				</div>
+				<div class="form-group spcInput">
+					<input type="text" name="qr" placeholder="验证码" autocomplete="off" data-vali="isNoEmpty"/>
+					<input type="hidden" autocomplete="off" name="registerBy"/>
+					<input type="hidden" name="sendqr" autocomplete="off"/>
+					<button type="button" class="btn-send" id="send-code" data-action="sendMessage">发送验证码</button>
+				</div>
+				<div class="form-group textL">
+					<label><input type="checkbox" name="protocol" placeholder="协议" data-vali="isChecked"/>我同意并遵守上述的 《<a href="#">租租侠服务协议</a>》</label>
+				</div>
+
+				<div class="form-group submit">
+					<button type="button" id="register" data-action="reg-submit">完成并登录</button>
+				</div>
+				<div class="form-group">
+					<p class="error" id="regerror"></p>
+				</div>
+			</form>
+		</div>
+		<div class="loginFace">
+			<form id="loginForm">
+				<legend>
+					登录
+					<a class="close" data-action="close-modal"></a>
+				</legend>
+				<div class="form-group norInput">
+					<input type="text" name="username" placeholder="账号" autocomplete="off"  data-vali="isNoEmpty"/>
+					<input type="password" name="password" placeholder="密码" data-vali="isNoEmpty"/>
+				</div>
+				<div class="form-group clearfix">
+					<label class="floatL"><input type="checkbox" name="1" value="0" data-require="no"/>记住账号</label>
+
+					<a class="btn-getPass floatR" href="javascript:void(0)" id="forgetPass" data-action="open-getPass-modal">忘记密码</a>
+				</div>
+				<div class="form-group submit">
+					<button type="button" id="btn-lg" data-action="login">登录</button>
+				</div>
+				<div class="form-group">
+					<p class="error" id="logerror"></p>
+				</div>
+				<div class="form-group other-login textL">
+					<label>第三方登录</label>
+					<a class="wx-login"  href="{{ d.webLogin }}" id="wx-login"></a>
+					<!-- <a class="qq-login" href="javascript:void(0)" id="qq-login" ></a> -->
+				</div>
+			</form>
+		</div>
+		<div class="getPassFace">
+			<form id="resetForm">
+				<legend>
+					找回密码
+					<a class="close" data-action="close-modal"></a>
+				</legend>
+				<div class="form-group norInput">
+					<input type="text" name="username" placeholder="邮箱/手机" autocomplete="off" data-vali="isNoEmpty,isPhOrEm"/>
+					<input type="password" name="onepass" placeholder="密码" autocomplete="off" data-vali="isNoEmpty,len10to20"/>
+					<input type="password" name="agapass" placeholder="确定密码" autocomplete="off" data-vali="isNoEmpty,len10to20"/>
+				</div>
+				<div class="form-group spcInput">
+					<input type="text" name="qr" placeholder="验证码" autocomplete="off" data-vali="isNoEmpty"/>
+					<input type="hidden" name="sendqr" autocomplete="off"/>
+					<button type="button" class="btn-send" id="reset-code" data-action="sendMessage" >发送验证码</button>
+				</div>
+				<div class="form-group submit">
+					<button type="button" id="resetPass" data-action="forgetPass-submit">修改并登录</button>
+				</div>
+				<div class="form-group">
+					<p class="error" id="reseterror"></p>
+				</div>
+			</form>
+		</div>
+	</div>

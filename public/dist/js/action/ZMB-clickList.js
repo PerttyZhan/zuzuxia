@@ -1,0 +1,1 @@
+define(["require","module","exports"],function(require,module,exports){var a={"alive-input":function(a){a.data("val",a.val())}};module.exports=a});

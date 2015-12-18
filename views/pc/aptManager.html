@@ -1,0 +1,106 @@
+{{ include manager-includes/style }}
+{{ include manager-includes/head }}
+
+	<div class="main" id="main">
+		<div class="container table">
+			<div class="table-cell sider">
+				<div class="list">
+					<a href="javascript:void(0)" class="fun">功能</a>
+					<ul class="dropMenu">
+						<li ><a href="#">群发功能</a></li>
+						<li ><a href="/pc/manager/login/banner/show">轮播图</a></li>
+						<li ><a href="/pc/manager/login/house/show">公寓详情</a></li>
+					</ul>
+				</div>
+				<div class="list">
+					<a  href="#" class="manager">管理</a>
+					<ul class="dropMenu">
+						<li><a href="banner">素材管理</a></li>
+						<li class="active"><a  href="/pc/manager/login/aptManager/show">预约管理</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="table-cell content">
+				<div class="title">
+					<h4>预约管理</h4>
+					<ol>
+						<li class="active">
+							<a href="/aptManager">预约入住</a>
+						</li>
+						<li>
+							<a href="/aptfeel" class="createHouse">预约体验</a>
+						</li>
+					</ol>
+				</div>
+				<div class="house" style="padding-bottom:50px;">
+					<div class="show-all">
+						<table  border="0" cellpadding="0" cellspacing="0" bordercolor="#dedede">
+							<thead>
+								<tr>
+									<th>预约号</th><th>公寓编号</th><th>客户姓名</th><th>联系方式</th><th>提交时间</th>
+								</tr>
+							</thead>
+							<tbody>
+								{{# for( var i = 0,len = d.appoints.length;i<len;i++ ){ }}
+									<tr>
+										<td>{{ d.appoints[i]._id }}</td>
+										<td>
+											{{# if( d.appoints[i].houseID ){ }}
+												{{ d.appoints[i].houseID.bh }}
+											{{# }else{ }}
+												{{ d.appoints[i].area }}
+											{{# } }}
+											
+										</td>
+										<td>{{ d.appoints[i].name || d.appoints[i].userID.name  }}</td>
+										<td>{{ d.appoints[i].telephone }}</td>
+										<td>{{ d.appoints[i].createTime }}</td>
+									</tr>
+								{{# } }}
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="7">
+									<a 
+										<a 
+										{{# if( d.count != 1 ){ }}
+										href="personCenter?count={{# (parseInt(d.count)-1) }}" 
+										{{# }else{ }}
+										href="javascript:void(0) %>" 
+										{{# } }}
+										class="pre" >上一页</a> 
+									
+
+									<span><strong>{{ d.count }}</strong>/{{ d.all }}</span> 
+										<a  
+										{{# if( d.count != d.all ){ }}
+											href="personCenter?count={{# (parseInt(d.count)+1) }}" 
+										{{# }else{ }}
+											href="javascript:void(0)" 
+										{{# } }}
+										class="next" >下一页</a>
+										<a class="trun" href="javascript:void(0)" id="open-turn" data-action="open-page-choose">
+											跳转
+											<span class="page-choose">
+												<p>
+													<input type="hidden" name="all" value="{{ d.all }}"/>
+													跳转至 <input type="text" name="page" /> 页
+												</p>
+												<button type="button" id="turn-page" data-action="page-turn">确定</button>
+											</span>
+										</a>
+										
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{{ include manager-includes/foot }}%>
+<script type="text/javascript">
+	kvm.module.invoke('/dist/js/lib/aptManager.js');
+</script>

@@ -1,0 +1,105 @@
+@-webkit-keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
+.animated-login {
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeOutRight {
+  from {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+@keyframes fadeOutRight {
+  from {
+     opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+.fadeOutRight{
+  -webkit-animation-name: fadeOutRight;
+  animation-name: fadeOutRight;
+}
+.animated-fadeOUt {
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@-moz-keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100px, -100px) rotateX(60deg) scale(0.8, 0.8);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotateX(0) scale(1, 1);
+  }
+}
+@-webkit-keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100px, -100px) rotateX(60deg) scale(0.8, 0.8);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotateX(0) scale(1, 1);
+  }
+}
+@-o-keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100px, -100px) rotateX(60deg) scale(0.8, 0.8);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotateX(0) scale(1, 1);
+  }
+}
+@keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100px, -100px) rotateX(60deg) scale(0.8, 0.8);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotateX(0) scale(1, 1);
+  }
+}

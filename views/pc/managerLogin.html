@@ -1,0 +1,36 @@
+
+{{ include manager-includes/style }}
+<div id="container">
+
+<ul id="anitOut"> 
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+
+<div class="login" id="login">
+    <form action="loginManager" method="post" id="managerForm">
+        <legend>
+            登录
+        </legend>
+       <input type="text" name="username" password="password" placeholder="用户名" data-vali="isNoEmpty">
+        <input type="password" name="password" placeholder="密码" data-vali="isNoEmpty">
+        <button type="submit" id="btn-login" data-action="zmb-login">登录</button>
+        <div >
+            <p class="error" id="error"></p>
+        </div>
+    </form>
+    
+</div>
+</div>
+{{ include manager-includes/foot }}
+<script type="text/javascript">
+    kvm.module.invoke('/js/lib/ZMB-login.js?t='{{# new Date().getTime()  }});
+</script>

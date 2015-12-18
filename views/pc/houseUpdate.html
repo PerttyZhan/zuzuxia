@@ -1,0 +1,196 @@
+{{ include manager-includes/style }}
+{{ include manager-includes/head }}
+
+	<div class="main" id="main">
+		<div class="container table">
+			<div class="table-cell sider">
+				<div class="list">
+					<a href="javascript:void(0)" class="fun">功能</a>
+					<ul class="dropMenu">
+						<li ><a href="#">群发功能</a></li>
+						<li ><a href="/pc/manager/login/banner/show">轮播图</a></li>
+						<li class="active"><a href="/pc/manager/login/house/show">公寓详情</a></li>
+					</ul>
+				</div>
+				<div class="list">
+					<a  href="#" class="manager">管理</a>
+					<ul class="dropMenu">
+						<li><a href="banner">素材管理</a></li>
+						<li><a href="/pc/manager/login/aptManager/show">预约管理</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="table-cell content">
+				<div class="title">
+					<h4>公寓详情</h4>
+					<ol>
+						<li class="active">
+							<a href="show">已发布公寓</a>
+						</li>
+						<li>
+							<a href="newHouse">新建公寓</a>
+						</li>
+					</ol>
+				</div>
+				<div class="house">
+
+<div class="house-update">
+	<div class="index-show">
+		<div class="update-choose">
+			<div class="update-list">
+				<input type="text" name="bh" class="alive-input" placeholder="请输入公寓编号" id="bh" value="{{ d.house.bh }}" data-val="{{ d.house.bh }}"/>
+				<span class="list-title">标题</span>
+				<div class="list-form">
+					<div class="list-text">
+						
+						<input type="text" name="title" placeholder="" value="{{ d.house.title }}" class="alive-input" data-val="{{ d.house.title }}"/>
+						<p><strong>{{ d.house.title.length }}</strong>/50</p>
+					</div>
+					<div class="list-btn">
+						{{# for( var i=0,len=d.house.keywords.length;i<len;i++ ){ }}
+							<span class="can-edit" data-name="keywords">{{ d.house.keywords[i] }}</span>
+
+						{{# }  }}
+
+						
+						<a href="javascrip:void(0)" class="add-sign" data-name="keywords" data-action="add-sign">点击添加标签</a>
+					</div>
+				</div>
+			</div>
+			<div class="update-list">
+				<span class="list-title">摘要</span>
+				<div class="list-form">
+					<div class="list-text">
+						<input type="text" name="summary" value="{{ d.house.summary }}" class="alive-input" data-val="{{ d.house.summary }}"/>
+						<p><strong>{{ d.house.summary.length }}</strong>/50</p>
+					</div>
+				</div>
+			</div>
+			<div class="update-list">
+				<form action="updateImg" method="post" encType="multipart/form-data" target="hidden_frame">
+				<span class="list-title">照片</span>
+				<div class="btn-group">
+					
+						<input type="hidden" name="_id" value="{{ d.house._id }}" id="_id"/>
+						<input type="hidden" name="config_id" value="{{ d.house.houseconfig._id }}" id="config_id"/>
+						<input type="hidden" name="changeType" value="" id="changeType"/>
+						<input type="hidden" name="changeNum" value="" id="changeNum"/>
+						<button type="button">上传<input type="file" name="imgUrl" accept="image/*" /></button>
+						<button type="button">从图片库选择</button>
+						<button type="button" class="dele" data-action="dele-img">删除</button>
+				</div>
+				<div class="pic-show">
+					<div class="cover-img">
+						<a href="javascript:void(0)" data-name="coverUrl" >
+							<img src="{{ d.house.coverUrl }}" title=""/>
+							<p class="size">
+								尺寸 456 : 341
+							</p>
+							<input type="hidden" name="coverUrl" value="{{ d.house.coverUrl }}"/>
+						</a>
+					</div>
+					<div class="scroll-img">
+						{{# for( var i =0,len =d.house.scollUrl.length;i<len;i++ ){  }}
+							<a href="javascript:void(0)" data-name="scollUrl" ><img src="{{ d.house.scollUrl[i] }}" title="" data-name="scollUrl"/>
+								<input type="hidden" name="scollUrl" value="{{ d.house.scollUrl[i] }}"/>
+								<p class="size">
+									尺寸 1898 : 700
+								</p>
+							</a>
+						{{# } }}
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="detail-show">
+		<div class="house-detail">
+			<ul>
+				<li>
+					<span><input type="text" value="{{ d.house.price }}" data-val="{{ d.house.price }}" class="alive-input" name="price" />元/月</span>
+					<div class="keywords">
+						{{# for( var i =0,len =d.house.require.length;i<len;i++ ){  }}
+
+							<span class="can-edit" data-name="require">{{ d.house.require[i] }}</span>
+
+						{{# } }}
+
+						<a href="#" class="add-sign" data-name="require" data-action="add-sign">点击添加标签</a>
+					</div>
+				</li>
+				<li>
+					{{# for( var i =0,len =d.house.des.length;i<len;i++ ){  }}
+
+						<span class="can-edit" data-name="des">{{ d.house.des[i] }}</span>
+
+					{{# } }}
+					<a href="#" class="add-sign" data-name="des" data-action="add-sign">点击添加标签</a>
+				</li>
+				<li class="address">
+					<span>
+						<input type="text" name="address" value="{{ d.house.address }}" class="alive-input" id="address" data-val="{{ d.house.address }}"/>
+					</span>
+				</li>
+			</ul>
+		</div>
+		<div class="mapShow">
+					<ul class="map-title">
+						<li ><a href="javascript::void(0)">街景</a></li>
+						<li class="active"><a href="javascript::void(0)">地图</a></li>
+					</ul>
+					<div class="map-content">
+						<div class="map" id="e1" data-map="{{ d.house.address }}" data-address="{{ d.house.address }}">
+						</div>
+						<div class="map" id="e2" data-map="{{ d.house.address }}" data-address="{{ d.house.address }}">
+						</div>
+						<div class="map-btn">
+							<h4>
+								可选择查看周边
+							</h4>
+							<div class="Bmap-choose">
+								<label><input type="checkbox" value="周边楼盘"  id="btnBuilding"/>周边楼盘</label>
+								<label><input type="checkbox" value="公交站点"  id="btnBus"/>公交站点</label>
+								<label><input type="checkbox" value="餐饮"  id="btnHotel"/>餐饮</label>
+								<label><input type="checkbox" value="银行"  id="btnBank"/>银行</label>
+								<label><input type="checkbox" value="超市"  id="btnSuperMarket"/>超市</label>
+								<label><input type="checkbox" value="商场"  id="btnShop"/>商场</label>
+								<label><input type="checkbox" value="学校"  id="btnSchool"/>学校</label>
+								<label><input type="checkbox" value="医院"  id="btnHospital"/>医院</label>
+								<label><input type="checkbox" value="家居卖场"  id="btnFurniture"/>家居卖场</label>
+								<label><input type="checkbox" value="装饰公司"  id="btnDecoration"/>装饰公司</label>
+								<label><input type="checkbox" value="加油站"  id="btnGasstation"/>加油站</label>
+							</div>
+						</div>
+					</div>
+			</div>
+		<div class="btn">
+
+			<input type="hidden" value="<{{ d.house.status }}" id="status"/>
+			{{# if(d.house.status == '2'){ }}
+				<button id="under" type="btn" data-action="update-house-status">下架</button>
+				<button id="dele" type="btn" data-action="update-house-status">删除</button>
+			{{# }else if( d.house.status == '1' ){ }}
+				<button id="release" type="btn" data-action="update-house-status">发布</button>
+				<button id="dele" type="btn" data-action="update-house-status">删除</button>
+			{{# }else{ }}
+				<button id="release" type="btn" data-action="update-house-status">发布</button>
+			{{# } }}	
+
+		</div>
+	</div>
+</div>
+		
+				</div>
+			</div>
+
+		
+		</div>
+	</div>
+	<iframe name="hidden_frame" id="hidden_frame" style="display:none"></iframe>
+<!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9f5d468870788eaa79a8865781872668"></script>
+<script src="http://map.qq.com/api/js?v=2.exp&key=d84d6d83e0e51e481e50454ccbe8986b"></script> -->
+{{ include manager-includes/foot }}
+<script type="text/javascript">
+	kvm.module.invoke('/js/lib/houseUpdate.js');
+</script>
